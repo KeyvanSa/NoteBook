@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -77,8 +78,13 @@ public class MainActivity extends Activity
 		lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
 		{
 			@Override
-			public void onItemClick(AdapterView<?> p1, View p2, final int p3, long p4)
+			public void onItemClick(AdapterView<?> p1, View p2,int position, long p4)
 			{
+				Intent toViewNote = new Intent(MainActivity.this , ViewNoteActivity.class);
+				toViewNote.putExtra("id",Ids.get(position));
+				startActivity(toViewNote);
+
+				/*
 				LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				View DialogView = inflater.inflate(R.layout.add_update,null);
 
@@ -131,7 +137,7 @@ public class MainActivity extends Activity
 						pFun.SHOW_TOAST(getResources().getString(R.string.update_note),1);
 					}
 				});
-				dialog.show();
+				dialog.show();*/
 			}
 		});
 
@@ -166,7 +172,7 @@ public class MainActivity extends Activity
 					public void onClick(View view)
 					{
 						db.DELETE_NOTE(Integer.parseInt(Ids.get(p3)));
-						pFun.SHOW_TOAST(getResources().getString(R.string.delete_note),1);
+						pFun.showTOAST(getResources().getString(R.string.delete_note),1);
 						setList();
 						dialog.dismiss();
 					}
@@ -229,19 +235,19 @@ public class MainActivity extends Activity
 				String strText=etText.getText().toString();
 
 				if(strTitle.equals("")){
-					pFun.SHOW_TOAST("Enter Title",2);
+					pFun.showTOAST("Enter Title",2);
 					return;
 				}
 
 				if(strText.equals("")){
-					pFun.SHOW_TOAST("Enter Text",2);
+					pFun.showTOAST("Enter Text",2);
 					return;
 				}
 
 				db.INSERT_NOTE (strTitle,strText,""+IdsCat.get(spCats.getSelectedItemPosition()),""+ System.currentTimeMillis());
 				dialog.dismiss();
 				setList();
-				pFun.SHOW_TOAST(getResources().getString(R.string.save_note),3);
+				pFun.showTOAST(getResources().getString(R.string.save_note),3);
 			}
 		});
 		dialog.show();
@@ -269,13 +275,13 @@ public class MainActivity extends Activity
 				String strTitle=etTitle.getText().toString();
 
 				if(strTitle.equals("")){
-					pFun.SHOW_TOAST("Enter Title",2);
+					pFun.showTOAST("Enter Title",2);
 					return;
 				}
 
 				db.INSERT_CATEGORY(strTitle);
 				dialog.dismiss();
-				pFun.SHOW_TOAST(getResources().getString(R.string.save_category),3);
+				pFun.showTOAST(getResources().getString(R.string.save_category),3);
 			}
 		});
 		dialog.show();
@@ -334,7 +340,7 @@ public class MainActivity extends Activity
 							String strTitle=etTitle.getText().toString();
 
 							if(strTitle.equals("")){
-								pFun.SHOW_TOAST("Enter Title",2);
+								pFun.showTOAST("Enter Title",2);
 								return;
 							}
 
@@ -345,7 +351,7 @@ public class MainActivity extends Activity
 
 							setList();
 
-							pFun.SHOW_TOAST(getResources().getString(R.string.update_category),3);
+							pFun.showTOAST(getResources().getString(R.string.update_category),3);
 						}
 					});
 
@@ -367,7 +373,7 @@ public class MainActivity extends Activity
 
 					setList();
 					dialog.dismiss();
-					pFun.SHOW_TOAST(getResources().getString(R.string.delete_category),1);
+					pFun.showTOAST(getResources().getString(R.string.delete_category),1);
 				}
 				return true;
 			}
@@ -379,7 +385,6 @@ public class MainActivity extends Activity
 	public void searchDialog(View v)
 	{
 		materialDesignFAM.close(true);
-
 
 		LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View DialogView = inflater.inflate(R.layout.search_dialog,null);
@@ -520,7 +525,7 @@ public class MainActivity extends Activity
 			ssSpannable.setSpan(new ClickableSpan() {
 				@Override
 				public void onClick(View widget) {
-					pFun.SHOW_TOAST(tag,1);
+					pFun.showTOAST(tag,1);
 				}
 				@Override
 				public void updateDrawState(TextPaint ds) {
@@ -572,18 +577,12 @@ public class MainActivity extends Activity
 		pFun = new PublicFunction(this);
 
 		LinearLayout_Empty = findViewById(R.id.LinearLayout_Empty);
-		lv=(ListView) findViewById(R.id.mainListView1);
-
+		lv = (ListView) findViewById(R.id.mainListView1);
 
 		materialDesignFAM = (FloatingActionMenu) findViewById(R.id.floating_action_menu);
 		materialDesignFAM.setClosedOnTouchOutside(false);
 		materialDesignFAM.setAnimationDelayPerItem(90);
-		/*
-		// Loop to add notes and display listview animations
-		for(int i=0;i<100;i++) {
-				db.InsertNote("EbookLineChannel","@EbookLine","0",""+java.lang.System.currentTimeMillis());
-		}
-		*/
+
 		setList();
 	}
 

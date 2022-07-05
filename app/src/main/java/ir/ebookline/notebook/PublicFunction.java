@@ -14,7 +14,7 @@ public class PublicFunction
     }
 
 
-    public void SHOW_TOAST(String str,int Type)
+    public void showTOAST(String str,int Type)
     {
         // 1 > normal Toast
         // 2 > error Toast

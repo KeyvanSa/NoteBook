@@ -9,13 +9,10 @@
     <string name="save_note">Notes saved</string>
 
 
-
     // Category
     <string name="save_category">Category added</string>
     <string name="update_category">Category updated</string>
     <string name="delete_category">Category deleted</string>
-
-
 
 
 </resources>

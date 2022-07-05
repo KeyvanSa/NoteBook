@@ -43,7 +43,6 @@ public class DataBaseHelper
 		database.insert(dbhelper.TBL_NOTE_NAME,dbhelper.TITLE,cv);
 		CLOSE();
 	}
-
 	/////////////////////////////// Insert Update Method /////////////////////////////////
 	public void UPDATE_NOTE (int id,String title,String text,String Category,String Date)
 	{
@@ -224,6 +223,28 @@ public class DataBaseHelper
 		return i;
 	}
 
+	public String ShowInformationNote (String id,int field)
+	{
+		OPEN();
+		Cursor cu= database.rawQuery("select * from "+dbhelper.TBL_NOTE_NAME+" where "+dbhelper.ID+"="+id, null );
+		if(cu!=null&&cu.getCount()!=0) {
+			cu.moveToFirst();
+			String name=cu.getString(field);
+			CLOSE();
+			return name;
+		}else return "Error";
+	}
 
+	public String ShowInformationCategory (String id,int field)
+	{
+		OPEN();
+		Cursor cu= database.rawQuery("select * from "+dbhelper.TBL_CATEGOTY_NAME+" where "+dbhelper.ID_CATEGOTY+"="+id, null );
+		if(cu!=null&&cu.getCount()!=0) {
+			cu.moveToFirst();
+			String name=cu.getString(field);
+			CLOSE();
+			return name;
+		}else return "Error";
+	}
 
 }

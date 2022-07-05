@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ir.ebookline.notebook.Activities.ViewNoteActivity">
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutTitlebar"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:id="@+id/ImageViewPin"
+            android:rotation="45"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/ic_outline_unpin_24"
+            android:layout_height="40dp"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:id="@+id/ImageViewEdit"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/ic_outline_edit_24"
+            android:layout_toRightOf="@id/ImageViewPin"
+            android:layout_height="40dp"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:id="@+id/ImageViewShare"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/ic_outline_share_24"
+            android:layout_toRightOf="@id/ImageViewEdit"
+            android:layout_height="40dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:layout_below="@id/ImageViewPin"
+            android:id="@+id/TextViewTitle"
+            android:textColor="@color/black"
+            android:layout_margin="5dp"
+            android:maxLines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:textSize="25sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:layout_below="@id/TextViewTitle"
+            android:id="@+id/TextViewDate"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/black"
+            android:layout_marginLeft="10dp"
+            android:layout_margin="5dp"
+            android:maxLines="1"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:layout_below="@id/TextViewTitle"
+            android:layout_toRightOf="@id/TextViewDate"
+            android:id="@+id/TextViewCategory"
+            android:textColor="@color/black"
+            android:layout_marginLeft="10dp"
+            android:layout_margin="5dp"
+            android:maxLines="1"
+            android:textSize="18sp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:scrollbars="none"
+            android:layout_below="@id/TextViewCategory">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Text"
+                android:layout_below="@id/TextViewTitle"
+                android:layout_toRightOf="@id/TextViewDate"
+                android:id="@+id/TextViewText"
+                android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_margin="5dp"
+                android:maxLines="1"
+                android:textSize="18sp"/>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>
