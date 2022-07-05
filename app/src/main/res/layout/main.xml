@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:fab="http://schemas.android.com/apk/res-auto"
+	android:background="#ffffff">
+
+	<TextView
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_width="match_parent"
+		android:text="Click to change the note and click and hold to delete or pin."
+		android:textSize="25sp"
+		android:id="@+id/text"
+		android:gravity="center_horizontal"
+		android:textColor="#000000"
+		android:layout_margin="5dp"/>
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:gravity="center|center_vertical|center_horizontal"
+		android:id="@+id/LinearLayout_Empty"
+		android:visibility="gone">
+
+		<ImageView
+			android:src="@drawable/ic_baseline_clear_24"
+			android:layout_width="100dp"
+			android:layout_height="100dp"
+			android:id="@+id/ImageView_Empty"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="No Note"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:textColor="#000000"
+			android:id="@+id/TextView_Empty_Title"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Add a note using the menu option"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:textColor="#000000"
+			android:id="@+id/TextView_Empty_Text"
+			android:gravity="center|center_vertical|center_horizontal"/>
+
+	</LinearLayout>
+
+	<ListView
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:id="@+id/mainListView1"
+		android:dividerHeight="10dp"
+		android:divider="#00000000"
+		android:layout_below="@id/text"
+		android:layout_margin="10dp"
+		android:layout_marginTop="50dp"/>
+
+	<com.github.clans.fab.FloatingActionMenu
+		android:id="@+id/floating_action_menu"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		fab:menu_animationDelayPerItem="55"
+		fab:menu_backgroundColor="@android:color/transparent"
+		fab:menu_buttonSpacing="0dp"
+		fab:menu_colorNormal="@color/purple_500"
+		fab:menu_colorPressed="@color/purple_200"
+		fab:menu_colorRipple="#99d4d4d4"
+		fab:menu_fab_label="Choose Option"
+		fab:menu_fab_size="normal"
+		fab:menu_icon="@drawable/ic_baseline_menu_24"
+		fab:menu_labels_colorNormal="#333"
+		fab:menu_labels_colorPressed="#444"
+		fab:menu_labels_colorRipple="#66efecec"
+		fab:menu_labels_cornerRadius="3dp"
+		fab:menu_labels_ellipsize="none"
+		fab:menu_labels_maxLines="-1"
+		fab:menu_labels_padding="8dp"
+		fab:menu_labels_position="right"
+		fab:menu_labels_showShadow="true"
+		fab:menu_labels_singleLine="true"
+		fab:menu_labels_textColor="#f2f1f1"
+		fab:menu_labels_textSize="15sp"
+		fab:menu_openDirection="up"
+		fab:menu_shadowColor="#60252525"
+		fab:menu_shadowRadius="2dp"
+		fab:menu_shadowXOffset="1dp"
+		fab:menu_shadowYOffset="2dp"
+		fab:menu_showShadow="true"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentBottom="true">
+
+		<com.github.clans.fab.FloatingActionButton
+			android:id="@+id/ImageView_AddNote"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_baseline_add_24"
+			fab:fab_label="Add Note"
+			fab:menu_colorNormal="@color/teal_700"
+			fab:menu_colorPressed="@color/teal_200"
+			android:onClick="addNote"
+			fab:fab_size="mini"
+			android:padding="5dp"/>
+
+		<com.github.clans.fab.FloatingActionButton
+			android:id="@+id/ImageView_Add_Category"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_baseline_add_24"
+			fab:fab_label="Add Category"
+			fab:menu_colorNormal="@color/teal_700"
+			android:onClick="addCat"
+			fab:menu_colorPressed="@color/teal_200"
+			fab:fab_size="mini"
+			android:padding="5dp"/>
+
+		<com.github.clans.fab.FloatingActionButton
+			android:id="@+id/ImageView_Show_Categories"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_baseline_cats_24"
+			fab:fab_label="Show Category"
+			fab:menu_colorNormal="@color/teal_700"
+			fab:menu_colorPressed="@color/teal_200"
+			fab:fab_size="mini"
+			android:onClick="showCats"
+			android:padding="5dp"/>
+
+		<com.github.clans.fab.FloatingActionButton
+			android:id="@+id/ImageView_Search"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_baseline_search_24"
+			fab:fab_label="Search in Titles"
+			fab:menu_colorNormal="@color/teal_700"
+			fab:menu_colorPressed="@color/teal_200"
+			fab:fab_size="mini"
+			android:onClick="searchDialog"
+			android:padding="5dp"/>
+
+	</com.github.clans.fab.FloatingActionMenu>
+
+
+</RelativeLayout>
+

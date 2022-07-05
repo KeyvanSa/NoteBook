@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bkg_dialog"
+	android:orientation="vertical">
+
+	<TextView
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_width="match_parent"
+		android:text="Click to change the title and click and hold to delete."
+		android:textSize="25sp"
+		android:gravity="center_horizontal"
+		android:textColor="#000000"
+		android:layout_margin="5dp"/>
+
+	<ListView
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:id="@+id/ListView"
+		android:dividerHeight="10dp"
+		android:layout_margin="5dp"
+		android:divider="#00000000" />
+
+</LinearLayout>
+
