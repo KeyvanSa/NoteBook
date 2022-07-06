@@ -2,6 +2,7 @@ package ir.ebookline.notebook.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,8 +20,8 @@ public class ViewNoteActivity extends Activity
     DataBaseHelper db;
     PublicFunction pFun;
 
-    ImageView ImageViewPin , ImageViewEdit ;
-    TextView TextViewTitle , TextViewDate , TextViewCategory , TextViewText ;
+    ImageView imageviewPin , imageviewEdit , imageviewShare ;
+    TextView textviewTitle , textviewDate , textviewCategory , textviewText ;
 
     String strId;
     String strTitle;
@@ -48,12 +49,13 @@ public class ViewNoteActivity extends Activity
 
     private void init()
     {
-        ImageViewPin = findViewById(R.id.ImageViewPin);
-        ImageViewEdit = findViewById(R.id.ImageViewEdit);
-        TextViewTitle = findViewById(R.id.TextViewTitle);
-        TextViewCategory = findViewById(R.id.TextViewCategory);
-        TextViewDate = findViewById(R.id.TextViewDate);
-        TextViewText = findViewById(R.id.TextViewText);
+        imageviewPin = findViewById(R.id.ImageViewPin);
+        imageviewEdit = findViewById(R.id.ImageViewEdit);
+        imageviewShare = findViewById(R.id.ImageViewShare);
+        textviewTitle = findViewById(R.id.TextViewTitle);
+        textviewCategory = findViewById(R.id.TextViewCategory);
+        textviewDate = findViewById(R.id.TextViewDate);
+        textviewText = findViewById(R.id.TextViewText);
 
         db=new DataBaseHelper(this);
         pFun = new PublicFunction(this);
@@ -79,14 +81,47 @@ public class ViewNoteActivity extends Activity
         strDate = new JalaliCalendar().getJalaliDate(new Date(Long.parseLong(strDate)))+
                 "-"+new SimpleDateFormat("HH:mm:ss").format(new Date(Long.parseLong(strDate)));
 
-        TextViewTitle.setText(strTitle);
-        TextViewCategory.setText(strCategory);
-        TextViewDate.setText(strDate);
-        TextViewText.setText(strText);
+        if ( strPin.equals("1")){
+            imageviewPin.setImageResource(R.drawable.ic_baseline_pin_24);
+        }
 
+        textviewTitle.setText(strTitle);
+        textviewCategory.setText(strCategory);
+        textviewDate.setText(strDate);
+        textviewText.setText(strText);
 
+        imageviewPin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                if( strPin.equals("0")){
+                    strPin ="1";
+                    pFun.showTOAST("Pinned...!",3);
+                    imageviewPin.setImageResource(R.drawable.ic_baseline_pin_24);
+                } else {
+                    strPin = "0";
+                    pFun.showTOAST("Unpinned...!",3);
+                    imageviewPin.setImageResource(R.drawable.ic_outline_unpin_24);
+                }
 
+                db.SET_PIN(Integer.parseInt(strId),strPin);
+
+            }
+        });
+
+        imageviewEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pFun.showTOAST("Soon ...",1);
+            }
+        });
+
+        imageviewShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pFun.showTOAST("Soon ...",1);
+            }
+        });
 
     }
 }

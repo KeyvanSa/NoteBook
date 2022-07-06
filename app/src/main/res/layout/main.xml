@@ -5,17 +5,6 @@
 	xmlns:fab="http://schemas.android.com/apk/res-auto"
 	android:background="#ffffff">
 
-	<TextView
-		android:layout_height="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceLarge"
-		android:layout_width="match_parent"
-		android:text="Click to change the note and click and hold to delete or pin."
-		android:textSize="25sp"
-		android:id="@+id/text"
-		android:gravity="center_horizontal"
-		android:textColor="#000000"
-		android:layout_margin="5dp"/>
-
 	<LinearLayout
 		android:orientation="vertical"
 		android:layout_width="match_parent"
@@ -50,15 +39,13 @@
 
 	</LinearLayout>
 
-	<ListView
-		android:layout_height="match_parent"
+	<android.support.v7.widget.RecyclerView
 		android:layout_width="match_parent"
-		android:id="@+id/mainListView1"
-		android:dividerHeight="10dp"
-		android:divider="#00000000"
+		android:layout_height="match_parent"
 		android:layout_below="@id/text"
 		android:layout_margin="10dp"
-		android:layout_marginTop="50dp"/>
+		android:layout_marginTop="50dp"
+		android:id="@+id/RecyclerViewNotes"/>
 
 	<com.github.clans.fab.FloatingActionMenu
 		android:id="@+id/floating_action_menu"

@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
@@ -32,6 +34,8 @@ import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionMenu;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,8 +43,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ebookline.notebooksrc.R;
+import ir.ebookline.notebook.Adapter.AdapterNotes;
 import ir.ebookline.notebook.DataBase.DataBaseHelper;
 import ir.ebookline.notebook.JalaliCalendar;
+import ir.ebookline.notebook.Model.ModelNotes;
 import ir.ebookline.notebook.PublicFunction;
 
 public class MainActivity extends Activity
@@ -48,7 +54,7 @@ public class MainActivity extends Activity
 	DataBaseHelper db;
 	PublicFunction pFun;
 
-	ListView lv;
+	RecyclerView RecyclerViewNotes;
 	LinearLayout LinearLayout_Empty ;
 	FloatingActionMenu materialDesignFAM;
 
@@ -71,135 +77,8 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-
 		init();
 
-
-		lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> p1, View p2,int position, long p4)
-			{
-				Intent toViewNote = new Intent(MainActivity.this , ViewNoteActivity.class);
-				toViewNote.putExtra("id",Ids.get(position));
-				startActivity(toViewNote);
-
-				/*
-				LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View DialogView = inflater.inflate(R.layout.add_update,null);
-
-				final Dialog dialog = new Dialog(MainActivity.this);
-				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-				dialog.setContentView(DialogView);
-				final EditText etTitle=(EditText) DialogView.findViewById(R.id.etTitle);
-				final EditText etText =(EditText) DialogView.findViewById(R.id.etText);
-				final Spinner spCats =(Spinner) DialogView.findViewById(R.id.Cats);
-				Button b      =(Button) DialogView.findViewById(R.id.add_update_button);
-
-				b.setText("Update Note");
-				etTitle.setText(Titles.get(p3));
-				etText.setText(Texts.get(p3));
-				setSpan(etText);
-
-				IdsCat     =db.SHOW_CATEGORIES_LIST(0);
-				TitlesCat  =db.SHOW_CATEGORIES_LIST(1);
-
-				spCats.setAdapter(new AdapterSpinner());
-
-				for(int i=0;i<IdsCat.size();i++) {
-					if(Integer.parseInt(IdsCat.get(i))==Integer.parseInt(Categories.get(p3))) {
-						spCats.setSelection(i);
-					}
-				}
-
-				b.setOnClickListener(new View.OnClickListener()
-				{
-					@Override
-					public void onClick(View p1)
-					{
-						String strTitle=etTitle.getText().toString();
-						String strText=etText.getText().toString();
-
-						if(strTitle.equals("")){
-							pFun.SHOW_TOAST("Enter Title",2);
-							return;
-						}
-
-						if(strText.equals("")){
-							pFun.SHOW_TOAST("Enter Text",2);
-							return;
-						}
-
-						db.UPDATE_NOTE(Integer.parseInt(Ids.get(p3)),strTitle,strText,""+IdsCat.get(spCats.getSelectedItemPosition()),""+ System.currentTimeMillis());
-						dialog.dismiss();
-						setList();
-						pFun.SHOW_TOAST(getResources().getString(R.string.update_note),1);
-					}
-				});
-				dialog.show();*/
-			}
-		});
-
-
-		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
-		{
-			@Override
-			public boolean onItemLongClick(AdapterView<?> p1, View p2, final int p3, long p4)
-			{
-				LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View DialogView = inflater.inflate(R.layout.dialog,null);
-
-				final Dialog dialog = new Dialog(MainActivity.this);
-				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-				dialog.setContentView(DialogView);
-
-				TextView tvTitle = DialogView.findViewById(R.id.Title);
-				TextView tvText = DialogView.findViewById(R.id.Text);
-				Button bDelete =(Button) DialogView.findViewById(R.id.Button_Delete_Note);
-				Button bPin =(Button) DialogView.findViewById(R.id.Button_Pin_Note);
-
-				tvText.append("\n"+Titles.get(p3));
-
-				if(Pins.get(p3).equals("1")) {
-					bPin.setText("Remove the PIN?");
-				}
-
-				bDelete.setOnClickListener(new View.OnClickListener()
-				{
-					@Override
-					public void onClick(View view)
-					{
-						db.DELETE_NOTE(Integer.parseInt(Ids.get(p3)));
-						pFun.showTOAST(getResources().getString(R.string.delete_note),1);
-						setList();
-						dialog.dismiss();
-					}
-				});
-
-				bPin.setOnClickListener(new View.OnClickListener()
-				{
-					@Override
-					public void onClick(View view)
-					{
-
-						if(Pins.get(p3).equals("0")) {
-							db.SET_PIN(Integer.parseInt(Ids.get(p3)),"1");
-						}else {
-							db.SET_PIN(Integer.parseInt(Ids.get(p3)),"0");
-						}
-
-						setList();
-						dialog.dismiss();
-					}
-				});
-
-				dialog.show();
-
-				return true;
-			}
-		});
 	}
 
 
@@ -246,7 +125,7 @@ public class MainActivity extends Activity
 
 				db.INSERT_NOTE (strTitle,strText,""+IdsCat.get(spCats.getSelectedItemPosition()),""+ System.currentTimeMillis());
 				dialog.dismiss();
-				setList();
+				init();
 				pFun.showTOAST(getResources().getString(R.string.save_note),3);
 			}
 		});
@@ -349,7 +228,7 @@ public class MainActivity extends Activity
 							dialog2.dismiss();
 							dialog.dismiss();
 
-							setList();
+							init();
 
 							pFun.showTOAST(getResources().getString(R.string.update_category),3);
 						}
@@ -371,7 +250,7 @@ public class MainActivity extends Activity
 					db.UPDATE_CATEGORY_NOTES(Integer.parseInt(IdsCat.get(p3)));
 					db.DELETE_CATERGORY(Integer.parseInt(IdsCat.get(p3)));
 
-					setList();
+					init();
 					dialog.dismiss();
 					pFun.showTOAST(getResources().getString(R.string.delete_category),1);
 				}
@@ -415,7 +294,8 @@ public class MainActivity extends Activity
 					Categories  =db.SEARCH_LIST(3,s);
 					Dates       =db.SEARCH_LIST(4,s);
 
-					lv.setAdapter(new AdapterListView());
+					setList(Ids,Titles,Texts,Categories,Dates,Pins);
+
 					isSearchList=true;
 					dialog.dismiss();
 				}
@@ -426,60 +306,6 @@ public class MainActivity extends Activity
 
 
 
-
-
-	public class AdapterListView extends BaseAdapter {
-		Context context            = MainActivity.this ;
-		LayoutInflater inflater    =null;
-		public AdapterListView() {
-			inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		}
-		@Override
-		public int getCount() {return Titles.size();}
-		@Override
-		public Object getItem(int position) {return position;}
-		@Override
-		public long getItemId(int position) {return position;}
-		@Override
-		public View getView(final int position, View convertView, ViewGroup parent)  {
-
-			View rowView = inflater.inflate(R.layout.item_note,null);
-			TextView tvTitle=(TextView) rowView.findViewById(R.id.Title);
-			TextView tvText=(TextView) rowView.findViewById(R.id.Text);
-			TextView tvOther=(TextView) rowView.findViewById(R.id.Other);
-			ImageView ivPin=(ImageView) rowView.findViewById(R.id.Pin);
-
-			tvTitle.setText(Titles.get(position));
-			tvText.setText(Texts.get(position));
-
-
-			IdsCat     =db.SHOW_CATEGORIES_LIST(0);
-			TitlesCat  =db.SHOW_CATEGORIES_LIST(1);
-
-			for(int i=0;i<IdsCat.size();i++) {
-				if(Integer.parseInt(IdsCat.get(i))==Integer.parseInt(Categories.get(position))) {
-					tvOther.setText("("+TitlesCat.get(i)+"),");
-					break;
-				}
-			}
-
-			tvOther.append(""+new JalaliCalendar().getJalaliDate(new Date(Long.parseLong(Dates.get(position))))+"-"+new SimpleDateFormat("HH:mm:ss").format(new Date(Long.parseLong(Dates.get(position)))));
-
-			Animation anim;
-			if(position%2==0){
-				anim = AnimationUtils.loadAnimation( context , R.anim.right_to_left);
-			}else{
-				anim = AnimationUtils.loadAnimation( context , R.anim.left_to_right);
-			}
-			rowView.setAnimation(anim);
-
-			if(Pins.get(position).equals("1")) {
-				ivPin.setVisibility(View.VISIBLE);
-			}
-
-			return rowView;
-		}
-	}
 
 	public class AdapterSpinner extends BaseAdapter {
 		Context context            = MainActivity.this ;
@@ -509,7 +335,7 @@ public class MainActivity extends Activity
 		if(!isSearchList) {
 			super.onBackPressed();
 		}else{
-			setList();
+			init();
 			isSearchList=false;
 		}
 	}
@@ -539,27 +365,32 @@ public class MainActivity extends Activity
 	}
 
 
-	public void setList()
+	public void setList(ArrayList<String>Id , ArrayList<String>Tiltle , ArrayList<String>Note , ArrayList<String>Category , ArrayList<String>Date , ArrayList<String>Pin)
 	{
-		Ids         =null;
-		Titles      =null;
-		Texts       =null;
-		Categories  =null;
-		Dates       =null;
-		Pins        =null;
+		if (Ids == null )
+			return;
+		if (Ids.size() == 0)
+			return;
 
-		Ids         =db.SHOW_NOTES_LIST(0);
-		Titles      =db.SHOW_NOTES_LIST(1);
-		Texts       =db.SHOW_NOTES_LIST(2);
-		Categories  =db.SHOW_NOTES_LIST(3);
-		Dates       =db.SHOW_NOTES_LIST(4);
-		Pins        =db.SHOW_NOTES_LIST(5);
-
-		lv.setAdapter(new AdapterListView());
-
-		if ( lv.getAdapter() != null)
+		ArrayList<ModelNotes> array = new ArrayList<ModelNotes>();
+		for ( int i=0 ; i < Ids.size() ; i++)
 		{
-			if (lv.getAdapter().getCount() == 0 )
+			ModelNotes mn = new ModelNotes();
+			mn.setId(Ids.get(i));
+			mn.setTitle(Titles.get(i));
+			mn.setNote(Texts.get(i));
+			mn.setCategory(Categories.get(i));
+			mn.setDate(Dates.get(i));
+			mn.setPin(Pins.get(i));
+			array.add(mn);
+		}
+
+		AdapterNotes an = new AdapterNotes(MainActivity.this , array);
+		RecyclerViewNotes.setAdapter(an);
+
+		if ( an != null)
+		{
+			if ( an.getItemCount() == 0 )
 			{
 				LinearLayout_Empty.setVisibility(View.VISIBLE);
 			}else {
@@ -577,13 +408,24 @@ public class MainActivity extends Activity
 		pFun = new PublicFunction(this);
 
 		LinearLayout_Empty = findViewById(R.id.LinearLayout_Empty);
-		lv = (ListView) findViewById(R.id.mainListView1);
+		RecyclerViewNotes = findViewById(R.id.RecyclerViewNotes);
+
+		RecyclerView.LayoutManager mLayout=new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false);
+		RecyclerViewNotes.setLayoutManager(mLayout);
 
 		materialDesignFAM = (FloatingActionMenu) findViewById(R.id.floating_action_menu);
 		materialDesignFAM.setClosedOnTouchOutside(false);
 		materialDesignFAM.setAnimationDelayPerItem(90);
 
-		setList();
+
+		Ids         =db.SHOW_NOTES_LIST(0);
+		Titles      =db.SHOW_NOTES_LIST(1);
+		Texts       =db.SHOW_NOTES_LIST(2);
+		Categories  =db.SHOW_NOTES_LIST(3);
+		Dates       =db.SHOW_NOTES_LIST(4);
+		Pins        =db.SHOW_NOTES_LIST(5);
+
+		setList(Ids,Titles,Texts,Categories,Dates,Pins);
 	}
 
 
