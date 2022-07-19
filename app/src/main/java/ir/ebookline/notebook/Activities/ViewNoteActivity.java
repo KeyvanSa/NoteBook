@@ -1,6 +1,7 @@
 package ir.ebookline.notebook.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,7 +21,7 @@ public class ViewNoteActivity extends Activity
     DataBaseHelper db;
     PublicFunction pFun;
 
-    ImageView imageviewPin , imageviewEdit , imageviewShare ;
+    ImageView imageviewPin , imageviewEdit , imageviewShare , imageviewDelete ;
     TextView textviewTitle , textviewDate , textviewCategory , textviewText ;
 
     String strId;
@@ -40,6 +41,47 @@ public class ViewNoteActivity extends Activity
 
 
 
+        imageviewPin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if( strPin.equals("0")){
+                    strPin ="1";
+                    pFun.showTOAST("Pinned...!",3);
+                    imageviewPin.setImageResource(R.drawable.ic_baseline_pin_24);
+                } else {
+                    strPin = "0";
+                    pFun.showTOAST("Unpinned...!",3);
+                    imageviewPin.setImageResource(R.drawable.ic_outline_unpin_24);
+                }
+
+                db.SET_PIN(Integer.parseInt(strId),strPin);
+
+            }
+        });
+
+        imageviewEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pFun.showTOAST("Soon ...",1);
+            }
+        });
+
+        imageviewShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pFun.shareText(strTitle +"\n"+ strText );
+            }
+        });
+
+        imageviewDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               db.DELETE_NOTE(Integer.parseInt(strId));
+               pFun.showTOAST("Successfully Deleted",3);
+               onBackPressed();
+            }
+        });
 
     }
 
@@ -52,6 +94,7 @@ public class ViewNoteActivity extends Activity
         imageviewPin = findViewById(R.id.ImageViewPin);
         imageviewEdit = findViewById(R.id.ImageViewEdit);
         imageviewShare = findViewById(R.id.ImageViewShare);
+        imageviewDelete = findViewById(R.id.ImageViewDelete);
         textviewTitle = findViewById(R.id.TextViewTitle);
         textviewCategory = findViewById(R.id.TextViewCategory);
         textviewDate = findViewById(R.id.TextViewDate);
@@ -89,39 +132,12 @@ public class ViewNoteActivity extends Activity
         textviewCategory.setText(strCategory);
         textviewDate.setText(strDate);
         textviewText.setText(strText);
+    }
 
-        imageviewPin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if( strPin.equals("0")){
-                    strPin ="1";
-                    pFun.showTOAST("Pinned...!",3);
-                    imageviewPin.setImageResource(R.drawable.ic_baseline_pin_24);
-                } else {
-                    strPin = "0";
-                    pFun.showTOAST("Unpinned...!",3);
-                    imageviewPin.setImageResource(R.drawable.ic_outline_unpin_24);
-                }
-
-                db.SET_PIN(Integer.parseInt(strId),strPin);
-
-            }
-        });
-
-        imageviewEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pFun.showTOAST("Soon ...",1);
-            }
-        });
-
-        imageviewShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pFun.showTOAST("Soon ...",1);
-            }
-        });
-
+    @Override
+    public void onBackPressed() {
+        Intent toMAin = new Intent(this , MainActivity.class);
+        startActivity(toMAin);
+        finish();
     }
 }

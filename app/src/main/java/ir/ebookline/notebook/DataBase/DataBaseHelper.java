@@ -132,11 +132,11 @@ public class DataBaseHelper
 	{
 		ArrayList<String>list=new ArrayList<String>();
 		OPEN();
-		Cursor cu1 = database.query(dbhelper.TBL_NOTE_NAME,null,"pin !=0",null,null,null,null);
+		Cursor cu1 = database.query(dbhelper.TBL_NOTE_NAME,null,dbhelper.PIN+" !=0",null,null,null,null);
 		while(cu1.moveToNext()) {
 			list.add(cu1.getString(fild));
 		}
-		Cursor cu2 = database.query(dbhelper.TBL_NOTE_NAME,null,"pin=0",null,null,null,null);
+		Cursor cu2 = database.query(dbhelper.TBL_NOTE_NAME,null,dbhelper.PIN+" =0",null,null,null,null);
 		while(cu2.moveToNext()) {
 			list.add(cu2.getString(fild));
 		}

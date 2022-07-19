@@ -1,5 +1,6 @@
 package ir.ebookline.notebook.Adapter;
 
+import android.app.Activity;
 import android.content.*;
 import android.support.annotation.*;
 import android.support.v7.widget.*;
@@ -103,6 +104,7 @@ public class AdapterNotes extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 Intent toViewNote = new Intent(con , ViewNoteActivity.class);
                 toViewNote.putExtra("id",mn.getId());
                 con.startActivity(toViewNote);
+                ((Activity)con).finish();
             }
         });
 

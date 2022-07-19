@@ -179,7 +179,6 @@ public class MainActivity extends Activity
 		dialog.setContentView(DialogView);
 		ListView listCat=(ListView) DialogView.findViewById(R.id.ListView);
 
-
 		IdsCat     =db.SHOW_CATEGORIES_LIST(0);
 		TitlesCat  =db.SHOW_CATEGORIES_LIST(1);
 
@@ -294,7 +293,7 @@ public class MainActivity extends Activity
 					Categories  =db.SEARCH_LIST(3,s);
 					Dates       =db.SEARCH_LIST(4,s);
 
-					setList(Ids,Titles,Texts,Categories,Dates,Pins);
+					setList();
 
 					isSearchList=true;
 					dialog.dismiss();
@@ -365,12 +364,14 @@ public class MainActivity extends Activity
 	}
 
 
-	public void setList(ArrayList<String>Id , ArrayList<String>Tiltle , ArrayList<String>Note , ArrayList<String>Category , ArrayList<String>Date , ArrayList<String>Pin)
+	public void setList()
 	{
-		if (Ids == null )
-			return;
-		if (Ids.size() == 0)
-			return;
+		Ids         =db.SHOW_NOTES_LIST(0);
+		Titles      =db.SHOW_NOTES_LIST(1);
+		Texts       =db.SHOW_NOTES_LIST(2);
+		Categories  =db.SHOW_NOTES_LIST(3);
+		Dates       =db.SHOW_NOTES_LIST(4);
+		Pins        =db.SHOW_NOTES_LIST(5);
 
 		ArrayList<ModelNotes> array = new ArrayList<ModelNotes>();
 		for ( int i=0 ; i < Ids.size() ; i++)
@@ -386,7 +387,6 @@ public class MainActivity extends Activity
 		}
 
 		AdapterNotes an = new AdapterNotes(MainActivity.this , array);
-		RecyclerViewNotes.setAdapter(an);
 
 		if ( an != null)
 		{
@@ -395,9 +395,8 @@ public class MainActivity extends Activity
 				LinearLayout_Empty.setVisibility(View.VISIBLE);
 			}else {
 				LinearLayout_Empty.setVisibility(View.GONE);
+				RecyclerViewNotes.setAdapter(an);
 			}
-		}else {
-			LinearLayout_Empty.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -417,16 +416,7 @@ public class MainActivity extends Activity
 		materialDesignFAM.setClosedOnTouchOutside(false);
 		materialDesignFAM.setAnimationDelayPerItem(90);
 
-
-		Ids         =db.SHOW_NOTES_LIST(0);
-		Titles      =db.SHOW_NOTES_LIST(1);
-		Texts       =db.SHOW_NOTES_LIST(2);
-		Categories  =db.SHOW_NOTES_LIST(3);
-		Dates       =db.SHOW_NOTES_LIST(4);
-		Pins        =db.SHOW_NOTES_LIST(5);
-
-		setList(Ids,Titles,Texts,Categories,Dates,Pins);
+		setList();
 	}
-
 
 }
