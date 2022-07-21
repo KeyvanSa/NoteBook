@@ -63,7 +63,9 @@ public class ViewNoteActivity extends Activity
         imageviewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pFun.showTOAST("Soon ...",1);
+                Intent toViewNote = new Intent(ViewNoteActivity.this, AddNoteActivity.class);
+                toViewNote.putExtra("id",strId);
+                startActivity(toViewNote);
             }
         });
 
@@ -140,4 +142,11 @@ public class ViewNoteActivity extends Activity
         startActivity(toMAin);
         finish();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        init();
+    }
+
 }

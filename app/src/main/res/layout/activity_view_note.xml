@@ -71,7 +71,6 @@
             android:textColor="@color/black"
             android:layout_marginLeft="10dp"
             android:layout_margin="5dp"
-            android:maxLines="1"
             android:textSize="18sp"/>
 
         <TextView
