@@ -1,0 +1,58 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+
+    viewBinding{
+        enabled=true
+    }
+
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "ebookline.notepad"
+        minSdk 21
+        targetSdk 32
+        versionCode 10
+        versionName "10"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // use fab button
+    implementation 'com.github.clans:fab:1.6.4'
+
+    // get permission
+    implementation 'com.karumi:dexter:6.2.3'
+
+    // use finger print
+    implementation 'androidx.biometric:biometric:1.0.1'
+
+    // custom toast
+    implementation 'com.github.TheHasnatBD:SweetToast:1.0.2'
+
+    // Calligraphy
+    implementation "io.github.inflationx:calligraphy3:3.1.1"
+    implementation "io.github.inflationx:viewpump:2.0.3"
+
+}

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">NoteBook</string>
+
+    <string name="ok">OK</string>
+    <string name="no">No</string>
+    <string name="title">Title</string>
+    <string name="text">Text</string>
+    <string name="back">Back</string>
+    <string name="options">Options</string>
+    <string name="error">Error</string>
+
+    <string name="copy_text">Text Copied</string>
+    <string name="share">Share</string>
+    <string name="save">Save</string>
+    <string name="copy">Copy</string>
+
+    <string name="color">Color</string>
+    <string name="date">Date</string>
+    <string name="clear">Clear</string>
+
+    <string name="empty_list_title">List Is Empty</string>
+    <string name="enter_title">Please Enter Title</string>
+    <string name="enter_text">Please Enter Text</string>
+
+    <string name="pined">Pined</string>
+    <string name="unpined">Un Pined</string>
+
+    <string name="choose_color">Choose Color</string>
+    <string name="choose_folder">Choose Folder</string>
+    <string name="choose_database">Choose Database</string>
+
+    <string name="about">AboutUs</string>
+    <string name="rate">Rate Us</string>
+    <string name="backup">Back Up</string>
+    <string name="restore">Restore</string>
+    <string name="delete_notes">Deleted Notes</string>
+
+    <string name="search">Search Notes</string>
+
+    <string name="empty_list_text">notes list is empty \n you can add note by use + button</string>
+    <string name="empty_trash_list_text">You do not have any deleted note</string>
+    <string name="copy_database">Database Copied Successfully</string>
+
+    <string name="note">Note</string>
+    <string name="notes">Notes</string>
+    <string name="all">All</string>
+    <string name="note_add">Add Note</string>
+    <string name="note_add_successfully">Note Added Successfully</string>
+    <string name="note_add_denied">Note Added Denied</string>
+    <string name="note_edit">Edit Note</string>
+    <string name="note_edit_successfully">Note Edited Successfully</string>
+    <string name="note_edit_denied">Note Edited Denied</string>
+    <string name="note_delete">Delete Note\?</string>
+    <string name="note_delete_for_ever">Delete Note %s For Ever?</string>
+    <string name="delete_for_ever">For Ever</string>
+    <string name="note_delete_to_trash">to Trash</string>
+    <string name="note_delete_success">Delete Note Successfully</string>
+    <string name="note_delete_denied">Delete Note Denied</string>
+    <string name="notes_all_delete">Delete All Notes\?</string>
+    <string name="category">Category</string>
+    <string name="no_category">No Category</string>
+    <string name="categories">Categories</string>
+    <string name="category_add">Add Category</string>
+    <string name="category_add_successfully">Category Added Successfully</string>
+    <string name="category_add_denied">Category Added Denied</string>
+    <string name="category_edit">Edit Category</string>
+    <string name="category_edit_successfully">Category Edited Successfully</string>
+    <string name="category_edit_denied">Category Edited Denied</string>
+    <string name="category_delete">Delete Category\?</string>
+    <string name="category_delete_success">Delete Category Successfully</string>
+    <string name="category_delete_denied">Delete Category Denied</string>
+
+    <string name="sort">Sort</string>
+    <string name="sort_by_newest">Sort By Newest</string>
+    <string name="sort_by_oldest">Sort By Oldest</string>
+    <string name="sort_by_title_asc">Sort By Title ASC</string>
+    <string name="sort_by_title_desc">Sort By Title DESC</string>
+    <string name="sort_by_text_acs">Sort BY Text ASC</string>
+    <string name="sort_by_text_desc">Sort By Text DESC</string>
+
+    <string name="settings">Settings</string>
+    <string name="appearance">Appearance</string>
+    <string name="security">Security</string>
+    <string name="text_size">Text Size</string>
+    <string name="colors">Colors</string>
+    <string name="text_color">Text Color</string>
+    <string name="text_font">Text Font</string>
+    <string name="theme">Theme</string>
+    <string name="theme_light">Light Theme</string>
+    <string name="theme_dark">Dark Theme</string>
+    <string name="text_password">Password</string>
+    <string name="security_text">Security Text</string>
+    <string name="security_question_information">Risk the security question if you forget it,it iis not possible to recover the password enter the program</string>
+
+    <string name="notes_restore">Notes have been successfully retrieved</string>
+    <string name="notes_restore_error">Error retrieving notes</string>
+
+    <string name="few_second_ago">Few Seconds Ago</string>
+    <string name="minute_ago">Minute Ago</string>
+    <string name="minutes_ago">%d Minutes Ago</string>
+    <string name="hour_ago">Hour Ago</string>
+    <string name="hours_ago">%d Hour Ago</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="days_ago">%d Days Ago</string>
+    <string name="a_month_ago">A Month Ago</string>
+    <string name="month_ago">%d Month Ago</string>
+    <string name="a_year_ago">A Year Ago</string>
+    <string name="year_ago">%d Year Ago</string>
+
+    <string name="note_add_old_db">Notes Added From Old Database</string>
+    <string name="use_password">Use Password</string>
+    <string name="enter_password_question">Please enter password and security question</string>
+    <string name="forget_your_password">Forget Your Password?</string>
+    <string name="enter_your_password">Enter your Password</string>
+    <string name="check_password">Check Password</string>
+    <string name="wrong_password">your entry password is wrong</string>
+    <string name="delete_password">delete your password</string>
+    <string name="security_text_wrong">your security text is wrong</string>
+    <string name="get_write_permission">Get write permission</string>
+    <string name="get_write_permission_text">For this, please allow the program to access the memory.</string>
+    <string name="reject">reject</string>
+    <string name="permission_rejected">permission rejected</string>
+    <string name="program_settings">Program settings</string>
+    <string name="settings_app">Give the app access to the memory in the settings page</string>
+    <string name="go_to_settings_page">go to settings page</string>
+    <string name="use_fingerprint">Use your fingerprint to login</string>
+    <string name="use_finger_print">Use FingerPrint</string>
+    <string name="operation_not_permitted">Access to the app is limited by the Android device</string>
+    <string name="access_management_storage">To see all the files and folders in this list, you must give the program access to memory management</string>
+    <string name="list_is_empty">List Is Empty</string>
+    <string name="there_are_no_folders_or_files">There are no folders or files</string>
+
+</resources>

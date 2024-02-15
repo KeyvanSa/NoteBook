@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+
+    <color name="color_accent">#58A9FB</color>
+
+    <color name="message_success">#03edbf</color>
+    <color name="message_info">#00f6eb</color>
+    <color name="message_error">#f480a6</color>
+
+    <color name="background">#f1faff</color>
+    <color name="search_box">#e6f4f1</color>
+    <color name="text_color">#3e4756</color>
+    <color name="text_description">#a2acbd</color>
+
+    <color name="text_color_find_search">#FD552A</color>
+    <color name="text_color_hashtag">#1E88E5</color>
+    <color name="text_color_mention">#7CB342</color>
+    <color name="text_background_color_find_search">#ffed37</color>
+
+
+    <!--dark theme colors-->
+    <color name="color_accent_dark">#FB8C00</color>
+
+    <color name="message_success_dark">#518071</color>
+    <color name="message_info_dark">#446178</color>
+    <color name="message_error_dark">#9a5e6d</color>
+
+    <color name="background_dark">#252525</color>
+    <color name="search_box_dark">#525252</color>
+    <color name="text_color_dark">#FFFFFF</color>
+    <color name="text_description_dark">#faf8ff</color>
+    <!--dark theme colors-->
+
+
+</resources>

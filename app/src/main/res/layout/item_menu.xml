@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="?attr/backgroundColor"
+    android:minHeight="45dp">
+
+    <ImageView
+        android:id="@+id/imageViewMenuIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        app:tint="?attr/colorAccent" />
+
+    <TextView
+        android:id="@+id/textViewMenuTitle"
+        style="@style/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@id/imageViewMenuIcon"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textSize="12sp" />
+
+</RelativeLayout>

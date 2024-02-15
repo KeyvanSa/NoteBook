@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/color_accent"
+    app:cardCornerRadius="5dp">
+
+    <RelativeLayout
+        android:layout_marginRight="10dp"
+        android:background="?attr/searchBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textViewDate"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textViewCategory"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewDate"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            style="@style/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@id/textViewDate"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/textViewText"
+            style="@style/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTitle"
+            android:layout_margin="10dp"
+            android:maxLines="2"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

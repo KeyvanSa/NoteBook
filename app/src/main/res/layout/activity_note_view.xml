@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
+    tools:context=".Activity.NoteViewActivity">
+
+    <RelativeLayout
+        android:background="?attr/searchBox"
+        android:minHeight="55dp"
+        android:elevation="5dp"
+        android:id="@+id/relativeToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/relativeToolbarButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageViewMenu"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"
+                android:src="@drawable/navicon"
+                app:tint="?attr/colorAccent" />
+
+            <ImageView
+                android:id="@+id/imageViewPin"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toLeftOf="@id/imageViewMenu"
+                android:padding="5dp"
+                android:src="@drawable/unbookmark"
+                app:tint="?attr/colorAccent" />
+
+            <ImageView
+                android:id="@+id/imageViewSearch"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toLeftOf="@id/imageViewPin"
+                android:padding="5dp"
+                android:src="@drawable/search"
+                app:tint="?attr/colorAccent" />
+
+            <ImageView
+                android:id="@+id/imageViewEdit"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toLeftOf="@id/imageViewSearch"
+                android:padding="5dp"
+                android:src="@drawable/edit"
+                app:tint="?attr/colorAccent" />
+
+            <ImageView
+                android:id="@+id/imageViewDelete"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toLeftOf="@id/imageViewEdit"
+                android:padding="5dp"
+                android:src="@drawable/trash"
+                app:tint="?attr/colorAccent" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeToolbarSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/relativeToolbarButtons"
+            android:layout_margin="5dp"
+            android:visibility="gone">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textLayoutText"
+                style="@style/textinputlayout_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="filled"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconMode="clear_text">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edittextText"
+                    style="@style/textViewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:hint="@string/text"
+                    android:maxLines="1"
+                    android:textAlignment="textStart" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="7dp"
+                android:src="@drawable/search"
+                app:tint="?attr/colorAccent" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        style="@style/textViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativeToolbar"
+        android:layout_margin="10dp"
+        android:ellipsize="end"
+        android:maxLines="1" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewTitle"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewCategory"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutCategory"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="5dp"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textViewDate"
+        style="@style/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewTitle"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textSize="12sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textViewDate"
+        android:layout_margin="10dp"
+        android:scrollbars="none">
+        <TextView
+            android:id="@+id/textViewText"
+            style="@style/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textColor="?attr/textColor"
+            android:textSize="14sp" />
+    </ScrollView>
+
+</RelativeLayout>

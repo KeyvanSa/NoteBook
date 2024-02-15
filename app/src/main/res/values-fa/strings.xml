@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">دفترچه یادداشت</string>
+
+    <string name="ok">باشه</string>
+    <string name="no">نه</string>
+    <string name="title">عنوان</string>
+    <string name="text">متن</string>
+    <string name="back">بازگشت</string>
+    <string name="options">گزینه ها</string>
+    <string name="error">خطا</string>
+
+    <string name="copy_text">متن کپی شد</string>
+    <string name="share">اشتراک</string>
+    <string name="save">ذخیره</string>
+    <string name="copy">کپی</string>
+
+    <string name="color">رنگ</string>
+    <string name="date">تاریخ</string>
+    <string name="clear">پاک کردن</string>
+
+    <string name="empty_list_title">لیست خالی است</string>
+    <string name="enter_title">لطفا یک عنوان بنویسید</string>
+    <string name="enter_text">لطفا یک متن بنویسید</string>
+
+    <string name="pined">پین شد</string>
+    <string name="unpined">پین حذف شد</string>
+
+    <string name="choose_color">انتخاب رنگ</string>
+    <string name="choose_folder">انتخاب پوشه</string>
+    <string name="choose_database">انتخاب دیتابیس</string>
+
+    <string name="about">درباه ما</string>
+    <string name="rate">امتیاز به ما</string>
+    <string name="backup">پشتیبان از یادداشت ها</string>
+    <string name="restore">بازیابی یادداشت ها</string>
+    <string name="delete_notes">یادداشت های حذف شده</string>
+
+    <string name="search">جستجوی یادداشت ها</string>
+
+    <string name="empty_list_text">لیست یادداشت ها خالی است. \n با استفاده از دکمه + میتوانید یادداشت جدید بنویسید</string>
+    <string name="empty_trash_list_text">شما یادداشت حذف شده ای ندارید</string>
+    <string name="copy_database">دیتابیس با موفقیت کپی شد</string>
+
+    <string name="note">یادداشت</string>
+    <string name="notes">یادداشت ها</string>
+    <string name="all">همه</string>
+    <string name="note_add">افزودن یادداشت</string>
+    <string name="note_add_successfully">یادداشت با موفقیت اضافه شد</string>
+    <string name="note_add_denied">خطا در افزودن یادداشت</string>
+    <string name="note_edit">ویرایش یادداشت</string>
+    <string name="note_edit_successfully">یادداشت با موفقیت ویرایش شد</string>
+    <string name="note_edit_denied">خطا در ویرایش یادداشت</string>
+    <string name="note_delete">یادداشت حذف شود؟</string>
+    <string name="note_delete_for_ever">یادداشت %s برای همیشه حذف شود؟</string>
+    <string name="delete_for_ever">حذف کامل</string>
+    <string name="note_delete_to_trash">انتقال به سطل آشغال</string>
+    <string name="note_delete_success">حذف یادداشت با موفقیت انجام شد</string>
+    <string name="note_delete_denied">خطا در حذف یادداشت</string>
+    <string name="notes_all_delete">حذف همه یادداشت ها</string>
+    <string name="category">دسته بندی</string>
+    <string name="no_category">بدون دسته بندی</string>
+    <string name="categories">دسته بندی ها</string>
+    <string name="category_add">افزودن دسته بندی</string>
+    <string name="category_add_successfully">دسته بندی با موفقیت اضافه شد</string>
+    <string name="category_add_denied">خطا در اضافه کردن دسته بندی</string>
+    <string name="category_edit">ویرایش دسته بندی</string>
+    <string name="category_edit_successfully">ویرایش دسته بندی با موفیت انجام شد</string>
+    <string name="category_edit_denied">خطا در ویرایش دسته بندی</string>
+    <string name="category_delete">حذف دسته بندی</string>
+    <string name="category_delete_success">حذف دسته بندی با موفقیت انجام شد</string>
+    <string name="category_delete_denied">خطا در حذف دسته بندی</string>
+
+    <string name="sort">ترتیب لیست</string>
+    <string name="sort_by_newest">جدیدترین</string>
+    <string name="sort_by_oldest">قدیمیترین</string>
+    <string name="sort_by_title_asc">عنوان صعودی</string>
+    <string name="sort_by_title_desc">عنوان نزولی</string>
+    <string name="sort_by_text_acs">متن صعودی</string>
+    <string name="sort_by_text_desc">متن نزولی</string>
+
+    <string name="settings">تنظیمات</string>
+    <string name="appearance">ظاهر برنامه</string>
+    <string name="security">امنیت</string>
+    <string name="text_size">اندازه متن</string>
+    <string name="colors">رنگ ها</string>
+    <string name="text_color">رنگ متن</string>
+    <string name="text_font">فونت متن</string>
+    <string name="theme">تم</string>
+    <string name="theme_light">تم روشن</string>
+    <string name="theme_dark">تم تیره</string>
+    <string name="text_password">رمز عبور</string>
+    <string name="security_text">متن امنیتی</string>
+    <string name="security_question_information">در صورت فراموشی کلمه امنیتی امکان ورود به برنامه وجود ندارد</string>
+
+    <string name="notes_restore">یادداشت ها با موفقیت بازیابی شدند</string>
+    <string name="notes_restore_error">خطا در بازیابی یادداشت ها</string>
+
+    <string name="few_second_ago">لحظاتی قبل</string>
+    <string name="minute_ago">یک دقیقه قبل</string>
+    <string name="minutes_ago">دقیقه قبل %d</string>
+    <string name="hour_ago">یک ساعت قبل</string>
+    <string name="hours_ago">%d ساعت قبل</string>
+    <string name="yesterday">دیروز</string>
+    <string name="days_ago">%d روز قبل</string>
+    <string name="a_month_ago">یک ماه قبل</string>
+    <string name="month_ago">%d ماه قبل</string>
+    <string name="a_year_ago">یک سال قبل</string>
+    <string name="year_ago">%d سال قبل</string>
+
+    <string name="note_add_old_db">یادداشت ها از دیتابیس قبلی اضافه شدند</string>
+    <string name="use_password">استفاده از رمز عبور</string>
+    <string name="enter_password_question">لطفا یک کلمه امنیتی وارد کنید</string>
+    <string name="forget_your_password">رمز عبور را فراموش کرده اید؟</string>
+    <string name="enter_your_password">رمز عبور را وارد کنید</string>
+    <string name="check_password">بررسی کلمه امنیتی</string>
+    <string name="wrong_password">رمز عبور نادرست است</string>
+    <string name="delete_password">رمز عبور برداشته شد</string>
+    <string name="security_text_wrong">کلمه امنیتی اشتباه است</string>
+
+    <string name="get_write_permission">دسترسی به حافظه</string>
+    <string name="get_write_permission_text">برای این کار لطفا دسترسی به حافظه را به برنامه بدهید</string>
+    <string name="reject">رد کردن</string>
+    <string name="permission_rejected">دسترسی رد شد</string>
+    <string name="program_settings">تنظیمات برنامه</string>
+    <string name="settings_app">برای اجاز دادن لطفا به صفحه تنظیمات برنامه بروید</string>
+    <string name="go_to_settings_page">برو به تنظیمات برنامه</string>
+
+    <string name="use_fingerprint">برای ورود به برنامه از اثر انگشت استفاده کنید</string>
+    <string name="use_finger_print">استفاده از اثر انگشت برای ورود</string>
+    <string name="operation_not_permitted">دسترسی برنامه توسط دستگاه اندروید محدود شده است</string>
+    <string name="access_management_storage">برای دیدن همه فایل ها و پوشه ها در این لیست باید دسترسی به مدیریت حافظه را به برنامه بدهید</string>
+    <string name="list_is_empty">لیست خالی است</string>
+    <string name="there_are_no_folders_or_files">هیچ پوشه یا فایلی وجود ندارد</string>
+
+</resources>

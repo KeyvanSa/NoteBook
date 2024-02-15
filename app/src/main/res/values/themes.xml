@@ -1,0 +1,103 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.NotePad" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/color_accent</item>
+        <item name="colorPrimaryVariant">@color/message_error</item>
+        <item name="colorOnPrimary">@color/message_success</item>
+
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="messageSuccess">@color/message_success</item>
+        <item name="messageInfo">@color/message_info</item>
+        <item name="messageError">@color/message_error</item>
+        <item name="backgroundColor">@color/white</item>
+        <item name="searchBox">@color/search_box</item>
+        <item name="textColor">@color/text_color</item>
+        <item name="textDescription">@color/text_description</item>
+    </style>
+
+    <style name="DarkTheme.NotePad" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/color_accent_dark</item>
+        <item name="colorPrimaryVariant">@color/message_error_dark</item>
+        <item name="colorOnPrimary">@color/message_success_dark</item>
+
+        <item name="colorAccent">@color/color_accent_dark</item>
+        <item name="messageSuccess">@color/message_success_dark</item>
+        <item name="messageInfo">@color/message_info_dark</item>
+        <item name="messageError">@color/message_error_dark</item>
+        <item name="backgroundColor">@color/background_dark</item>
+        <item name="searchBox">@color/search_box_dark</item>
+        <item name="textColor">@color/text_color_dark</item>
+        <item name="textDescription">@color/text_description_dark</item>
+    </style>
+
+    <style name="textinputlayout_large"
+        parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">?attr/searchBox</item>
+        <item name="fontPath">shabnamMedium.ttf</item>
+        <item name="backgroundColor">#00000000</item>
+        <item name="android:textSize">18sp</item>
+        <item name="hintTextColor">?attr/colorAccent</item>
+        <item name="errorTextColor">?attr/colorAccent</item>
+        <item name="android:textColor">?attr/textColor</item>
+    </style>
+
+    <style name="textViewTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/textColor</item>
+        <item name="fontPath">shabnamMedium.ttf</item>
+    </style>
+
+    <style name="firstButton">
+        <item name="android:background">@drawable/first_button</item>
+        <item name="fontPath">shabnamMedium.ttf</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+    </style>
+
+    <style name="buttonPassword" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">#00000000</item>
+        <item name="fontPath">shabnamMedium.ttf</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:layout_margin">3dp</item>
+    </style>
+
+    <style name="editTextPassword">
+        <item name="android:background">@drawable/bkg_edittext_password</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="android:cursorVisible">false</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:inputType">numberPassword</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="minHeight">50dp</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:longClickable">false</item>
+        <item name="android:maxEms">1</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="expandedTitleTextAppearance_CollapsingToolbar"
+        parent="Widget.AppCompat.TextView">
+        <item name="fontPath">shabnamMedium.ttf</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="collapsedTitleTextAppearance_CollapsingToolbar"
+        parent="Widget.AppCompat.TextView">
+        <item name="fontPath">shabnamMedium.ttf</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+</resources>

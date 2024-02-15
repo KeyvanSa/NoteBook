@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ds">
+        <attr name="colorAccent" format="reference|color" />
+        <attr name="messageSuccess" format="reference|color"/>
+        <attr name="messageInfo" format="reference|color"/>
+        <attr name="messageError" format="reference|color"/>
+        <attr name="backgroundColor" format="reference|color"/>
+        <attr name="searchBox" format="reference|color"/>
+        <attr name="textColor" format="reference|color"/>
+        <attr name="textDescription" format="reference|color"/>
+
+        <attr name="fontPath" format="reference|string" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/backgroundColor"
+    tools:context=".Activity.MainActivity">
+
+    <RelativeLayout
+        android:background="?attr/searchBox"
+        android:minHeight="55dp"
+        android:elevation="5dp"
+        android:id="@+id/relativeToolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/relativeToolbarButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageViewMenu"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"
+                android:src="@drawable/navicon"
+                app:tint="?attr/colorAccent" />
+
+            <ImageView
+                android:id="@+id/imageViewSort"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toLeftOf="@id/imageViewMenu"
+                android:padding="5dp"
+                android:src="@drawable/sort"
+                app:tint="?attr/colorAccent" />
+
+            <ImageView
+                android:id="@+id/imageViewSearch"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toLeftOf="@id/imageViewSort"
+                android:padding="5dp"
+                android:src="@drawable/search"
+                app:tint="?attr/colorAccent" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeToolbarSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/relativeToolbarButtons"
+            android:layout_margin="5dp"
+            android:visibility="gone">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textLayoutText"
+                style="@style/textinputlayout_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:boxBackgroundMode="filled"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconMode="clear_text">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edittextText"
+                    style="@style/textViewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:hint="@string/title"
+                    android:maxLines="1"
+                    android:textAlignment="textStart" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:padding="7dp"
+                android:src="@drawable/search"
+                app:tint="?attr/colorAccent"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeEmptyList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/relativeToolbarMain"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageViewEmptyList"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/empty_notes" />
+
+        <TextView
+            android:id="@+id/textViewEmptyListTitle"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageViewEmptyList"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/empty_list_title"/>
+
+        <TextView
+            android:id="@+id/textViewText"
+            style="@style/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewEmptyListTitle"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="@string/empty_list_text"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativeToolbarMain"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerNotes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/recyclerViewCategories"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        fab:menu_fab_size="normal"
+        fab:menu_showShadow="true"
+        fab:menu_colorNormal="?attr/colorAccent"
+        fab:menu_icon="@drawable/fab_add"
+        fab:menu_labels_position="left"
+        fab:menu_openDirection="up"
+        fab:menu_fab_label="@string/options">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menuItemAddNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="?attr/colorAccent"
+            fab:fab_label="@string/note_add"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menuItemAddCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="?attr/colorAccent"
+            app:menu_labels_textColor="?attr/backgroundColor"
+            fab:fab_size="mini"
+            fab:fab_label="@string/category_add" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+</RelativeLayout>
