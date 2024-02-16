@@ -58,10 +58,18 @@ public class CustomDialog extends Dialog implements View.OnClickListener
 
         buttonOk.setOnClickListener(this);
         buttonNo.setOnClickListener(this);
+
+        if(mClickListener==null){
+            buttonOk.setVisibility(View.GONE);
+            buttonNo.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
     public void onClick(View view) {
+        if(mClickListener==null) return;
+
         Button button= (Button) view;
         if(button.getText().toString().equals( (getButtonOkText()==null) ? context.getResources().getString(R.string.ok) : getButtonOkText() ))
             mClickListener.onPositiveItemClick(view);

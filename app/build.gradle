@@ -14,8 +14,8 @@ android {
         applicationId "ebookline.notepad"
         minSdk 21
         targetSdk 32
-        versionCode 10
-        versionName "10"
+        versionCode 12
+        versionName "12.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
