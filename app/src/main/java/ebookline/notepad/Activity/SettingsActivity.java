@@ -87,7 +87,7 @@ public class SettingsActivity extends AppCompatActivity
 
         try {
             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            settings.textViewVersion.setText(String.valueOf(pInfo.versionCode));
+            settings.textViewVersion.setText(String.format("%s(%s)",pInfo.versionCode,pInfo.versionName));
         } catch (PackageManager.NameNotFoundException e) {
             settings.textViewVersion.setText("10.0.0");
         }

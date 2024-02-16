@@ -74,9 +74,8 @@ public class NoteViewActivity extends AppCompatActivity
             helper.exceptionHandler(e);
         }
 
-        noteViewBinding.textViewText.setTextColor(Color.parseColor(
-                shared.getString(Constants.TEXT_COLOR,
-                        String.valueOf(getResources().getColor(R.color.text_color)))));
+        noteViewBinding.textViewText.setTextColor(Color.parseColor( (shared.getString(Constants.TEXT_COLOR)==null) ?
+                Constants.TextColorsList.get(0) : shared.getString(Constants.TEXT_COLOR)));
 
         noteViewBinding.imageViewSearch.setOnClickListener(view -> {
             if(isSearchMode)
