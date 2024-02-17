@@ -60,4 +60,4 @@ Keyvan Safarzadeh
 
 | Main Activity| Setting Activity| Add Note Activity|
 | :---: |:----:| :----:|
-| ![Main](images/MainActivity.png)     | ![Settings](images/SettingsActivity.png) | ![Note](images/Add Note Activity.png) |
+| ![Main](images/MainActivity.png)     | ![Settings](images/SettingsActivity.png) | ![Note](images/AddNoteActivity.png) |
