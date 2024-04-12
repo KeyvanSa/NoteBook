@@ -30,10 +30,15 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import ebookline.notepad.Database.DBHelper;
 import ebookline.notepad.Dialogs.CustomDialog;
+import ebookline.notepad.Model.Note;
 import ebookline.notepad.R;
 import xyz.hasnat.sweettoast.SweetToast;
 
@@ -181,9 +186,12 @@ public class HelperClass
     }
 
     public boolean hasFingerPrint(){
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                ((FingerprintManager)context.getSystemService(Context.FINGERPRINT_SERVICE)).isHardwareDetected()
-                && ((FingerprintManager)context.getSystemService(Context.FINGERPRINT_SERVICE)).hasEnrolledFingerprints();
+        try{
+            return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                    ((FingerprintManager)context.getSystemService(Context.FINGERPRINT_SERVICE)).isHardwareDetected()
+                    && ((FingerprintManager)context.getSystemService(Context.FINGERPRINT_SERVICE)).hasEnrolledFingerprints();
+        }catch (Exception ignored){}
+        return false;
     }
 
     public String getDisplayableTime(long delta) {

@@ -83,6 +83,7 @@
     <string name="settings">تنظیمات</string>
     <string name="appearance">ظاهر برنامه</string>
     <string name="security">امنیت</string>
+    <string name="delete_timer">حذف یادداشت تاریخ گذشته</string>
     <string name="text_size">اندازه متن</string>
     <string name="colors">رنگ ها</string>
     <string name="text_color">رنگ متن</string>
@@ -92,7 +93,9 @@
     <string name="theme_dark">تم تیره</string>
     <string name="text_password">رمز عبور</string>
     <string name="security_text">متن امنیتی</string>
+    <string name="expired_notes_days">حداکثر روز نگهداری یادداشت ها</string>
     <string name="security_question_information">در صورت فراموشی کلمه امنیتی امکان ورود به برنامه وجود ندارد</string>
+    <string name="expire_notes_information">اگر این گزینه فعال باشد یادداشت هایی که بیشتر از 30 روز در سطل آشغال برنامه باشند به طور خورکار حذف میشوند.</string>
 
     <string name="notes_restore">یادداشت ها با موفقیت بازیابی شدند</string>
     <string name="notes_restore_error">خطا در بازیابی یادداشت ها</string>
@@ -108,6 +111,7 @@
     <string name="month_ago">%d ماه قبل</string>
     <string name="a_year_ago">یک سال قبل</string>
     <string name="year_ago">%d سال قبل</string>
+    <string name="left_days">%d روز مانده</string>
 
     <string name="note_add_old_db">یادداشت ها از دیتابیس قبلی اضافه شدند</string>
     <string name="use_password">استفاده از رمز عبور</string>

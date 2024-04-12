@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,6 +70,17 @@ public class SettingsActivity extends AppCompatActivity
             else settings.linearUsePassword.setVisibility(View.GONE);
         });
 
+        settings.checkboxExpiredNotes.setChecked(shared.getBoolean(Constants.USE_EXPIRED_NOTE));
+        if(settings.checkboxExpiredNotes.isChecked()){
+            settings.linearExpiredNotes.setVisibility(View.VISIBLE);
+        }
+
+        settings.checkboxExpiredNotes.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(b)
+                settings.linearExpiredNotes.setVisibility(View.VISIBLE);
+            else settings.linearExpiredNotes.setVisibility(View.GONE);
+        });
+
         settings.buttonTextColor.setTextColor(Color.parseColor(textColor));
         settings.buttonTextColor.setOnClickListener(view -> {
             ColorPickerDialog dialog = new ColorPickerDialog(this);
@@ -114,6 +126,11 @@ public class SettingsActivity extends AppCompatActivity
             }
             Prefs.putBoolean(Constants.USE_FINGERPRINT,settings.checkboxUseFingerPrint.isChecked());
         }else Prefs.remove(Constants.USE_PASSWORD);
+
+        if(settings.checkboxExpiredNotes.isChecked())
+            shared.saveBoolean(Constants.USE_EXPIRED_NOTE,settings.checkboxExpiredNotes.isChecked());
+        else
+            shared.removeValue(Constants.USE_EXPIRED_NOTE);
 
         Intent toMainActivity = new Intent(SettingsActivity.this,MainActivity.class);
         startActivity(toMainActivity);

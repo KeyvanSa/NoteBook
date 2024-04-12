@@ -12,11 +12,15 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
 
+import ebookline.notepad.Activity.TrashActivity;
 import ebookline.notepad.Database.DBHelper;
 import ebookline.notepad.Model.Category;
 import ebookline.notepad.Model.Note;
 import ebookline.notepad.R;
+import ebookline.notepad.Shared.SharedHelper;
+import ebookline.notepad.Util.Constants;
 import ebookline.notepad.Util.HelperClass;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
@@ -26,6 +30,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
     private ItemClickListener mClickListener;
 
     private final HelperClass helper;
+    private final SharedHelper shared;
     private final DBHelper db;
 
     private final Context context;
@@ -33,6 +38,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
     public NoteAdapter(Context context, List<Note> data) {
         this.context = context;
         helper = new HelperClass(context);
+        shared=new SharedHelper(context);
         db = new DBHelper(context);
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
@@ -62,31 +68,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
             holder.textViewCategory.setText(category.getTitle());
             holder.itemCardView.setCardBackgroundColor(Color.parseColor(note.getColor()));
 
-            String[] sDate = holder.textViewDate.getText().toString().split("-")[1].split("/");
-            if(Integer.parseInt(sDate[1])==1)
-                holder.textViewDate.setText(String.format("%s فروردین",sDate[2]));
-            else if(Integer.parseInt(sDate[1])==2)
-                holder.textViewDate.setText(String.format("%s اردیبهشت",sDate[2]));
-            else if(Integer.parseInt(sDate[1])==3)
-                holder.textViewDate.setText(String.format("%s خرداد",sDate[2]));
-            else if(Integer.parseInt(sDate[1])==4)
-                holder.textViewDate.setText(String.format("%s تیر",sDate[2]));
-            else if(Integer.parseInt(sDate[1])==5)
-                holder.textViewDate.setText(String.format("%s مرداد",sDate[2]));
-            else if(Integer.parseInt(sDate[1])==6)
-                holder.textViewDate.setText(String.format("%s شهریور",sDate[2]));
-            else if(Integer.parseInt(sDate[1])==7)
-                holder.textViewDate.setText(String.format("%s مهر",sDate[2]));
-            else if(Integer.parseInt(sDate[1])==8)
-                holder.textViewDate.setText(String.format("%s آبان",sDate[2]));
-            else if(Integer.parseInt(sDate[1])==9)
-                holder.textViewDate.setText(String.format("%s آذر",sDate[2]));
-            else if(Integer.parseInt(sDate[1])==10)
-                holder.textViewDate.setText(String.format("%s دی",sDate[2]));
-            else if(Integer.parseInt(sDate[1])==11)
-                holder.textViewDate.setText(String.format("%s بهمن",sDate[2]));
-            else if(Integer.parseInt(sDate[1])==12)
-                holder.textViewDate.setText(String.format("%s اسفند",sDate[2]));
+            //String[] sDate = holder.textViewDate.getText().toString().split("-")[1].split("/");
+
+            if(context.getClass()==TrashActivity.class)
+                setExpiredDay(position,holder.textViewExpiredDate);
 
         }catch (Exception e){
             holder.textViewText.setText(e.toString());
@@ -94,11 +79,31 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
         }
     }
 
+    private void setExpiredDay(int position, TextView textViewExpiredDate)
+    {
+        long day = (java.lang.System.currentTimeMillis() - Long.parseLong(getItem(position).getaTime()) )/1000;
+        int lastDays = 29 - (int)(day/(24*60*60));
+
+        textViewExpiredDate.setText(
+                String.format(
+                        Locale.ROOT,
+                        context.getResources().getString(R.string.left_days)
+                        ,lastDays));
+
+        if(lastDays <= 10)
+           textViewExpiredDate.setTextColor(context.getResources().getColor(R.color.message_error));
+        else if (lastDays <= 20)
+            textViewExpiredDate.setTextColor(context.getResources().getColor(R.color.color_accent));
+        else textViewExpiredDate.setTextColor(context.getResources().getColor(R.color.message_success_dark));
+
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView itemCardView;
         TextView textViewTitle;
         TextView textViewText;
         TextView textViewDate;
+        TextView textViewExpiredDate;
         TextView textViewCategory;
         ViewHolder(View itemView) {
             super(itemView);
@@ -106,6 +111,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewText = itemView.findViewById(R.id.textViewText);
             textViewDate = itemView.findViewById(R.id.textViewDate);
+            textViewExpiredDate = itemView.findViewById(R.id.textViewExpiredDate);
             textViewCategory = itemView.findViewById(R.id.textViewCategory);
             itemView.setOnClickListener(this);
         }

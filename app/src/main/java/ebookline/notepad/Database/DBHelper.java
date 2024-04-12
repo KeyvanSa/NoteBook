@@ -16,6 +16,7 @@ import java.util.List;
 import ebookline.notepad.Model.Category;
 import ebookline.notepad.Model.Note;
 import ebookline.notepad.R;
+import ebookline.notepad.Shared.SharedHelper;
 import ebookline.notepad.Util.Constants;
 import ebookline.notepad.Util.HelperClass;
 
@@ -27,17 +28,17 @@ public class DBHelper
     private HelperClass helper;
 
     public void autoDeleteExpiredNotes(){
-
         List<Note> list = getTrashNotes();
 
-        for(Note note : list){
-            if((Long.parseLong(note.getaTime()) +
-                    (Constants.DAYS_PAST_TO_DELETE_TRASH_NOTES*24*60*60*1000))
-                    > java.lang.System.currentTimeMillis())
+        for (Note note : list){
 
+            int leftDays = 29 -
+                    (int)(((java.lang.System.currentTimeMillis() -
+                            Long.parseLong(note.getaTime()) )/1000)/(24*60*60));
+
+            if(leftDays<1)
                 deleteTrashNote(note);
         }
-
     }
 
     public int count(String tblName,String selection){

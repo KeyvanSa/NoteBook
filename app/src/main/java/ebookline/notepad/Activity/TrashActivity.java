@@ -13,7 +13,9 @@ import ebookline.notepad.Dialogs.CustomDialog;
 import ebookline.notepad.Database.DBHelper;
 import ebookline.notepad.Model.Note;
 import ebookline.notepad.R;
+import ebookline.notepad.Shared.SharedHelper;
 import ebookline.notepad.ThemeManager;
+import ebookline.notepad.Util.Constants;
 import ebookline.notepad.Util.HelperClass;
 import ebookline.notepad.databinding.ActivityTrashBinding;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
@@ -27,6 +29,7 @@ public class TrashActivity extends AppCompatActivity implements NoteAdapter.Item
     Note note;
 
     DBHelper db;
+    SharedHelper shared;
     HelperClass helper;
 
     @Override
@@ -37,6 +40,7 @@ public class TrashActivity extends AppCompatActivity implements NoteAdapter.Item
         setContentView(trashBinding.getRoot());
 
         db = new DBHelper(this);
+        shared = new SharedHelper(this);
         helper = new HelperClass(this);
 
         try{

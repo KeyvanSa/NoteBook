@@ -83,6 +83,7 @@
     <string name="settings">Settings</string>
     <string name="appearance">Appearance</string>
     <string name="security">Security</string>
+    <string name="delete_timer">Delete Expired Notes</string>
     <string name="text_size">Text Size</string>
     <string name="colors">Colors</string>
     <string name="text_color">Text Color</string>
@@ -92,7 +93,9 @@
     <string name="theme_dark">Dark Theme</string>
     <string name="text_password">Password</string>
     <string name="security_text">Security Text</string>
+    <string name="expired_notes_days">Maximum days to keeping notes</string>
     <string name="security_question_information">Risk the security question if you forget it,it iis not possible to recover the password enter the program</string>
+    <string name="expire_notes_information">If this option is active, the notes that are more than the 30 days in the program\'s trash will be automatically deleted.</string>
 
     <string name="notes_restore">Notes have been successfully retrieved</string>
     <string name="notes_restore_error">Error retrieving notes</string>
@@ -108,6 +111,7 @@
     <string name="month_ago">%d Month Ago</string>
     <string name="a_year_ago">A Year Ago</string>
     <string name="year_ago">%d Year Ago</string>
+    <string name="left_days">%d day(s) Left</string>
 
     <string name="note_add_old_db">Notes Added From Old Database</string>
     <string name="use_password">Use Password</string>

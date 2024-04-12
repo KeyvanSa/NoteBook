@@ -41,6 +41,7 @@ import ebookline.notepad.Model.Category;
 import ebookline.notepad.Model.Menu;
 import ebookline.notepad.Model.Note;
 import ebookline.notepad.R;
+import ebookline.notepad.Shared.SharedHelper;
 import ebookline.notepad.ThemeManager;
 import ebookline.notepad.Util.Constants;
 import ebookline.notepad.Util.HelperClass;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
     ActivityMainBinding main;
 
     private HelperClass helper;
+    private SharedHelper shared;
     private DBHelper db;
 
     private List<Note> noteList;
@@ -74,9 +76,12 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
         setContentView(main.getRoot());
 
         helper = new HelperClass(this);
+        shared = new SharedHelper(this);
         db = new DBHelper(this);
 
         try {
+            if(shared.getBoolean(Constants.USE_EXPIRED_NOTE))
+                db.autoDeleteExpiredNotes();
 
             if(db.getNoteOldDatabase()){
                 getNotesList(null,null);

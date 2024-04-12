@@ -27,6 +27,19 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/textViewExpiredDate"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/textViewDate"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/message_error"
+            android:textSize="12sp" />
+
+        <TextView
             android:id="@+id/textViewCategory"
             style="@style/textViewTitle"
             android:layout_width="wrap_content"
@@ -45,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_margin="5dp"
-            android:layout_toRightOf="@id/textViewDate"
+            android:layout_toRightOf="@id/textViewExpiredDate"
             android:maxLines="1" />
 
         <TextView

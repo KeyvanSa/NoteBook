@@ -40,6 +40,8 @@ public class Constants
     public static final String USE_PASSWORD="use_password";
     public static final String USE_FINGERPRINT="use_fingerprint";
 
+    public static final String USE_EXPIRED_NOTE="use_expired_note";
+
     public static final boolean bazzar_or_myket = false; // true is bazzar
 
 }
