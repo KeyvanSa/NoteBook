@@ -1,15 +1,16 @@
 package ebookline.notepad.Dialogs;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,33 +20,40 @@ import ebookline.notepad.Model.Menu;
 import ebookline.notepad.R;
 import ebookline.notepad.Util.HelperClass;
 
-public class MenuDialog extends BottomSheetDialog implements MenuAdapter.ItemClickListener
+public class MenuDialog extends BottomSheetDialogFragment implements MenuAdapter.ItemClickListener
 {
     Context context;
     HelperClass helper;
 
     private List<Menu> list;
 
-    OnClickButtonListener onClickButtonListener;
+    OnClickItemListener onClickButtonListener;
 
-    private void init()
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_bottom_sheet_menu,container,false);
+
+        init(view);
+
+        return view.getRootView();
+    }
+
+    private void init(View view)
     {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setBackgroundDrawable(null);
-
-        View view=View.inflate(context, R.layout.layout_bottom_sheet_menu,null);
-        view.setBackgroundColor(Color.TRANSPARENT);
-
         RecyclerView recyclerView = view.findViewById(R.id.recyclerMenu);
 
         MenuAdapter adapter = new MenuAdapter(context, ((getList() == null) ? new ArrayList<>() : getList()));
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
-
-        setContentView(view);
     }
 
-    public void setOnClickButtonListener(OnClickButtonListener onClickButtonListener){
+    public void setOnClickButtonListener(OnClickItemListener onClickButtonListener){
         this.onClickButtonListener = onClickButtonListener;
     }
 
@@ -55,18 +63,12 @@ public class MenuDialog extends BottomSheetDialog implements MenuAdapter.ItemCli
         dismiss();
     }
 
-    public void showDialog(){
-        init();
-        show();
-    }
-
     public MenuDialog(Context context){
-        super(context);
         this.context=context;
         helper = new HelperClass(context);
     }
 
-    public interface OnClickButtonListener {
+    public interface OnClickItemListener {
         void onItemClick(Menu menu);
     }
 

@@ -113,29 +113,31 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             menuList.add(new Menu(5,getResources().getString(R.string.sort_by_text_acs),R.drawable.sort));
             menuList.add(new Menu(6,getResources().getString(R.string.sort_by_text_desc),R.drawable.sort));
 
-            MenuDialog dialog = new MenuDialog(this);
-            dialog.setList(menuList);
-            dialog.setOnClickButtonListener(menu ->
-            {
-                isSearchMode = true;
-                onBackPressed();
+            MenuDialog bottomSheet=new MenuDialog(this);
+            bottomSheet.setList(menuList);
+            bottomSheet.setOnClickButtonListener(new MenuDialog.OnClickItemListener() {
+                @Override
+                public void onItemClick(Menu menu) {
+                    isSearchMode = true;
+                    onBackPressed();
 
-                if(menu.getId()==1)
-                    getNotesList(null,Constants.ID+" desc");
-                if(menu.getId()==2)
-                    getNotesList(null,Constants.ID+" asc");
+                    if(menu.getId()==1)
+                        getNotesList(null,Constants.ID+" desc");
+                    if(menu.getId()==2)
+                        getNotesList(null,Constants.ID+" asc");
 
-                if(menu.getId()==3)
-                    getNotesList(null,Constants.TITLE+" desc");
-                if(menu.getId()==4)
-                    getNotesList(null,Constants.TITLE+" asc");
+                    if(menu.getId()==3)
+                        getNotesList(null,Constants.TITLE+" desc");
+                    if(menu.getId()==4)
+                        getNotesList(null,Constants.TITLE+" asc");
 
-                if(menu.getId()==5)
-                    getNotesList(null,Constants.TEXT+" desc");
-                if(menu.getId()==6)
-                    getNotesList(null,Constants.TEXT+" asc");
+                    if(menu.getId()==5)
+                        getNotesList(null,Constants.TEXT+" desc");
+                    if(menu.getId()==6)
+                        getNotesList(null,Constants.TEXT+" asc");
+                }
             });
-            dialog.showDialog();
+            bottomSheet.show(this.getSupportFragmentManager(),bottomSheet.getTag());
 
             if(main.menu.isOpened())
                 main.menu.close(true);
@@ -294,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
                 }
             });
 
-            dialog.showDialog();
+            dialog.show(this.getSupportFragmentManager(),dialog.getTag());
 
             if(main.menu.isOpened())
                 main.menu.close(true);

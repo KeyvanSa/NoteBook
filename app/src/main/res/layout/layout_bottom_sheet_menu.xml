@@ -3,15 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+    android:paddingBottom="20dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         app:cardBackgroundColor="?attr/backgroundColor"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp">
+        app:cardCornerRadius="1dp"
+        app:cardElevation="1dp">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerMenu"
             android:layout_width="match_parent"

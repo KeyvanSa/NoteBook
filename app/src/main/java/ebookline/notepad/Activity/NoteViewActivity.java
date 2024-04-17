@@ -218,7 +218,7 @@ public class NoteViewActivity extends AppCompatActivity
                     helper.copyToClipboard(strText);
                 }
             });
-            dialog.showDialog();
+            dialog.show(this.getSupportFragmentManager(),dialog.getTag());
         });
 
         noteViewBinding.edittextText.addTextChangedListener(new TextWatcher() {
