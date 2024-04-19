@@ -42,6 +42,10 @@ public class Constants
 
     public static final String USE_EXPIRED_NOTE="use_expired_note";
 
+    public static final String LANGUAGE="language";
+    public static final String ENGLISH="en";
+    public static final String PERSIAN="fa";
+
     public static final boolean bazzar_or_myket = false; // true is bazzar
 
 }

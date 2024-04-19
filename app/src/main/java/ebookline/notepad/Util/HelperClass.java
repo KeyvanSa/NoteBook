@@ -7,6 +7,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Environment;
@@ -16,6 +18,8 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -30,21 +34,37 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ebookline.notepad.Database.DBHelper;
 import ebookline.notepad.Dialogs.CustomDialog;
-import ebookline.notepad.Model.Note;
 import ebookline.notepad.R;
+import ebookline.notepad.Shared.SharedHelper;
 import xyz.hasnat.sweettoast.SweetToast;
 
 public class HelperClass
 {
     private final Context context;
+
+    @SuppressLint("NewApi")
+    public String getCurrentLanguage(){
+        Configuration configuration = context.getResources().getConfiguration();
+        return configuration.getLocales().get(0).getLanguage();
+    }
+
+    public void setApplicationLanguage(){
+        SharedHelper shared=new SharedHelper(context);
+        Locale locale=new Locale(shared.getString(Constants.LANGUAGE,Constants.ENGLISH));
+
+        Resources resources=context.getResources();
+
+        Configuration configuration= resources.getConfiguration();
+        configuration.setLocale(locale);
+
+        DisplayMetrics displayMetrics=resources.getDisplayMetrics();
+        resources.updateConfiguration(configuration,displayMetrics);
+    }
 
     public void shakeAnimation(View view){
         Animation shakeAnimation = AnimationUtils.loadAnimation(context,R.anim.shake);

@@ -3,6 +3,7 @@ package ebookline.notepad;
 import android.app.Application;
 import android.content.ContextWrapper;
 
+import ebookline.notepad.Util.HelperClass;
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;

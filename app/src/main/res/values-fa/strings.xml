@@ -96,6 +96,9 @@
     <string name="expired_notes_days">حداکثر روز نگهداری یادداشت ها</string>
     <string name="security_question_information">در صورت فراموشی کلمه امنیتی امکان ورود به برنامه وجود ندارد</string>
     <string name="expire_notes_information">اگر این گزینه فعال باشد یادداشت هایی که بیشتر از 30 روز در سطل آشغال برنامه باشند به طور خورکار حذف میشوند.</string>
+    <string name="language">زبان</string>
+    <string name="english">انگلیسی</string>
+    <string name="persian">فارسی</string>
 
     <string name="notes_restore">یادداشت ها با موفقیت بازیابی شدند</string>
     <string name="notes_restore_error">خطا در بازیابی یادداشت ها</string>

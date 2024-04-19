@@ -30,6 +30,7 @@ public class SettingsActivity extends AppCompatActivity
     SharedHelper shared;
 
     String textColor ;
+    String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,18 @@ public class SettingsActivity extends AppCompatActivity
             settings.textViewVersion.setText("10.0.0");
         }
 
+        language = shared.getString(Constants.LANGUAGE,Constants.PERSIAN);
+        if(!language.equals(Constants.ENGLISH) && !language.equals(Constants.PERSIAN))
+            language = Constants.PERSIAN;
+
+        if(helper.getCurrentLanguage().equals(Constants.ENGLISH))
+            settings.radioButtonEnglishLanguage.setChecked(true);
+        else settings.radioButtonPersianLanguage.setChecked(true);
+
+        settings.radioButtonEnglishLanguage.setOnClickListener(view -> language = Constants.ENGLISH);
+
+        settings.radioButtonPersianLanguage.setOnClickListener(view -> language = Constants.PERSIAN);
+
     }
 
     @Override
@@ -131,6 +144,8 @@ public class SettingsActivity extends AppCompatActivity
             shared.saveBoolean(Constants.USE_EXPIRED_NOTE,settings.checkboxExpiredNotes.isChecked());
         else
             shared.removeValue(Constants.USE_EXPIRED_NOTE);
+
+        shared.saveString(Constants.LANGUAGE,language);
 
         Intent toMainActivity = new Intent(SettingsActivity.this,MainActivity.class);
         startActivity(toMainActivity);

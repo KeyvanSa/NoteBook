@@ -79,6 +79,10 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
         shared = new SharedHelper(this);
         db = new DBHelper(this);
 
+        try{
+            helper.setApplicationLanguage();
+        }catch (Exception ignored){}
+
         try {
             if(shared.getBoolean(Constants.USE_EXPIRED_NOTE))
                 db.autoDeleteExpiredNotes();

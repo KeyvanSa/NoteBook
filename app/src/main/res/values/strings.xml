@@ -96,6 +96,9 @@
     <string name="expired_notes_days">Maximum days to keeping notes</string>
     <string name="security_question_information">Risk the security question if you forget it,it iis not possible to recover the password enter the program</string>
     <string name="expire_notes_information">If this option is active, the notes that are more than the 30 days in the program\'s trash will be automatically deleted.</string>
+    <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="persian">Persian</string>
 
     <string name="notes_restore">Notes have been successfully retrieved</string>
     <string name="notes_restore_error">Error retrieving notes</string>
