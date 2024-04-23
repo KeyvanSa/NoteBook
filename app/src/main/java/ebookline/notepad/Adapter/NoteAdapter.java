@@ -70,7 +70,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
 
             //String[] sDate = holder.textViewDate.getText().toString().split("-")[1].split("/");
 
-            if(context.getClass()==TrashActivity.class)
+            if(context.getClass()==TrashActivity.class && shared.getBoolean(Constants.USE_EXPIRED_NOTE))
                 setExpiredDay(position,holder.textViewExpiredDate);
 
         }catch (Exception e){

@@ -106,8 +106,6 @@ public class SettingsActivity extends AppCompatActivity
         }
 
         language = shared.getString(Constants.LANGUAGE,Constants.PERSIAN);
-        if(!language.equals(Constants.ENGLISH) && !language.equals(Constants.PERSIAN))
-            language = Constants.PERSIAN;
 
         if(helper.getCurrentLanguage().equals(Constants.ENGLISH))
             settings.radioButtonEnglishLanguage.setChecked(true);

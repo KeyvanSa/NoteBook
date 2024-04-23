@@ -55,7 +55,7 @@ public class HelperClass
 
     public void setApplicationLanguage(){
         SharedHelper shared=new SharedHelper(context);
-        Locale locale=new Locale(shared.getString(Constants.LANGUAGE,Constants.ENGLISH));
+        Locale locale=new Locale(shared.getString(Constants.LANGUAGE,Constants.PERSIAN));
 
         Resources resources=context.getResources();
 

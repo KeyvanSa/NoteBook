@@ -23,8 +23,6 @@ public class Constants
     public static final String TBL_CATEGORY_NAME = "category";
     public static final String PARENT = "parent";
 
-    public static final long DAYS_PAST_TO_DELETE_TRASH_NOTES = 30;
-
     public static final ArrayList<String> categoryColorsList =
             new ArrayList<>(Arrays.asList("#95afc0", "#ff7979", "#ffbe76", "#7ed6df", "#badc58"));
 

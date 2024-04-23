@@ -95,7 +95,7 @@ public class DBHelper
             note.setText(cursor.getString(2));
             note.setCategory(0);
 
-            if(cursor.getCount()<8){ // db is notebook database file
+            if(cursor.getColumnCount()<8){ // db is notebook database file
                 note.setColor(Constants.categoryColorsList.get(0));
                 note.setaTime(cursor.getString(4));
                 note.setcTime(cursor.getString(4));
@@ -277,7 +277,11 @@ public class DBHelper
             note.setcTime(cursor.getString(6));
             note.setPin(cursor.getInt(7));
             note.setDeleted(cursor.getInt(8));
-            list.add(note);
+            /*
+            To avoid displaying deleted notes
+             because the SQL condition may not work correctly*/
+            if(note.getDeleted()==0)
+                list.add(note);
         }
 
         dbClose();

@@ -30,7 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewTitle"
             android:layout_margin="10dp"
-            android:maxLines="2"
             android:text="@string/text"
             android:textSize="16sp" />
 

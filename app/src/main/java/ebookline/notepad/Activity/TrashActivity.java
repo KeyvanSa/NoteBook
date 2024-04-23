@@ -69,7 +69,7 @@ public class TrashActivity extends AppCompatActivity implements NoteAdapter.Item
         note = adapter.getItem(position);
 
         CustomDialog dialog = new CustomDialog(this);
-        dialog.setTitle(getResources().getString(R.string.note_delete));
+        dialog.setTitle(String.format(getResources().getString(R.string.note_delete),""));
         dialog.setText(String.format(getResources().getString(R.string.note_delete_for_ever),note.getTitle()));
         dialog.setButtonOkText(getResources().getString(R.string.ok));
         dialog.setButtonNoText(getResources().getString(R.string.restore));

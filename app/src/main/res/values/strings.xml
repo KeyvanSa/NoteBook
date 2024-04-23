@@ -52,7 +52,7 @@
     <string name="note_edit">Edit Note</string>
     <string name="note_edit_successfully">Note Edited Successfully</string>
     <string name="note_edit_denied">Note Edited Denied</string>
-    <string name="note_delete">Delete Note\?</string>
+    <string name="note_delete">Delete Note %s</string>
     <string name="note_delete_for_ever">Delete Note %s For Ever?</string>
     <string name="delete_for_ever">For Ever</string>
     <string name="note_delete_to_trash">to Trash</string>

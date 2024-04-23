@@ -82,6 +82,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
             password.textLayoutSecurityQuestion.setVisibility(View.VISIBLE);
             password.buttonCheckPassword.setVisibility(View.VISIBLE);
             password.linearLayoutEditTexts.setVisibility(View.GONE);
+            password.textViewTitle.setVisibility(View.GONE);
             password.linearLayoutKeyboard.setVisibility(View.INVISIBLE);
         });
 
@@ -188,6 +189,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
             password.buttonCheckPassword.setVisibility(View.GONE);
             password.textViewForgetPassword.setVisibility(View.VISIBLE);
             password.linearLayoutEditTexts.setVisibility(View.VISIBLE);
+            password.textViewTitle.setVisibility(View.VISIBLE);
             password.linearLayoutKeyboard.setVisibility(View.VISIBLE);
             onClick(password.buttonClear);
         }else super.onBackPressed();

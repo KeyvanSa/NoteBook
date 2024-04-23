@@ -79,10 +79,6 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
         shared = new SharedHelper(this);
         db = new DBHelper(this);
 
-        try{
-            helper.setApplicationLanguage();
-        }catch (Exception ignored){}
-
         try {
             if(shared.getBoolean(Constants.USE_EXPIRED_NOTE))
                 db.autoDeleteExpiredNotes();
@@ -93,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             }else  getNotesList(null,null);
 
             getCategoriesList();
+
+            // set app language
+            helper.setApplicationLanguage();
 
         }catch (Exception e){
             helper.exceptionHandler(e);
@@ -273,30 +272,64 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
                     }
 
                 }else if(menu.getId()==6) {
-                    if (!helper.hasReadPermission() || !helper.hasWritePermission()) {
-                        return;
+
+                    try{
+                        Dexter.withContext(MainActivity.this)
+                                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                .withListener(new PermissionListener()
+                                {
+                                    @Override public void onPermissionGranted(PermissionGrantedResponse response)
+                                    {
+                                        FilePickerDialog dialog1 = new FilePickerDialog(MainActivity.this);
+                                        dialog1.setFileSelection(true);
+                                        dialog1.setTypeShowFiles(new String[]{"db"});
+                                        dialog1.setStrTitle(getResources().getString(R.string.choose_database));
+                                        dialog1.setBackButtonText(getResources().getString(R.string.restore));
+                                        dialog1.setOnClickButtonListener(new FilePickerDialog.OnClickButtonListener() {
+                                            @Override
+                                            public void chooseFolder(File folder) {
+                                                if (db.restoreDatabase(folder)) {
+                                                    helper.showToast(getResources().getString(R.string.notes_restore), 3);
+                                                    getNotesList(null, null);
+                                                } else helper.showToast(getResources().getString(R.string.notes_restore_error), 2);
+                                            }
+
+                                            @Override
+                                            public boolean chooseBack() {
+                                                return false;
+                                            }
+                                        });
+                                        dialog1.showDialog();
+                                    }
+                                    @Override public void onPermissionDenied(PermissionDeniedResponse response) {
+                                        if(response.isPermanentlyDenied()){
+                                            CustomDialog dialog1 =new CustomDialog(MainActivity.this);
+                                            dialog1.setTitle(getString(R.string.program_settings));
+                                            dialog1.setText(getString(R.string.settings_app));
+                                            dialog1.setButtonOkText(getString(R.string.go_to_settings_page));
+                                            dialog1.setButtonNoText(getString(R.string.reject));
+                                            dialog1.setClickListener(new CustomDialog.ItemClickListener() {
+                                                @Override
+                                                public void onPositiveItemClick(View view1) {}
+                                                @Override
+                                                public void onNegativeItemClick(View view1) {
+                                                    helper.showToast(getString(R.string.permission_rejected),1);
+                                                }
+                                            });
+                                            dialog1.setOnDismissListener(dialogInterface -> helper.showToast(getString(R.string.permission_rejected),1));
+                                            dialog1.showDialog();
+                                        }else helper.showToast(getString(R.string.permission_rejected),1);
+                                    }
+                                    @Override public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                                        token.continuePermissionRequest();
+                                    }
+                                })
+                                .withErrorListener(dexterError -> helper.showToast(dexterError.toString(),1))
+                                .check();
+                    }catch (Exception e){
+                        helper.showAlert(e.toString(),2);
                     }
 
-                    FilePickerDialog dialog1 = new FilePickerDialog(MainActivity.this);
-                    dialog1.setFileSelection(true);
-                    dialog1.setTypeShowFiles(new String[]{"db"});
-                    dialog1.setStrTitle(getResources().getString(R.string.choose_database));
-                    dialog1.setBackButtonText(getResources().getString(R.string.restore));
-                    dialog1.setOnClickButtonListener(new FilePickerDialog.OnClickButtonListener() {
-                        @Override
-                        public void chooseFolder(File folder) {
-                            if (db.restoreDatabase(folder)) {
-                                helper.showToast(getResources().getString(R.string.notes_restore), 3);
-                                getNotesList(null, null);
-                            } else helper.showToast(getResources().getString(R.string.notes_restore_error), 2);
-                        }
-
-                        @Override
-                        public boolean chooseBack() {
-                            return false;
-                        }
-                    });
-                    dialog1.showDialog();
                 }
             });
 
@@ -327,8 +360,10 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                if(Objects.requireNonNull(main.edittextText.getText()).toString().length()==0)
+                if(Objects.requireNonNull(main.edittextText.getText()).toString().length()==0) {
+                    getNotesList(null,null);
                     return;
+                }
 
                 if(isSearchMode)
                     getNotesList(
@@ -507,6 +542,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             main.relativeToolbarSearch.setVisibility(View.GONE);
             main.edittextText.setText("");
             main.recyclerViewCategories.setVisibility(View.VISIBLE);
+            getNotesList(null,null);
         }else{
             super.onBackPressed();
         }

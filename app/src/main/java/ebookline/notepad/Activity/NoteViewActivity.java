@@ -57,6 +57,7 @@ public class NoteViewActivity extends AppCompatActivity
 
     private boolean isSearchMode = false;
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeManager.setTheme(this);
@@ -110,9 +111,9 @@ public class NoteViewActivity extends AppCompatActivity
 
         noteViewBinding.imageViewDelete.setOnClickListener(view -> {
             CustomDialog dialog = new CustomDialog(this);
-            dialog.setTitle(getResources().getString(R.string.note_delete));
-            dialog.setText(strTitle +"\n"+getResources().getString(R.string.note_delete));
-            dialog.setButtonOkText(getResources().getString(R.string.note_delete));
+            dialog.setTitle(String.format(getResources().getString(R.string.note_delete),""));
+            dialog.setText(strTitle +"\n"+String.format(getResources().getString(R.string.note_delete),"?"));
+            dialog.setButtonOkText(String.format(getResources().getString(R.string.note_delete),""));
             dialog.setButtonNoText(getResources().getString(R.string.no));
             dialog.setClickListener(new CustomDialog.ItemClickListener() {
                 @Override
@@ -298,7 +299,11 @@ public class NoteViewActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        getNote();
+        try{
+            getNote();
+        }catch (Exception e){
+            helper.exceptionHandler(e);
+        }
     }
 
     @Override

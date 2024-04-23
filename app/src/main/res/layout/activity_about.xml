@@ -22,7 +22,7 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorAccent"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="نسخه: 10.0.0"
+            app:title="نسخه: 14.1.2"
             app:collapsedTitleGravity="right|center_vertical"
             app:titleCollapseMode="scale"
             app:expandedTitleGravity="left|bottom"

@@ -28,5 +28,4 @@ public class AboutActivity extends AppCompatActivity
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
-
 }
