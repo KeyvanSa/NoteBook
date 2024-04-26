@@ -31,11 +31,27 @@ public class DBCreator extends SQLiteOpenHelper
                 +Constants.TITLE+" TEXT ,"
                 +Constants.COLOR+" TEXT ,"
                 +Constants.PARENT+" INTEGER DEFAULT 0);");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS "
+                +Constants.TBL_TASK_NAME+"("
+                +Constants.ID+" INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                +Constants.TITLE+" TEXT ,"
+                +Constants.COLOR+" TEXT ,"
+                +Constants.IS_CHECKED+" INTEGER DEFAULT 0);");
+
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    {
+        if(oldVersion<newVersion){
+            db.execSQL("CREATE TABLE IF NOT EXISTS "
+                    +Constants.TBL_TASK_NAME+"("
+                    +Constants.ID+" INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                    +Constants.TITLE+" TEXT ,"
+                    +Constants.COLOR+" TEXT ,"
+                    +Constants.IS_CHECKED+" INTEGER DEFAULT 0);");
+        }
     }
 
     public DBCreator(@Nullable Context context) {

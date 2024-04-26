@@ -352,6 +352,12 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             main.menu.close(true);
         });
 
+        main.menuItemAddTask.setOnClickListener(view -> {
+            main.menu.close(true);
+            Intent toTaskActivity = new Intent(this,TaskActivity.class);
+            startActivity(toTaskActivity);
+        });
+
         main.edittextText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}

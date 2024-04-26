@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class Constants
 {
     public static final String DB_NAME = "note.db";
-    public static final int    DB_VERSION = 2;
+    public static final int    DB_VERSION = 3;
 
     public static final String ID = "id";
     public static final String COLOR = "color";
@@ -23,11 +23,17 @@ public class Constants
     public static final String TBL_CATEGORY_NAME = "category";
     public static final String PARENT = "parent";
 
+    public static final String TBL_TASK_NAME = "task";
+    public static final String IS_CHECKED    = "checked";
+
     public static final ArrayList<String> categoryColorsList =
             new ArrayList<>(Arrays.asList("#95afc0", "#ff7979", "#ffbe76", "#7ed6df", "#badc58"));
 
     public static final ArrayList<String> TextColorsList =
             new ArrayList<>(Arrays.asList("#000000", "#ff7979", "#ffbe76", "#7ed6df", "#badc58"));
+
+    public static final ArrayList<String> TaskColorsList =
+            new ArrayList<>(Arrays.asList("#95afc0", "#ff7979", "#ffbe76", "#7ed6df", "#badc58"));
 
     public static final String THEME="theme";
 

@@ -40,19 +40,29 @@
     <string name="search">Search Notes</string>
 
     <string name="empty_list_text">notes list is empty \n you can add note by use + button</string>
+    <string name="empty_list_text_task">task list is empty \n you can add task by use + button</string>
     <string name="empty_trash_list_text">You do not have any deleted note</string>
     <string name="copy_database">Database Copied Successfully</string>
 
     <string name="note">Note</string>
     <string name="notes">Notes</string>
+    <string name="task_activity">Task Activity</string>
     <string name="all">All</string>
     <string name="note_add">Add Note</string>
+    <string name="task_add">Add Task</string>
     <string name="note_add_successfully">Note Added Successfully</string>
+    <string name="task_add_successfully">Task Added Successfully</string>
     <string name="note_add_denied">Note Added Denied</string>
+    <string name="task_add_denied">Task Added Denied</string>
     <string name="note_edit">Edit Note</string>
+    <string name="task_edit">Edit Task</string>
+    <string name="task_done">Task Done</string>
     <string name="note_edit_successfully">Note Edited Successfully</string>
+    <string name="task_edit_successfully">Task Edited Successfully</string>
     <string name="note_edit_denied">Note Edited Denied</string>
+    <string name="task_edit_denied">Task Edited Denied</string>
     <string name="note_delete">Delete Note %s</string>
+    <string name="task_delete">Delete Task %s</string>
     <string name="note_delete_for_ever">Delete Note %s For Ever?</string>
     <string name="delete_for_ever">For Ever</string>
     <string name="note_delete_to_trash">to Trash</string>

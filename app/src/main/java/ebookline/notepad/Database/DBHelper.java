@@ -15,6 +15,7 @@ import java.util.List;
 
 import ebookline.notepad.Model.Category;
 import ebookline.notepad.Model.Note;
+import ebookline.notepad.Model.Task;
 import ebookline.notepad.R;
 import ebookline.notepad.Shared.SharedHelper;
 import ebookline.notepad.Util.Constants;
@@ -164,6 +165,82 @@ public class DBHelper
         }
         return false;
     }
+
+    ///////////// Task Start /////////////////
+    public List<Task> getTasks(){
+        List<Task> list = new ArrayList<>();
+
+        dbOpen();
+        Cursor cursor=db.query(Constants.TBL_TASK_NAME,null,null,null,null,null,
+                Constants.IS_CHECKED+" asc");
+
+        while (cursor.moveToNext()){
+            Task task = new Task();
+            task.setId(cursor.getInt(0));
+            task.setTitle(cursor.getString(1));
+            task.setColor(cursor.getString(2));
+            task.setCheck(cursor.getInt(3));
+
+            list.add(task);
+        }
+
+        dbClose();
+        cursor.close();
+        return list;
+    }
+
+    public Task getTask(int id){
+        dbOpen();
+        Cursor cursor=db.query(Constants.TBL_TASK_NAME,null,Constants.ID+"=?",new String[]{String.valueOf(id)},null,null, null);
+
+        Task task = new Task();
+
+        if(!cursor.moveToFirst())
+            return task;
+
+        task.setId(cursor.getInt(0));
+        task.setTitle(cursor.getString(1));
+        task.setColor(cursor.getString(2));
+        task.setCheck(cursor.getInt(3));
+
+        dbClose();
+        cursor.close();
+        return task;
+    }
+
+    public long addTask(Task task){
+        ContentValues cv = new ContentValues();
+        cv.put(Constants.TITLE,task.getTitle());
+        cv.put(Constants.COLOR,task.getColor());
+        cv.put(Constants.IS_CHECKED,task.getCheck());
+
+        dbOpen();
+        long result = db.insert(Constants.TBL_TASK_NAME,null,cv);
+        dbClose();
+        return result;
+    }
+
+    public long updateTask(Task task){
+        ContentValues cv = new ContentValues();
+        cv.put(Constants.TITLE,task.getTitle());
+        cv.put(Constants.COLOR,task.getColor());
+        cv.put(Constants.IS_CHECKED,task.getCheck());
+
+        dbOpen();
+        long result = db.update(Constants.TBL_TASK_NAME,cv,Constants.ID+"=?",new String[]{String.valueOf(task.getId())});
+        dbClose();
+        return result;
+    }
+
+    public int deleteTask(Task task){
+
+        dbOpen();
+        int result = db.delete(Constants.TBL_TASK_NAME,Constants.ID+"=?",new String[]{String.valueOf(task.getId())});
+        dbClose();
+
+        return result;
+    }
+    ///////////// Task End //////////////////
 
     ///////////// Category Start //////////////////
     public List<Category> getCategories(){

@@ -1,10 +1,10 @@
-![Logo](app/src/main/res/drawable/logo.png)
+<img src="app/src/main/res/drawable/logo.png" width="250" height="250">
 # The Note App 8-)
 
 ## Description
 This project is an entertaining game for the Android operating system developed using the **Java** programming language and the **Android** development platform.
 
-## Featueres
+## Features
 
 1. Adding infinite notes with details:
 * Title
@@ -53,7 +53,7 @@ Keyvan Safarzadeh
 - [x] Create UI/UX App
 - [x] Software logic coding
 - [ ] Select multiple notes list items
-- [ ] Add TO-DO list
+- [x] Add TO-DO list
 - [ ] Add alarm notes
 
 ## Images

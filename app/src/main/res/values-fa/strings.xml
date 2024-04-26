@@ -40,19 +40,29 @@
     <string name="search">جستجوی یادداشت ها</string>
 
     <string name="empty_list_text">لیست یادداشت ها خالی است. \n با استفاده از دکمه + میتوانید یادداشت جدید بنویسید</string>
+    <string name="empty_list_text_task">لیست کارها خالی است. \n با استفاده از دکمه + میتوانید کار جدید بنویسید</string>
     <string name="empty_trash_list_text">شما یادداشت حذف شده ای ندارید</string>
     <string name="copy_database">دیتابیس با موفقیت کپی شد</string>
 
     <string name="note">یادداشت</string>
     <string name="notes">یادداشت ها</string>
+    <string name="task_activity">صفحه کارها</string>
     <string name="all">همه</string>
     <string name="note_add">افزودن یادداشت</string>
+    <string name="task_add">افزودن کار</string>
     <string name="note_add_successfully">یادداشت با موفقیت اضافه شد</string>
+    <string name="task_add_successfully">کار با موفقیت اضافه شد</string>
     <string name="note_add_denied">خطا در افزودن یادداشت</string>
+    <string name="task_add_denied">خطا در افزودن کار</string>
     <string name="note_edit">ویرایش یادداشت</string>
+    <string name="task_edit">ویرایش کار</string>
+    <string name="task_done">کار انجام شده</string>
     <string name="note_edit_successfully">یادداشت با موفقیت ویرایش شد</string>
+    <string name="task_edit_successfully">کار با موفقیت ویرایش شد</string>
     <string name="note_edit_denied">خطا در ویرایش یادداشت</string>
+    <string name="task_edit_denied">خطا در ویرایش کار</string>
     <string name="note_delete">یادداشت حذف شود %s</string>
+    <string name="task_delete">%sکار حذف شود</string>
     <string name="note_delete_for_ever">یادداشت %s برای همیشه حذف شود؟</string>
     <string name="delete_for_ever">حذف کامل</string>
     <string name="note_delete_to_trash">انتقال به سطل آشغال</string>

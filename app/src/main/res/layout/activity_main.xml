@@ -189,6 +189,16 @@
             fab:fab_size="mini"
             fab:fab_label="@string/category_add" />
 
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menuItemAddTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="?attr/colorAccent"
+            app:menu_labels_textColor="?attr/backgroundColor"
+            fab:fab_size="mini"
+            fab:fab_label="@string/task_activity" />
+
     </com.github.clans.fab.FloatingActionMenu>
 
 </RelativeLayout>
