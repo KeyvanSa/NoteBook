@@ -44,7 +44,7 @@ public class DBCreator extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        if(oldVersion<newVersion){
+        if(oldVersion<3){
             db.execSQL("CREATE TABLE IF NOT EXISTS "
                     +Constants.TBL_TASK_NAME+"("
                     +Constants.ID+" INTEGER PRIMARY KEY AUTOINCREMENT ,"

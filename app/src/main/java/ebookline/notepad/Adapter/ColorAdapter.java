@@ -5,15 +5,18 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.nio.channels.ClosedByInterruptException;
 import java.util.List;
 
 import ebookline.notepad.R;
@@ -49,17 +52,23 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder>
         shape.setCornerRadii(new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         shape.setColor(Color.parseColor(mData.get(position)));
 
-        try{
-            TypedValue typedValue = new TypedValue();
-            Resources.Theme theme = context.getTheme();
-            theme.resolveAttribute(R.attr.textColor , typedValue, true);
-            @ColorInt
-            int color = typedValue.data;
-            if(selectedItem==position)
-                shape.setStroke(5,color);
-        }catch (Exception ignored){}
+        if(position==selectedItem){
+            float[]hsv=new float[3];
+            Color.colorToHSV(Color.parseColor(mData.get(position)),hsv);
+            hsv[2] *= 0.8f;
+            shape.setStroke(5,Color.HSVToColor(hsv));
+
+            TextView textView=new TextView(context);
+            textView.setWidth(55);
+            textView.setHeight(55);
+            textView.setText("√");
+            textView.setGravity(Gravity.CENTER);
+            textView.setTextSize(18f);
+            holder.linearLayout.addView(textView);
+        }
 
         holder.linearLayout.setBackground(shape);
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

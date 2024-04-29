@@ -60,7 +60,7 @@ public class ColorPickerDialog extends Dialog implements ColorAdapter.ItemClickL
 
     @Override
     public void onItemClick(View view, int position) {
-        colorCode=Constants.categoryColorsList.get(position);
+        colorCode=getColorsList().get(position);
         adapter = new ColorAdapter(context,getColorsList(),position);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
@@ -72,7 +72,9 @@ public class ColorPickerDialog extends Dialog implements ColorAdapter.ItemClickL
         Button button = (Button) view;
 
         if(button.getId()==R.id.buttonPositive)
-            this.onClickButtonListener.chooseColor( (colorCode==null) ? "#000000" : colorCode);
+            this.onClickButtonListener.chooseColor( (colorCode==null) ? (
+                    (getColorsList()==null) ? "#000000" : getColorsList().get(0)
+            ) : colorCode);
         else this.onClickButtonListener.chooseBack();
 
         dismiss();

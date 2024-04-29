@@ -340,6 +340,199 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardBackgroundColor="?attr/backgroundColor"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                
+                <TextView
+                    android:id="@+id/textViewTitle5"
+                    style="@style/textViewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:maxLines="1"
+                    android:text="@string/special_characters"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkboxFindHashtags"
+                    style="@style/textViewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/find_hashtags"
+                    android:textSize="14sp" />
+                <LinearLayout
+                    android:id="@+id/linearLayoutHashtag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="2">
+                    <LinearLayout
+                        android:id="@+id/linearLayoutColorHashtag"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal" />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxClickableHashtags"
+                        style="@style/textViewTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1.5"
+                        android:text="@string/clickable_hashtag"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkboxFindMentions"
+                    style="@style/textViewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/find_mentions"
+                    android:textSize="14sp" />
+                <LinearLayout
+                    android:id="@+id/linearLayoutMention"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="2">
+                    <LinearLayout
+                        android:id="@+id/linearLayoutColorMention"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal" />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxClickableMentions"
+                        style="@style/textViewTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1.5"
+                        android:text="@string/clickable_mention"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkboxFindUrls"
+                    style="@style/textViewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/find_urls"
+                    android:textSize="14sp" />
+                <LinearLayout
+                    android:id="@+id/linearLayoutUrls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="2">
+                    <LinearLayout
+                        android:id="@+id/linearLayoutColorUrls"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal" />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxClickableUrls"
+                        style="@style/textViewTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1.5"
+                        android:text="@string/clickable_url"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkboxFindMails"
+                    style="@style/textViewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/find_mails"
+                    android:textSize="14sp" />
+                <LinearLayout
+                    android:id="@+id/linearLayoutMail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="2">
+                    <LinearLayout
+                        android:id="@+id/linearLayoutColorMail"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal" />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxClickableMails"
+                        style="@style/textViewTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1.5"
+                        android:text="@string/clickable_mail"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkboxFindPhones"
+                    style="@style/textViewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/find_phones"
+                    android:textSize="14sp" />
+                <LinearLayout
+                    android:id="@+id/linearLayoutPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="2">
+                    <LinearLayout
+                        android:id="@+id/linearLayoutColorPhone"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal" />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxClickablePhones"
+                        style="@style/textViewTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1.5"
+                        android:text="@string/clickable_phone"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"

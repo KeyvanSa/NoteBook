@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
@@ -35,17 +36,21 @@ import ebookline.notepad.Dialogs.MenuDialog;
 import ebookline.notepad.Model.Category;
 import ebookline.notepad.Model.Menu;
 import ebookline.notepad.Model.Note;
+import ebookline.notepad.Model.SPCModel;
 import ebookline.notepad.R;
 import ebookline.notepad.Shared.SharedHelper;
 import ebookline.notepad.ThemeManager;
 import ebookline.notepad.Util.Constants;
 import ebookline.notepad.Util.HelperClass;
+import ebookline.notepad.Util.SPCRecognizer;
 import ebookline.notepad.databinding.ActivityNoteViewBinding;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 public class NoteViewActivity extends AppCompatActivity
 {
     ActivityNoteViewBinding noteViewBinding;
+
+    SPCRecognizer spc;
 
     DBHelper db;
     SharedHelper shared;
@@ -54,6 +59,7 @@ public class NoteViewActivity extends AppCompatActivity
     Note note;
     String strTitle , strText , strColor , strATime , strCTime;
     int id=0 , iCategory=0 , iPin=0;
+    int position=1;
 
     private boolean isSearchMode = false;
 
@@ -65,15 +71,66 @@ public class NoteViewActivity extends AppCompatActivity
         noteViewBinding=ActivityNoteViewBinding.inflate(getLayoutInflater());
         setContentView(noteViewBinding.getRoot());
 
+        spc=new SPCRecognizer(noteViewBinding.textViewText);
+
         db=new DBHelper(this);
         shared=new SharedHelper(this);
         helper=new HelperClass(this);
 
-        try{
-            getNote();
-        }catch (Exception e){
-            helper.exceptionHandler(e);
-        }
+        spc.setFindHashtag(shared.getBoolean(Constants.FIND_HASHTAG));
+        spc.setclickHashtag(shared.getBoolean(Constants.CLICK_HASHTAG));
+        spc.setColorTAG( (shared.getString(Constants.COLOR_HASHTAG)==null ?
+                getResources().getColor(R.color.text_color_hashtag) :
+                Color.parseColor(shared.getString(Constants.COLOR_HASHTAG))));
+
+        spc.setFindMention(shared.getBoolean(Constants.FIND_MENTION));
+        spc.setclickMention(shared.getBoolean(Constants.CLICK_MENTION));
+        spc.setColorMENTION( (shared.getString(Constants.COLOR_MENTION)==null ?
+                getResources().getColor(R.color.text_color_mention) :
+                Color.parseColor(shared.getString(Constants.COLOR_MENTION))));
+
+        spc.setFindUrl(shared.getBoolean(Constants.FIND_URL));
+        spc.setclickUrl(shared.getBoolean(Constants.CLICK_URL));
+        spc.setColorURL( (shared.getString(Constants.COLOR_URL)==null ?
+                getResources().getColor(R.color.text_color_url) :
+                Color.parseColor(shared.getString(Constants.COLOR_URL))));
+
+        spc.setfindMail(shared.getBoolean(Constants.FIND_MAIL));
+        spc.setclickMail(shared.getBoolean(Constants.CLICK_MAIL));
+        spc.setColorMAIL( (shared.getString(Constants.COLOR_MAIL)==null ?
+                getResources().getColor(R.color.text_color_mail) :
+                Color.parseColor(shared.getString(Constants.COLOR_MAIL))));
+
+        spc.setFindPhone(shared.getBoolean(Constants.FIND_PHONE));
+        spc.setclickPhone(shared.getBoolean(Constants.CLICK_PHONE));
+        spc.setColorPHONE( (shared.getString(Constants.COLOR_PHONE)==null ?
+                getResources().getColor(R.color.text_color_phone) :
+                Color.parseColor(shared.getString(Constants.COLOR_PHONE))));
+
+        spc.setClickListener(model ->
+        {
+            if(!model.isClickable())
+                return;
+
+            if(model.getSymbol().equals(SPCRecognizer.SYMBOL_MENTION) || model.getSymbol().equals(SPCRecognizer.SYMBOL_HASHTAG)){
+                helper.copyToClipboard(model.getText());
+                return;
+            }
+
+            if(model.getSymbol().equals(SPCRecognizer.SYMBOL_URL)){
+                Intent toURLModel = new Intent(Intent.ACTION_VIEW);
+                toURLModel.setData(Uri.parse(model.getText()));
+                startActivity(toURLModel);
+                return;
+            }
+
+            if(model.getSymbol().equals(SPCRecognizer.SYMBOL_PHONE)){
+                Intent toCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + model.getText()));
+                startActivity(toCall);
+                return;
+            }
+
+        });
 
         noteViewBinding.textViewText.setTextColor(Color.parseColor( (shared.getString(Constants.TEXT_COLOR)==null) ?
                 Constants.TextColorsList.get(0) : shared.getString(Constants.TEXT_COLOR)));
@@ -226,9 +283,15 @@ public class NoteViewActivity extends AppCompatActivity
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
             {
-                if(s.toString().length()==0) {
-                    noteViewBinding.textViewText.setText(strText);
-                    return;
+                if(s.length()==0){
+                    spc.check(noteViewBinding.textViewText);
+                    position=1;
+                } else {
+                    int i=spc.findWord(s.toString(),position);
+                    if(i!=0){
+                        //buttonPrevious.setVisibility(View.VISIBLE);
+                       // buttonNext.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 s = s.toString().replaceAll("\\*","");
@@ -301,6 +364,7 @@ public class NoteViewActivity extends AppCompatActivity
         super.onResume();
         try{
             getNote();
+            spc.check(noteViewBinding.textViewText);
         }catch (Exception e){
             helper.exceptionHandler(e);
         }
@@ -310,8 +374,8 @@ public class NoteViewActivity extends AppCompatActivity
     public void onBackPressed() {
         if(isSearchMode){
             noteViewBinding.relativeToolbarSearch.setVisibility(View.GONE);
-            noteViewBinding.textViewText.setText(strText);
             noteViewBinding.edittextText.setText("");
+            onResume();
         }else{
             super.onBackPressed();
         }

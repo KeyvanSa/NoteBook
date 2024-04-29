@@ -149,4 +149,16 @@
     <string name="list_is_empty">List Is Empty</string>
     <string name="there_are_no_folders_or_files">There are no folders or files</string>
 
+    <string name="special_characters">Special Characters</string>
+    <string name="find_hashtags">Find Hashtags</string>
+    <string name="find_mentions">Find Mentions</string>
+    <string name="find_urls">Find Urls</string>
+    <string name="find_mails">Find Mails</string>
+    <string name="find_phones">Find Phones</string>
+    <string name="clickable_hashtag">Clickable Hashtags</string>
+    <string name="clickable_mention">Clickable Mentions</string>
+    <string name="clickable_url">Clickable Urls</string>
+    <string name="clickable_mail">Clickable Mails</string>
+    <string name="clickable_phone">Clickable Phones</string>
+
 </resources>

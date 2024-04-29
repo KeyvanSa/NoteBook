@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">دفترچه یادداشت</string>
 
     <string name="ok">باشه</string>
@@ -150,5 +149,17 @@
     <string name="access_management_storage">برای دیدن همه فایل ها و پوشه ها در این لیست باید دسترسی به مدیریت حافظه را به برنامه بدهید</string>
     <string name="list_is_empty">لیست خالی است</string>
     <string name="there_are_no_folders_or_files">هیچ پوشه یا فایلی وجود ندارد</string>
+
+    <string name="special_characters">کاراکترهای خاص</string>
+    <string name="find_hashtags">تشخیص هشتگ</string>
+    <string name="find_mentions">تشخیص منشن</string>
+    <string name="find_urls">تشخیص لینک ها</string>
+    <string name="find_mails">تشخیش ایمیل ها</string>
+    <string name="find_phones">تشخیص شماره تلفن ها</string>
+    <string name="clickable_hashtag">قابلیت کلیک هشتگ</string>
+    <string name="clickable_mention">قابلیت کلیک منشن</string>
+    <string name="clickable_url">قابلیت کلیک لینک</string>
+    <string name="clickable_mail">قابلیت کلیک ایمیل</string>
+    <string name="clickable_phone">قابلیت کلیک شماره تلفن</string>
 
 </resources>

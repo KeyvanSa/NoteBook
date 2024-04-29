@@ -14,11 +14,13 @@
     <color name="text_color">#3e4756</color>
     <color name="text_description">#a2acbd</color>
 
-    <color name="text_color_find_search">#FD552A</color>
     <color name="text_color_hashtag">#1E88E5</color>
     <color name="text_color_mention">#7CB342</color>
+    <color name="text_color_url">#00BCD4</color>
+    <color name="text_color_mail">#E91E63</color>
+    <color name="text_color_phone">#FF9800</color>
+    <color name="text_color_find_search">#FD552A</color>
     <color name="text_background_color_find_search">#ffed37</color>
-
 
     <!--dark theme colors-->
     <color name="color_accent_dark">#FB8C00</color>
