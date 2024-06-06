@@ -1,12 +1,17 @@
 package ebookline.notepad.Adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,6 +58,18 @@ public class CategoryAdapter2 extends RecyclerView.Adapter<CategoryAdapter2.View
 
         try{
             holder.textViewTitle.setText(category.getTitle());
+
+            GradientDrawable shape = new GradientDrawable();
+            shape.setShape(GradientDrawable.OVAL);
+            shape.setCornerRadii(new float[]{0, 0, 0, 0, 0, 0, 0, 0});
+            shape.setColor(Color.parseColor(category.getColor()));
+
+            float[]hsv=new float[3];
+            Color.colorToHSV(Color.parseColor(category.getColor()),hsv);
+            hsv[2] *= 0.8f;
+            shape.setStroke(5,Color.HSVToColor(hsv));
+
+            holder.linearLayoutColor.setBackground(shape);
         }catch (Exception e){
             holder.textViewTitle.setText(e.toString());
         }
@@ -60,16 +77,19 @@ public class CategoryAdapter2 extends RecyclerView.Adapter<CategoryAdapter2.View
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener , View.OnLongClickListener{
         TextView textViewTitle;
+        LinearLayout linearLayoutColor;
         ViewHolder(View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
+            linearLayoutColor = itemView.findViewById(R.id.linearLayoutColor);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onCategoryItemClick(view, getAdapterPosition());
+            if (mClickListener != null)
+                mClickListener.onCategoryItemClick(view, getAdapterPosition());
         }
 
         @Override

@@ -60,8 +60,8 @@
     <string name="task_edit_successfully">کار با موفقیت ویرایش شد</string>
     <string name="note_edit_denied">خطا در ویرایش یادداشت</string>
     <string name="task_edit_denied">خطا در ویرایش کار</string>
-    <string name="note_delete">یادداشت حذف شود %s</string>
-    <string name="task_delete">%sکار حذف شود</string>
+    <string name="note_delete"> یادداشت %s حذف شود؟</string>
+    <string name="task_delete">کار %s حذف شود؟</string>
     <string name="note_delete_for_ever">یادداشت %s برای همیشه حذف شود؟</string>
     <string name="delete_for_ever">حذف کامل</string>
     <string name="note_delete_to_trash">انتقال به سطل آشغال</string>

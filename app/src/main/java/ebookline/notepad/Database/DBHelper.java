@@ -68,7 +68,7 @@ public class DBHelper
         if(file==null)
             return false;
 
-        SQLiteDatabase db = null;
+        SQLiteDatabase database = null;
         String TBL_NOTE_NAME = null;
 
         if(file.getName().equals("notebook"))
@@ -76,17 +76,17 @@ public class DBHelper
         else  TBL_NOTE_NAME = Constants.TBL_NOTE_NAME;
 
         try{
-            db = SQLiteDatabase.openOrCreateDatabase(file,null);
+            database = SQLiteDatabase.openOrCreateDatabase(file,null);
         }catch (Exception ignored){return false;}
 
-        if (db==null || !db.isOpen())
+        if (database==null || !database.isOpen())
             return false;
 
         @SuppressLint("Recycle")
         Cursor cursor=null;
 
         /// cursor for Notes
-        cursor=db.query(TBL_NOTE_NAME,null,null,null,null,null,null);
+        cursor=database.query(TBL_NOTE_NAME,null,null,null,null,null,null);
         if(cursor==null)
             return false;
 
@@ -103,6 +103,7 @@ public class DBHelper
                 note.setPin(0);
                 note.setDeleted(0);
             }else{
+                note.setCategory(cursor.getInt(3));
                 note.setColor(cursor.getString(4));
                 note.setaTime(cursor.getString(5));
                 note.setcTime(cursor.getString(6));
@@ -111,6 +112,43 @@ public class DBHelper
             }
 
             addNote(note);
+        }
+
+        if(cursor.moveToFirst() && cursor.moveToNext() && cursor.getColumnCount()>=8){
+            // add categories
+            cursor=database.query(Constants.TBL_CATEGORY_NAME,null,null,null,null,null,null);
+
+            if(cursor==null)
+                return false;
+
+            dbOpen();
+            while (cursor.moveToNext()){
+
+                ContentValues cv = new ContentValues();
+                cv.put(Constants.ID,cursor.getInt(0));
+                cv.put(Constants.TITLE,cursor.getString(1));
+                cv.put(Constants.COLOR,cursor.getString(2));
+
+                long result = db.insert(Constants.TBL_CATEGORY_NAME,null,cv);
+            }
+            dbClose();
+
+            // add tasks
+            cursor=database.query(Constants.TBL_TASK_NAME,null,null,null,null,null,null);
+
+            if(cursor==null)
+                return false;
+
+            while (cursor.moveToNext()){
+                Task task = new Task();
+
+                task.setId(cursor.getInt(0));
+                task.setTitle(cursor.getString(1));
+                task.setColor(cursor.getString(2));
+                task.setCheck(cursor.getInt(3));
+
+                addTask(task);
+            }
         }
 
         return true;
@@ -245,7 +283,7 @@ public class DBHelper
     ///////////// Category Start //////////////////
     public List<Category> getCategories(){
         List<Category> list = new ArrayList<>();
-        list.add(new Category(0,0,context.getResources().getString(R.string.no_category),"#ffffff"));
+        list.add(new Category(0,0,context.getResources().getString(R.string.no_category),Constants.categoryColorsList.get(0)));
 
         dbOpen();
         Cursor cursor=db.query(Constants.TBL_CATEGORY_NAME,null,null,null,null,null,

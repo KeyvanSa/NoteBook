@@ -26,8 +26,11 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import ebookline.notepad.Database.DBHelper;
 import ebookline.notepad.Dialogs.CustomDialog;
@@ -109,27 +112,30 @@ public class NoteViewActivity extends AppCompatActivity
 
         spc.setClickListener(model ->
         {
-            if(!model.isClickable())
-                return;
+            try {
+                if(!model.isClickable())
+                    return;
 
-            if(model.getSymbol().equals(SPCRecognizer.SYMBOL_MENTION) || model.getSymbol().equals(SPCRecognizer.SYMBOL_HASHTAG)){
-                helper.copyToClipboard(model.getText());
-                return;
+                if(model.getSymbol().equals(SPCRecognizer.SYMBOL_MENTION) || model.getSymbol().equals(SPCRecognizer.SYMBOL_HASHTAG)){
+                    helper.copyToClipboard(model.getText());
+                    return;
+                }
+
+                if(model.getSymbol().equals(SPCRecognizer.SYMBOL_URL)){
+                    Intent toURLModel = new Intent(Intent.ACTION_VIEW);
+                    toURLModel.setData(Uri.parse(model.getText()));
+                    startActivity(toURLModel);
+                    return;
+                }
+
+                if(model.getSymbol().equals(SPCRecognizer.SYMBOL_PHONE)){
+                    Intent toCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + model.getText()));
+                    startActivity(toCall);
+                    return;
+                }
+            }catch (Exception e){
+                helper.showToast(e.toString(),2);
             }
-
-            if(model.getSymbol().equals(SPCRecognizer.SYMBOL_URL)){
-                Intent toURLModel = new Intent(Intent.ACTION_VIEW);
-                toURLModel.setData(Uri.parse(model.getText()));
-                startActivity(toURLModel);
-                return;
-            }
-
-            if(model.getSymbol().equals(SPCRecognizer.SYMBOL_PHONE)){
-                Intent toCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + model.getText()));
-                startActivity(toCall);
-                return;
-            }
-
         });
 
         noteViewBinding.textViewText.setTextColor(Color.parseColor( (shared.getString(Constants.TEXT_COLOR)==null) ?

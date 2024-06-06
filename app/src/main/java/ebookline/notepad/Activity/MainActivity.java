@@ -1,8 +1,13 @@
 package ebookline.notepad.Activity;
 
+import static java.util.Objects.*;
+
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,6 +17,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +40,7 @@ import java.util.Objects;
 import ebookline.notepad.Adapter.CategoryAdapter2;
 import ebookline.notepad.Adapter.NoteAdapter;
 import ebookline.notepad.Database.DBHelper;
+import ebookline.notepad.Dialogs.ColorPickerDialog;
 import ebookline.notepad.Dialogs.CustomDialog;
 import ebookline.notepad.Dialogs.FilePickerDialog;
 import ebookline.notepad.Dialogs.MenuDialog;
@@ -118,27 +125,25 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
 
             MenuDialog bottomSheet=new MenuDialog(this);
             bottomSheet.setList(menuList);
-            bottomSheet.setOnClickButtonListener(new MenuDialog.OnClickItemListener() {
-                @Override
-                public void onItemClick(Menu menu) {
-                    isSearchMode = true;
-                    onBackPressed();
+            bottomSheet.setOnClickButtonListener(menu ->
+            {
+                isSearchMode = true;
+                onBackPressed();
 
-                    if(menu.getId()==1)
-                        getNotesList(null,Constants.ID+" desc");
-                    if(menu.getId()==2)
-                        getNotesList(null,Constants.ID+" asc");
+                if(menu.getId()==1)
+                    getNotesList(null,Constants.ID+" desc");
+                if(menu.getId()==2)
+                    getNotesList(null,Constants.ID+" asc");
 
-                    if(menu.getId()==3)
-                        getNotesList(null,Constants.TITLE+" desc");
-                    if(menu.getId()==4)
-                        getNotesList(null,Constants.TITLE+" asc");
+                if(menu.getId()==3)
+                    getNotesList(null,Constants.TITLE+" desc");
+                if(menu.getId()==4)
+                    getNotesList(null,Constants.TITLE+" asc");
 
-                    if(menu.getId()==5)
-                        getNotesList(null,Constants.TEXT+" desc");
-                    if(menu.getId()==6)
-                        getNotesList(null,Constants.TEXT+" asc");
-                }
+                if(menu.getId()==5)
+                    getNotesList(null,Constants.TEXT+" desc");
+                if(menu.getId()==6)
+                    getNotesList(null,Constants.TEXT+" asc");
             });
             bottomSheet.show(this.getSupportFragmentManager(),bottomSheet.getTag());
 
@@ -291,6 +296,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
                                                 if (db.restoreDatabase(folder)) {
                                                     helper.showToast(getResources().getString(R.string.notes_restore), 3);
                                                     getNotesList(null, null);
+                                                    getCategoriesList();
                                                 } else helper.showToast(getResources().getString(R.string.notes_restore_error), 2);
                                             }
 
@@ -366,7 +372,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                if(Objects.requireNonNull(main.edittextText.getText()).toString().length()==0) {
+                if(requireNonNull(main.edittextText.getText()).toString().length()==0) {
                     getNotesList(null,null);
                     return;
                 }
@@ -412,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
     {
         categoryList = new ArrayList<>();
 
-        categoryList.add(new Category(-1 ,0,getResources().getString(R.string.all),"#ffffff"));
+        categoryList.add(new Category(-1 ,0,getResources().getString(R.string.all),Constants.categoryColorsList.get(0)));
 
         categoryList.addAll(db.getCategories());
 
@@ -491,11 +497,38 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
 
         EditText editTextCategoryTitle = addCategoryView.findViewById(R.id.edittextTitle);
         Button buttonAddCategory = addCategoryView.findViewById(R.id.buttonAddCategory);
+        ImageView imageViewChooseColor = addCategoryView.findViewById(R.id.imageViewChooseColor);
 
+        category = new Category();
         if(newCategory!=null) {
+            category=newCategory;
+
             editTextCategoryTitle.setText(newCategory.getTitle().substring(0, newCategory.getTitle().indexOf("(")));
             buttonAddCategory.setText(getString(R.string.category_edit));
-        }
+        }else category.setColor(Constants.categoryColorsList.get(0));
+
+        Drawable progressDrawable = imageViewChooseColor.getDrawable();
+        progressDrawable.setColorFilter(Color.parseColor(category.getColor()),android.graphics.PorterDuff.Mode.SRC_IN);
+        imageViewChooseColor.setImageDrawable(progressDrawable);
+
+        imageViewChooseColor.setOnClickListener(view ->
+        {
+            ColorPickerDialog dialog = new ColorPickerDialog(this);
+            dialog.setColorsList(Constants.categoryColorsList);
+            dialog.setOnClickButtonListener(new ColorPickerDialog.OnClickButtonListener() {
+                @Override
+                public void chooseColor(String colorCode) {
+                    Drawable progressDrawable = imageViewChooseColor.getDrawable();
+                    progressDrawable.setColorFilter(Color.parseColor(colorCode),android.graphics.PorterDuff.Mode.SRC_IN);
+                    imageViewChooseColor.setImageDrawable(progressDrawable);
+
+                    category.setColor(colorCode);
+                }
+                @Override
+                public void chooseBack() {}
+            });
+            dialog.showDialog();
+        });
 
         buttonAddCategory.setOnClickListener(view1 -> {
 
@@ -504,12 +537,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
                 return;
             }
 
-            if(newCategory!=null)
-                category=newCategory;
-            else category = new Category();
-
             category.setTitle(editTextCategoryTitle.getText().toString());
-            category.setColor(Constants.categoryColorsList.get(0));
             category.setParent(0);
 
             if(newCategory==null){
@@ -523,7 +551,6 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             }
 
             getCategoriesList();
-            getNotesList(null,null);
             bottomSheetDialog.dismiss();
         });
 
@@ -531,12 +558,11 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
         bottomSheetDialog.show();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onResume() {
         super.onResume();
         getNotesList(null,null);
-        getCategoriesList();
-
         if(main.menu.isOpened())
             main.menu.close(true);
     }

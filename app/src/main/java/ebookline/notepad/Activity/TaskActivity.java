@@ -163,9 +163,13 @@ public class TaskActivity extends AppCompatActivity implements TaskAdapter.ItemC
             if(t.getCheck()==1)
                 progress++;
 
-        binding.progressBarProgressTasks.setProgress((progress*100)/taskList.size());
-        binding.textViewProgressTasks.setText(String.valueOf(binding.progressBarProgressTasks.getProgress()));
-
+        if(progress==0) {
+            binding.relativeShowProgressTasks.setVisibility(View.GONE);
+        }else{
+            binding.relativeShowProgressTasks.setVisibility(View.VISIBLE);
+            binding.progressBarProgressTasks.setProgress((progress*100)/taskList.size());
+            binding.textViewProgressTasks.setText(String.valueOf(binding.progressBarProgressTasks.getProgress()));
+        }
     }
 
     @Override

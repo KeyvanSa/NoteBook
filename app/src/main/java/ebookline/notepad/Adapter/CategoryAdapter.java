@@ -1,12 +1,19 @@
 package ebookline.notepad.Adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +47,26 @@ public class CategoryAdapter extends ArrayAdapter<Category>
         Category category = items.get(position);
 
         TextView textViewTitle = view.findViewById(R.id.textViewTitle);
+        LinearLayout linearLayoutColor=view.findViewById(R.id.linearLayoutColor);
+
         textViewTitle.setText(category.getTitle());
+
+        try{
+            GradientDrawable shape = new GradientDrawable();
+            shape.setShape(GradientDrawable.OVAL);
+            shape.setCornerRadii(new float[]{0, 0, 0, 0, 0, 0, 0, 0});
+            shape.setColor(Color.parseColor(category.getColor()));
+
+            float[]hsv=new float[3];
+            Color.colorToHSV(Color.parseColor(category.getColor()),hsv);
+            hsv[2] *= 0.8f;
+            shape.setStroke(5,Color.HSVToColor(hsv));
+
+            linearLayoutColor.setBackground(shape);
+
+        }catch (Exception e){
+            textViewTitle.setText(e.toString());
+        }
 
         return view;
     }

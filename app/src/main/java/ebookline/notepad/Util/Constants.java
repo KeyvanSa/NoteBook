@@ -30,7 +30,7 @@ public class Constants
             new ArrayList<>(Arrays.asList("#95afc0", "#ff7979", "#ffbe76", "#7ed6df", "#badc58"));
 
     public static final ArrayList<String> TextColorsList =
-            new ArrayList<>(Arrays.asList("#000000", "#ff7979", "#ffbe76", "#7ed6df", "#badc58"));
+            new ArrayList<>(Arrays.asList("#000000", "#ffffff", "#ff7979", "#ffbe76", "#7ed6df", "#badc58"));
 
     public static final ArrayList<String> TaskColorsList =
             new ArrayList<>(Arrays.asList("#95afc0", "#ff7979", "#ffbe76", "#7ed6df", "#badc58"));
