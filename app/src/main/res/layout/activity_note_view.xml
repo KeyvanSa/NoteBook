@@ -9,12 +9,12 @@
     tools:context=".Activity.NoteViewActivity">
 
     <RelativeLayout
-        android:background="?attr/searchBox"
-        android:minHeight="55dp"
-        android:elevation="5dp"
         android:id="@+id/relativeToolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/searchBox"
+        android:elevation="5dp"
+        android:minHeight="55dp">
 
         <RelativeLayout
             android:id="@+id/relativeToolbarButtons"
@@ -101,13 +101,45 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:padding="7dp"
                 android:src="@drawable/search"
                 app:tint="?attr/colorAccent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutCounter"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textLayoutText"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/imageViewNext"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="5dp"
+                    android:src="@drawable/back"
+                    app:tint="?attr/colorAccent" />
+                <TextView
+                    android:id="@+id/textViewPosition"
+                    style="@style/textViewTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="12sp"/>
+                <ImageView
+                    android:id="@+id/imageViewPrevious"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="5dp"
+                    android:rotation="180"
+                    android:src="@drawable/back"
+                    app:tint="?attr/colorAccent" />
+            </LinearLayout>
 
         </RelativeLayout>
 

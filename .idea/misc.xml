@@ -46,19 +46,23 @@
         <entry key="..\:/project/NoteBook/app/src/main/res/drawable-anydpi/ic_calendar_outline.xml" value="0.171" />
         <entry key="..\:/project/NoteBook/app/src/main/res/drawable-anydpi/ic_picture_outline.xml" value="0.171" />
         <entry key="..\:/project/NoteBook/app/src/main/res/drawable-anydpi/ic_sound_outline.xml" value="0.171" />
-        <entry key="..\:/project/NoteBook/app/src/main/res/layout/activity_about.xml" value="0.33" />
+        <entry key="..\:/project/NoteBook/app/src/main/res/drawable/first_button.xml" value="0.113" />
+        <entry key="..\:/project/NoteBook/app/src/main/res/drawable/glass_button.xml" value="0.113" />
+        <entry key="..\:/project/NoteBook/app/src/main/res/layout/activity_about.xml" value="0.22" />
         <entry key="..\:/project/NoteBook/app/src/main/res/layout/activity_alarm.xml" value="0.25" />
         <entry key="..\:/project/NoteBook/app/src/main/res/layout/activity_alarmlist.xml" value="0.33" />
         <entry key="..\:/project/NoteBook/app/src/main/res/layout/activity_note.xml" value="0.20416666666666666" />
-        <entry key="..\:/project/NoteBook/app/src/main/res/layout/activity_note_view.xml" value="0.20416666666666666" />
+        <entry key="..\:/project/NoteBook/app/src/main/res/layout/activity_note_view.xml" value="0.25" />
+        <entry key="..\:/project/NoteBook/app/src/main/res/layout/activity_settings.xml" value="0.33" />
         <entry key="..\:/project/NoteBook/app/src/main/res/layout/activity_task.xml" value="0.20416666666666666" />
         <entry key="..\:/project/NoteBook/app/src/main/res/layout/item_alarm.xml" value="0.25" />
         <entry key="..\:/project/NoteBook/app/src/main/res/layout/item_category.xml" value="0.20416666666666666" />
         <entry key="..\:/project/NoteBook/app/src/main/res/layout/item_category2.xml" value="0.67" />
-        <entry key="..\:/project/NoteBook/app/src/main/res/layout/item_note.xml" value="0.20416666666666666" />
+        <entry key="..\:/project/NoteBook/app/src/main/res/layout/item_note.xml" value="0.26148409893992935" />
         <entry key="..\:/project/NoteBook/app/src/main/res/layout/item_task.xml" value="0.20416666666666666" />
         <entry key="..\:/project/NoteBook/app/src/main/res/layout/layout_bottom_sheet_add_category.xml" value="0.20416666666666666" />
         <entry key="..\:/project/NoteBook/app/src/main/res/layout/layout_bottom_sheet_add_task.xml" value="0.20416666666666666" />
+        <entry key="..\:/project/NoteBook/app/src/main/res/layout/layout_dialog.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

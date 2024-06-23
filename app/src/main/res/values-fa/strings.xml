@@ -14,6 +14,7 @@
     <string name="share">اشتراک</string>
     <string name="save">ذخیره</string>
     <string name="copy">کپی</string>
+    <string name="information">اطلاعات</string>
 
     <string name="color">رنگ</string>
     <string name="date">تاریخ</string>
@@ -53,6 +54,8 @@
     <string name="task_add_successfully">کار با موفقیت اضافه شد</string>
     <string name="note_add_denied">خطا در افزودن یادداشت</string>
     <string name="task_add_denied">خطا در افزودن کار</string>
+    <string name="delete_expired_notes">حذف یادداشت های سطل آشغالی</string>
+    <string name="sure_delete_expired_notes">شما %s یادداشت در سطل آشغال دارید که مدت زیادی است حذف شده اند.\nآیا از حذف دائمی آنها اطمینان دارید؟</string>
     <string name="note_edit">ویرایش یادداشت</string>
     <string name="task_edit">ویرایش کار</string>
     <string name="task_done">کار انجام شده</string>
@@ -161,5 +164,17 @@
     <string name="clickable_url">قابلیت کلیک لینک</string>
     <string name="clickable_mail">قابلیت کلیک ایمیل</string>
     <string name="clickable_phone">قابلیت کلیک شماره تلفن</string>
+
+    <string name="count_line">این متن %s خط است.\n</string>
+    <string name="count_characters_with_space">دارای %s کاراکتر با احتساب فاصله \n</string>
+    <string name="count_characters_without_space">و %s کاراکتر بدون فاصله است.\n</string>
+    <string name="this_text_has">این متن دارد:\n</string>
+    <string name="count_mention">%s منشن\n</string>
+    <string name="count_hashtag">%s هشتگ\n</string>
+    <string name="count_phone">%s شماره تلفن\n</string>
+    <string name="count_site">%s آدرس سایت\n</string>
+    <string name="count_email">%s آدرس ایمیل\n</string>
+
+    <string name="date_information">این یادداشت در تاریخ %s شمسی و %s میلادی ثبت شده است و تاریخ آخرین ویرایش آن %s شمسی و %s میلادی است.</string>
 
 </resources>

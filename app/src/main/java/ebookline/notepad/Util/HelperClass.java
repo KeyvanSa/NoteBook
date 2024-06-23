@@ -19,6 +19,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
+import android.util.Patterns;
 import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
@@ -257,11 +258,91 @@ public class HelperClass
         return null;
     }
 
+
+    @SuppressLint("StringFormatMatches")
+    public String countCharacters(String txt){
+
+        int allCharacters_withSpace=txt.length();
+
+        Matcher matcher;
+
+        int numberOfSpace=0;
+        matcher=Pattern.compile("\\s").matcher(txt);
+        while(matcher.find())
+            numberOfSpace++;
+
+        int numberOfMentions=0;
+        matcher=Pattern.compile(SPCRecognizer.MENTION).matcher(txt);
+        while(matcher.find())
+            numberOfMentions++;
+
+        int numberOfHashtags=0;
+        matcher=Pattern.compile(SPCRecognizer.HASHTAG).matcher(txt);
+        while(matcher.find())
+            numberOfHashtags++;
+
+        int numberOfLines=0;
+        matcher=Pattern.compile("\n").matcher(txt);
+        while(matcher.find())
+            numberOfLines++;
+
+        int numberOfPhones=0;
+        matcher= Pattern.compile(SPCRecognizer.PHONE).matcher(txt);
+        while(matcher.find())
+            numberOfPhones++;
+
+        int numberOfSites=0;
+        matcher=Pattern.compile(SPCRecognizer.URL).matcher(txt);
+        while(matcher.find())
+            numberOfSites++;
+
+        int numberOfEmails=0;
+        matcher=Pattern.compile(SPCRecognizer.EMAIL).matcher(txt);
+        while(matcher.find())
+            numberOfEmails++;
+
+        StringBuilder sb=new StringBuilder();
+        sb.append(String.format(context.getResources().getString(R.string.count_line), numberOfLines));
+        sb.append(String.format(context.getString(R.string.count_characters_with_space),allCharacters_withSpace));
+        sb.append(String.format(context.getString(R.string.count_characters_without_space),allCharacters_withSpace-numberOfSpace));
+
+        if(     numberOfMentions>0 ||
+                numberOfHashtags>0 ||
+                numberOfPhones>0 ||
+                numberOfSites>0 ||
+                numberOfEmails>0){
+            sb.append(context.getString(R.string.this_text_has));
+
+            if(numberOfMentions>0)
+                sb.append(String.format(context.getString(R.string.count_mention),numberOfMentions));
+
+            if(numberOfHashtags>0)
+                sb.append(String.format(context.getString(R.string.count_hashtag),numberOfHashtags));
+
+            if(numberOfPhones>0)
+                sb.append(String.format(context.getString(R.string.count_phone),numberOfPhones));
+
+            if(numberOfSites>0)
+                sb.append(String.format(context.getString(R.string.count_site),numberOfSites));
+
+            if(numberOfEmails>0)
+                sb.append(String.format(context.getString(R.string.count_email),numberOfEmails));
+        }
+
+        return sb.toString();
+    }
+
     @SuppressLint("SimpleDateFormat")
     public String getDate(String time) {
         long l = Long.parseLong(time);
         return String.format("%s-%s",new SimpleDateFormat("HH:mm")
                         .format(new Date(l)),new JalaliCalendarClass().getJalaliDate(new Date(l)));
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public String getGregorianDate(String time) {
+        return new SimpleDateFormat("yyyy-MM-dd").format(
+                new JalaliCalendarClass().getGregorianDate(getDate(time).split("-")[1]));
     }
 
     public void exceptionHandler(Exception e){

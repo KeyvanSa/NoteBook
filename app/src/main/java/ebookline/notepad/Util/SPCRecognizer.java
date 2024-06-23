@@ -21,12 +21,12 @@ import ebookline.notepad.Model.SPCModel;
 
 public class SPCRecognizer
 {
-    private static final String HASHTAG ="(^|\\s+)#(\\w+)";
-    private static final String MENTION ="(^|\\s+)@(\\w+)";
+    public static final String HASHTAG ="(^|\\s+)#(\\w+)";
+    public static final String MENTION ="(^|\\s+)@(\\w+)";
     //private static final String URL     ="(https:\\/\\/www\\.|http:\\/\\/www\\.|https:\\/\\/|http:\\/\\/)?[a-zA-Z0-9]{2,}(\\.[a-zA-Z0-9]{2,})(\\.[a-zA-Z0-9]{2,})?";
-    private static final String URL     = Patterns.WEB_URL.toString();
-    private static final String EMAIL   ="([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)";
-    private static final String PHONE   ="\\d{13}|\\d{12}|\\d{11}|\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}";
+    public static final String URL     = Patterns.WEB_URL.toString();
+    public static final String EMAIL   ="([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)";
+    public static final String PHONE   ="\\d{13}|\\d{12}|\\d{11}|\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}";
 
     public static final String SYMBOL_HASHTAG ="hashtag";
     public static final String SYMBOL_MENTION ="mention";

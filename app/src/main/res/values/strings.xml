@@ -15,6 +15,7 @@
     <string name="share">Share</string>
     <string name="save">Save</string>
     <string name="copy">Copy</string>
+    <string name="information">Information</string>
 
     <string name="color">Color</string>
     <string name="date">Date</string>
@@ -54,6 +55,8 @@
     <string name="task_add_successfully">Task Added Successfully</string>
     <string name="note_add_denied">Note Added Denied</string>
     <string name="task_add_denied">Task Added Denied</string>
+    <string name="delete_expired_notes">Delete Expired Notes</string>
+    <string name="sure_delete_expired_notes">You have %s Expired Notes in trash.\n Are you sure to delete all?</string>
     <string name="note_edit">Edit Note</string>
     <string name="task_edit">Edit Task</string>
     <string name="task_done">Task Done</string>
@@ -160,5 +163,17 @@
     <string name="clickable_url">Clickable Urls</string>
     <string name="clickable_mail">Clickable Mails</string>
     <string name="clickable_phone">Clickable Phones</string>
+
+    <string name="count_line">This text is %s line(s)\n</string>
+    <string name="count_characters_with_space">it has %s characters including spaces</string>
+    <string name="count_characters_without_space">and %s characters without spaces.</string>
+    <string name="this_text_has">this text has \n</string>
+    <string name="count_mention">%s Mention(s)\: \n</string>
+    <string name="count_hashtag">%s Hashtag(s)\: \n</string>
+    <string name="count_phone">%s Phone(s)\: \n</string>
+    <string name="count_site">%s Site(s): \n</string>
+    <string name="count_email">%s Email(s): \n</string>
+
+    <string name="date_information">This note was registered on %s Jalali and %s AD and the date of its last revision is %s Jalali and %s AD.</string>
 
 </resources>

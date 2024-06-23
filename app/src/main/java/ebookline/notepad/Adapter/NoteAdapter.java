@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -73,6 +74,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
             if(context.getClass()==TrashActivity.class && shared.getBoolean(Constants.USE_EXPIRED_NOTE))
                 setExpiredDay(position,holder.textViewExpiredDate);
 
+            if(note.getPin()==1 && context.getClass()!=TrashActivity.class)
+                holder.imageViewPin.setVisibility(View.VISIBLE);
+            else holder.imageViewPin.setVisibility(View.GONE);
+
         }catch (Exception e){
             holder.textViewText.setText(e.toString());
             holder.textViewTitle.setText(context.getResources().getString(R.string.error));
@@ -100,6 +105,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView itemCardView;
+        ImageView imageViewPin;
         TextView textViewTitle;
         TextView textViewText;
         TextView textViewDate;
@@ -108,6 +114,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
         ViewHolder(View itemView) {
             super(itemView);
             itemCardView = itemView.findViewById(R.id.itemCardView);
+            imageViewPin = itemView.findViewById(R.id.imageViewPin);
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewText = itemView.findViewById(R.id.textViewText);
             textViewDate = itemView.findViewById(R.id.textViewDate);

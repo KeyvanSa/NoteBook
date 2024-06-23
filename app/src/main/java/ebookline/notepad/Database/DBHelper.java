@@ -5,14 +5,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.text.TextUtils;
-import android.widget.Toast;
+import android.view.View;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import ebookline.notepad.Dialogs.CustomDialog;
 import ebookline.notepad.Model.Category;
 import ebookline.notepad.Model.Note;
 import ebookline.notepad.Model.Task;
@@ -28,8 +28,10 @@ public class DBHelper
 
     private HelperClass helper;
 
-    public void autoDeleteExpiredNotes(){
+    public void autoDeleteExpiredNotes(Context context){
         List<Note> list = getTrashNotes();
+
+        List<Note> deletedList = new ArrayList<>();
 
         for (Note note : list){
 
@@ -38,8 +40,31 @@ public class DBHelper
                             Long.parseLong(note.getaTime()) )/1000)/(24*60*60));
 
             if(leftDays<1)
-                deleteTrashNote(note);
+                deletedList.add(note);
+
         }
+
+        if(deletedList.size()==0)
+            return;
+
+        CustomDialog dialog = new CustomDialog(context);
+        dialog.setTitle(context.getResources().getString(R.string.delete_expired_notes));
+        dialog.setText(String.format(context.getResources().getString(R.string.sure_delete_expired_notes),String.valueOf(deletedList.size())));
+        dialog.setButtonOkText(context.getResources().getString(R.string.ok));
+        dialog.setButtonNoText(context.getResources().getString(R.string.no));
+        dialog.setClickListener(new CustomDialog.ItemClickListener() {
+            @Override
+            public void onPositiveItemClick(View view) {
+                for (Note note:deletedList)
+                    deleteTrashNote(note);
+            }
+            @Override
+            public void onNegativeItemClick(View view) {
+                SharedHelper shared = new SharedHelper(context);
+                shared.removeValue(Constants.USE_EXPIRED_NOTE);
+            }
+        });
+        dialog.showDialog();
     }
 
     public int count(String tblName,String selection){

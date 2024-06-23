@@ -26,9 +26,9 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.File;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,6 +45,7 @@ import ebookline.notepad.Shared.SharedHelper;
 import ebookline.notepad.ThemeManager;
 import ebookline.notepad.Util.Constants;
 import ebookline.notepad.Util.HelperClass;
+import ebookline.notepad.Util.JalaliCalendarClass;
 import ebookline.notepad.Util.SPCRecognizer;
 import ebookline.notepad.databinding.ActivityNoteViewBinding;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
@@ -146,6 +147,8 @@ public class NoteViewActivity extends AppCompatActivity
                 return;
             isSearchMode = true;
             noteViewBinding.relativeToolbarSearch.setVisibility(View.VISIBLE);
+            noteViewBinding.textViewPosition.setText("");
+            noteViewBinding.linearLayoutCounter.setVisibility(View.GONE);
         });
 
         noteViewBinding.imageViewPin.setOnClickListener(view -> {
@@ -199,6 +202,7 @@ public class NoteViewActivity extends AppCompatActivity
             list.add(new Menu(1,getResources().getString(R.string.share),R.drawable.share));
             list.add(new Menu(2,getResources().getString(R.string.save),R.drawable.floppy));
             list.add(new Menu(3,getResources().getString(R.string.copy),R.drawable.widget));
+            list.add(new Menu(4,getResources().getString(R.string.information), R.drawable.exclamation));
 
             MenuDialog dialog = new MenuDialog(this);
             dialog.setList(list);
@@ -280,6 +284,11 @@ public class NoteViewActivity extends AppCompatActivity
 
                 }else if(menu.getId()==3){
                     helper.copyToClipboard(strText);
+                }else if(menu.getId()==4){
+                    CustomDialog dialog1=new CustomDialog(this);
+                    dialog1.setTitle(getResources().getString(R.string.information));
+                    dialog1.setText(helper.countCharacters(noteViewBinding.textViewText.getText().toString()));
+                    dialog1.showDialog();
                 }
             });
             dialog.show(this.getSupportFragmentManager(),dialog.getTag());
@@ -292,11 +301,17 @@ public class NoteViewActivity extends AppCompatActivity
                 if(s.length()==0){
                     spc.check(noteViewBinding.textViewText);
                     position=1;
+
+                    noteViewBinding.textViewPosition.setText("");
+                    noteViewBinding.linearLayoutCounter.setVisibility(View.GONE);
                 } else {
                     int i=spc.findWord(s.toString(),position);
-                    if(i!=0){
-                        //buttonPrevious.setVisibility(View.VISIBLE);
-                       // buttonNext.setVisibility(View.VISIBLE);
+                    if(i!=0) {
+                        noteViewBinding.linearLayoutCounter.setVisibility(View.VISIBLE);
+                        noteViewBinding.textViewPosition.setText(String.format("%s/%s",position,i));
+                    } else {
+                        noteViewBinding.linearLayoutCounter.setVisibility(View.GONE);
+                        noteViewBinding.textViewPosition.setText("");
                     }
                 }
 
@@ -312,6 +327,33 @@ public class NoteViewActivity extends AppCompatActivity
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void afterTextChanged(Editable s) {}
+        });
+
+        noteViewBinding.imageViewPrevious.setOnClickListener(view -> {
+            if(position>1)
+                position--;
+            else position=spc.findWord(noteViewBinding.edittextText.getText().toString(),position);
+            noteViewBinding.textViewPosition.setText(String.format("%s/%s",position, spc.findWord(noteViewBinding.edittextText.getText().toString(),position)));
+        });
+
+        noteViewBinding.imageViewNext.setOnClickListener(view -> {
+            if(position<spc.findWord(noteViewBinding.edittextText.getText().toString(),position))
+                position++;
+            else position=1;
+            noteViewBinding.textViewPosition.setText(String.format("%s/%s",position, spc.findWord(noteViewBinding.edittextText.getText().toString(),position)));
+        });
+
+        noteViewBinding.textViewDate.setOnClickListener(view -> {
+            CustomDialog dialog=new CustomDialog(this);
+            dialog.setTitle(getResources().getString(R.string.information));
+            dialog.setText(String.format(
+                    getResources().getString(R.string.date_information),
+                    helper.getDate(note.getaTime())
+                    ,helper.getGregorianDate(note.getaTime())
+                    ,helper.getDate(note.getcTime())
+                    ,helper.getGregorianDate(note.getcTime())
+            ));
+            dialog.showDialog();
         });
 
     }

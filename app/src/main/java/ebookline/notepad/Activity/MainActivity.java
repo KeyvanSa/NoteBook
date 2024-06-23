@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
 
         try {
             if(shared.getBoolean(Constants.USE_EXPIRED_NOTE))
-                db.autoDeleteExpiredNotes();
+                db.autoDeleteExpiredNotes(this);
 
             if(db.getNoteOldDatabase()){
                 getNotesList(null,null);
@@ -551,6 +551,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             }
 
             getCategoriesList();
+            getNotesList(null,null);
             bottomSheetDialog.dismiss();
         });
 
@@ -563,6 +564,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
     protected void onResume() {
         super.onResume();
         getNotesList(null,null);
+        getCategoriesList();
         if(main.menu.isOpened())
             main.menu.close(true);
     }
@@ -575,6 +577,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             main.edittextText.setText("");
             main.recyclerViewCategories.setVisibility(View.VISIBLE);
             getNotesList(null,null);
+            getCategoriesList();
         }else{
             super.onBackPressed();
         }
@@ -584,6 +587,5 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
-
 
 }
