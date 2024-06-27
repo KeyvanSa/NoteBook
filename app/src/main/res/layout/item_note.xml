@@ -5,83 +5,103 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="@color/color_accent"
+    app:cardBackgroundColor="?attr/colorAccent"
     app:cardCornerRadius="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:background="?attr/searchBox">
+        android:background="?attr/colorAccent">
 
-        <ImageView
-            android:id="@+id/imageViewPin"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentLeft="true"
-            android:padding="3dp"
-            android:src="@drawable/bookmark"
-            android:visibility="gone"
-            app:tint="?attr/colorAccent" />
-
-        <TextView
-            android:id="@+id/textViewDate"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkboxChooseItem"
             style="@style/textViewTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imageViewPin"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/textViewExpiredDate"
-            style="@style/textViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/textViewDate"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textColor="@color/message_error"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/textViewCategory"
-            style="@style/textViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewDate"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/textViewTitle"
-            style="@style/textViewTitle"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_margin="5dp"
-            android:layout_toRightOf="@id/textViewExpiredDate"
-            android:maxLines="1" />
+            android:layout_centerVertical="true"
+            android:enabled="false"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:buttonTint="@color/white" />
 
-        <TextView
-            android:id="@+id/textViewText"
-            style="@style/textViewTitle"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewTitle"
-            android:layout_margin="10dp"
-            android:maxLines="2"
-            android:textSize="14sp" />
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/checkboxChooseItem"
+            android:background="?attr/searchBox">
 
+            <ImageView
+                android:id="@+id/imageViewPin"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:padding="3dp"
+                android:src="@drawable/bookmark"
+                android:visibility="gone"
+                app:tint="?attr/colorAccent" />
+
+            <TextView
+                android:id="@+id/textViewDate"
+                style="@style/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageViewPin"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textViewExpiredDate"
+                style="@style/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/textViewDate"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/message_error"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textViewCategory"
+                style="@style/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewDate"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                style="@style/textViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@id/textViewExpiredDate"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/textViewText"
+                style="@style/textViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewTitle"
+                android:layout_margin="10dp"
+                android:maxLines="2"
+                android:textSize="14sp" />
+        </RelativeLayout>
     </RelativeLayout>
+
+
 
 </androidx.cardview.widget.CardView>

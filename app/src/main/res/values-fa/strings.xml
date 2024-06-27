@@ -39,6 +39,25 @@
 
     <string name="search">جستجوی یادداشت ها</string>
 
+    <string name="save_selected_notes">ذخیره یادداشت های انتخاب شده</string>
+    <string name="deleted_selected_notes">حذف یادداشت های انتخاب شده</string>
+    <string name="add_task_selected_notes">اضافه شدن یادداشت ها به کارها</string>
+
+    <string name="save_title">ذخیره عنوان</string>
+    <string name="save_text">ذخیره متن</string>
+    <string name="save_date">ذخیره تاریخ</string>
+    <string name="select_separator">انتخاب جدا کننده</string>
+
+    <string name="selected_notes">یادداشت های انتخاب شده:\n %s</string>
+
+    <string name="use_gregorian_date">انتخاب تاریخ میلادی</string>
+    <string name="use_jalali_date">انتخاب تاریخ جلالی</string>
+
+    <string name="line">2خط(\\n\\n)</string>
+    <string name="dot">نقطه(\.\.\.)</string>
+    <string name="dash">خط فاصله(---)</string>
+    <string name="underline">زیرخط(___)</string>
+
     <string name="empty_list_text">لیست یادداشت ها خالی است. \n با استفاده از دکمه + میتوانید یادداشت جدید بنویسید</string>
     <string name="empty_list_text_task">لیست کارها خالی است. \n با استفاده از دکمه + میتوانید کار جدید بنویسید</string>
     <string name="empty_trash_list_text">شما یادداشت حذف شده ای ندارید</string>
@@ -111,6 +130,10 @@
     <string name="language">زبان</string>
     <string name="english">انگلیسی</string>
     <string name="persian">فارسی</string>
+
+    <string name="file_name">نام فایل</string>
+    <string name="file_format">\.txt</string>
+    <string name="enter_file_name">نام فایل را بنویسید</string>
 
     <string name="notes_restore">یادداشت ها با موفقیت بازیابی شدند</string>
     <string name="notes_restore_error">خطا در بازیابی یادداشت ها</string>

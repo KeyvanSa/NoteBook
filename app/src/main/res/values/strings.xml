@@ -40,6 +40,25 @@
 
     <string name="search">Search Notes</string>
 
+    <string name="save_selected_notes">Save Selected Notes</string>
+    <string name="deleted_selected_notes">Delete Selected Notes</string>
+    <string name="add_task_selected_notes">Add To Task Selected Notes</string>
+
+    <string name="save_title">Save Title</string>
+    <string name="save_text">Save Text</string>
+    <string name="save_date">Save Date</string>
+    <string name="select_separator">Select Separator</string>
+
+    <string name="selected_notes">Selected Notes:\n %s</string>
+
+    <string name="use_gregorian_date">Use Gregorian Date</string>
+    <string name="use_jalali_date">Use Jalali Date</string>
+
+    <string name="line">2Line(\\n\\n)</string>
+    <string name="dot">Dot(\.\.\.)</string>
+    <string name="dash">Dash(---)</string>
+    <string name="underline">UnderLine(___)</string>
+
     <string name="empty_list_text">notes list is empty \n you can add note by use + button</string>
     <string name="empty_list_text_task">task list is empty \n you can add task by use + button</string>
     <string name="empty_trash_list_text">You do not have any deleted note</string>
@@ -112,6 +131,10 @@
     <string name="language">Language</string>
     <string name="english">English</string>
     <string name="persian">Persian</string>
+
+    <string name="file_name">Enter File Name</string>
+    <string name="file_format">\.txt</string>
+    <string name="enter_file_name">Enter File Name</string>
 
     <string name="notes_restore">Notes have been successfully retrieved</string>
     <string name="notes_restore_error">Error retrieving notes</string>

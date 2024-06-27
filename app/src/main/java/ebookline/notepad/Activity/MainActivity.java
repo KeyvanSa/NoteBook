@@ -1,6 +1,6 @@
 package ebookline.notepad.Activity;
 
-import static java.util.Objects.*;
+import static java.util.Objects.requireNonNull;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -35,11 +35,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 import ebookline.notepad.Adapter.CategoryAdapter2;
 import ebookline.notepad.Adapter.NoteAdapter;
 import ebookline.notepad.Database.DBHelper;
+import ebookline.notepad.Dialogs.BottomSheetSelectedNotes;
 import ebookline.notepad.Dialogs.ColorPickerDialog;
 import ebookline.notepad.Dialogs.CustomDialog;
 import ebookline.notepad.Dialogs.FilePickerDialog;
@@ -47,6 +47,7 @@ import ebookline.notepad.Dialogs.MenuDialog;
 import ebookline.notepad.Model.Category;
 import ebookline.notepad.Model.Menu;
 import ebookline.notepad.Model.Note;
+import ebookline.notepad.Model.Task;
 import ebookline.notepad.R;
 import ebookline.notepad.Shared.SharedHelper;
 import ebookline.notepad.ThemeManager;
@@ -56,6 +57,7 @@ import ebookline.notepad.databinding.ActivityMainBinding;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemClickListener,
+        NoteAdapter.ItemLongClickListener,
         CategoryAdapter2.ItemClickListener, CategoryAdapter2.ItemLongClickListener {
 
     ActivityMainBinding main;
@@ -364,6 +366,70 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             startActivity(toTaskActivity);
         });
 
+        main.menuItemSaveNotesText.setOnClickListener(view -> {
+            main.menuMultiSelectionItems.close(true);
+            if(!noteAdapter.selectMode)
+                return;
+            if(noteAdapter.checkNumberSelectedItems()==0)
+                return;
+            ArrayList<Note> list=new ArrayList<>();
+            ArrayList<Boolean> aList=noteAdapter.selectedItems;
+            for(int i=0;i<noteAdapter.getItemCount();i++){
+                if(aList.get(i))
+                    list.add(noteList.get(i));
+            }
+
+            BottomSheetSelectedNotes bottomSheet = new BottomSheetSelectedNotes(this);
+            bottomSheet.setSelectedNotes(list);
+            bottomSheet.show(this.getSupportFragmentManager(),bottomSheet.getTag());
+        });
+
+        main.menuItemDeleteSelectedNotes.setOnClickListener(view -> {
+            main.menuMultiSelectionItems.close(true);
+            if(!noteAdapter.selectMode)
+                return;
+            if(noteAdapter.checkNumberSelectedItems()==0)
+                return;
+           CustomDialog dialog = new CustomDialog(this);
+           dialog.setTitle(getResources().getString(R.string.delete_notes));
+           dialog.setText(getResources().getString(R.string.note_delete_to_trash));
+           dialog.setButtonNoText(getResources().getString(R.string.ok));
+           dialog.setButtonNoText(getResources().getString(R.string.no));
+           dialog.setClickListener(new CustomDialog.ItemClickListener() {
+               @Override
+               public void onPositiveItemClick(View view) {
+                   ArrayList<Boolean> aList=noteAdapter.selectedItems;
+                   for(int i=0;i<noteAdapter.getItemCount();i++) {
+                       if (aList.get(i))
+                           db.addNoteToTrash(noteList.get(i));
+                   }
+                   main.menuMultiSelectionItems.setVisibility(View.GONE);
+                   main.menuMultiSelectionItems.close(false);
+                   getNotesList(null,null);
+               }
+
+               @Override
+               public void onNegativeItemClick(View view) {
+                   dialog.dismiss();
+               }
+           });
+           dialog.showDialog();
+        });
+
+        main.menuItemAddTaskNotes.setOnClickListener(view -> {
+            main.menuMultiSelectionItems.close(true);
+            if(!noteAdapter.selectMode)
+                return;
+            if(noteAdapter.checkNumberSelectedItems()==0)
+                return;
+            for(int i=0;i<noteAdapter.selectedItems.size();i++){
+                Task task = new Task(0,0,noteList.get(i).getTitle(),Constants.TaskColorsList.get(0));
+                if(noteAdapter.selectedItems.get(i))
+                    db.addTask(task);
+            }
+            helper.showToast(getResources().getString(R.string.task_add_successfully),3);
+        });
+
         main.edittextText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -406,6 +472,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
 
         noteAdapter = new NoteAdapter(this,noteList);
         noteAdapter.setClickListener(this);
+        noteAdapter.setLongClickListener(this);
         main.recyclerNotes.setAdapter(noteAdapter);
 
         if(noteAdapter.getItemCount()==0)
@@ -440,10 +507,31 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
 
     @Override
     public void onItemClick(View view, int position) {
-        note = noteAdapter.getItem(position);
-        Intent toNoteActivity = new Intent(this,NoteViewActivity.class);
-        toNoteActivity.putExtra("id",note.getId());
-        startActivity(toNoteActivity);
+        if(!noteAdapter.selectMode){
+            note = noteAdapter.getItem(position);
+            Intent toNoteActivity = new Intent(this,NoteViewActivity.class);
+            toNoteActivity.putExtra("id",note.getId());
+            startActivity(toNoteActivity);
+        }else{
+            if(!noteAdapter.selectedItems.get(position))
+                noteAdapter.selectedItems.set(position,true);
+            else noteAdapter.selectedItems.set(position,false);
+            noteAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onItemLongClick(int position) {
+        if(!noteAdapter.selectMode) {
+            noteAdapter.selectMode = true;
+            noteAdapter.selectedItems=new ArrayList<>();
+            for(int i=0;i<noteAdapter.getItemCount();i++)
+                noteAdapter.selectedItems.add(false);
+            noteAdapter.selectedItems.set(position,true);
+            noteAdapter.notifyDataSetChanged();
+            main.menuMultiSelectionItems.setVisibility(View.VISIBLE);
+           // main.menuMultiSelectionItems.open(true);
+        }
     }
 
     @Override
@@ -578,7 +666,12 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             main.recyclerViewCategories.setVisibility(View.VISIBLE);
             getNotesList(null,null);
             getCategoriesList();
-        }else{
+        }else if(noteAdapter.selectMode){
+            main.menuMultiSelectionItems.setVisibility(View.GONE);
+            main.menuMultiSelectionItems.close(false);
+            noteAdapter.selectMode=false;
+            noteAdapter.notifyDataSetChanged();
+        } else{
             super.onBackPressed();
         }
     }

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:background="?attr/backgroundColor"
     tools:context=".Activity.MainActivity">
 
     <RelativeLayout
-        android:background="?attr/searchBox"
-        android:minHeight="55dp"
-        android:elevation="5dp"
         android:id="@+id/relativeToolbarMain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/searchBox"
+        android:elevation="5dp"
+        android:minHeight="55dp">
 
         <RelativeLayout
             android:id="@+id/relativeToolbarButtons"
@@ -84,10 +84,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:padding="7dp"
                 android:src="@drawable/search"
                 app:tint="?attr/colorAccent"/>
@@ -160,15 +160,15 @@
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        fab:menu_fab_size="normal"
-        fab:menu_showShadow="true"
+        android:layout_alignParentBottom="true"
         fab:menu_colorNormal="?attr/colorAccent"
+        fab:menu_fab_label="@string/options"
+        fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
         fab:menu_labels_position="left"
         fab:menu_openDirection="up"
-        fab:menu_fab_label="@string/options">
+        fab:menu_showShadow="true">
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menuItemAddNote"
@@ -186,8 +186,8 @@
             android:src="@drawable/fab_add"
             app:fab_colorNormal="?attr/colorAccent"
             app:menu_labels_textColor="?attr/backgroundColor"
-            fab:fab_size="mini"
-            fab:fab_label="@string/category_add" />
+            fab:fab_label="@string/category_add"
+            fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menuItemAddTask"
@@ -196,8 +196,54 @@
             android:src="@drawable/fab_add"
             app:fab_colorNormal="?attr/colorAccent"
             app:menu_labels_textColor="?attr/backgroundColor"
-            fab:fab_size="mini"
-            fab:fab_label="@string/task_activity" />
+            fab:fab_label="@string/task_activity"
+            fab:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menuMultiSelectionItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        fab:menu_colorNormal="?attr/colorAccent"
+        fab:menu_fab_label="@string/options"
+        fab:menu_fab_size="normal"
+        fab:menu_icon="@drawable/ic_text_option"
+        fab:menu_labels_position="right"
+        fab:menu_openDirection="up"
+        fab:menu_showShadow="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menuItemSaveNotesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="?attr/colorAccent"
+            fab:fab_label="@string/save_selected_notes"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menuItemDeleteSelectedNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="?attr/colorAccent"
+            app:menu_labels_textColor="?attr/backgroundColor"
+            fab:fab_label="@string/deleted_selected_notes"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menuItemAddTaskNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="?attr/colorAccent"
+            app:menu_labels_textColor="?attr/backgroundColor"
+            fab:fab_label="@string/add_task_selected_notes"
+            fab:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>
 

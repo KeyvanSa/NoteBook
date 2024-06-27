@@ -52,7 +52,7 @@ Keyvan Safarzadeh
 - [x] Create SQL Database
 - [x] Create UI/UX App
 - [x] Software logic coding
-- [ ] Select multiple notes list items
+- [x] Select multiple notes list items(Save,Delete and Add To Task Selected Notes)
 - [x] Add TO-DO list
 - [ ] Add alarm notes
 

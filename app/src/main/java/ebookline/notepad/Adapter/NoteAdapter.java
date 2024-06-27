@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,6 +31,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
     private final List<Note> mData;
     private final LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    private ItemLongClickListener mLongClickListener;
 
     private final HelperClass helper;
     private final SharedHelper shared;
@@ -36,13 +39,19 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
 
     private final Context context;
 
+    public boolean selectMode=false;
+    public ArrayList<Boolean>selectedItems;
+
     public NoteAdapter(Context context, List<Note> data) {
         this.context = context;
         helper = new HelperClass(context);
         shared=new SharedHelper(context);
         db = new DBHelper(context);
+        selectedItems=new ArrayList<>();
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        for(int i=0;i<data.size();i++)
+            selectedItems.add(false);
     }
 
     @NonNull
@@ -78,6 +87,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
                 holder.imageViewPin.setVisibility(View.VISIBLE);
             else holder.imageViewPin.setVisibility(View.GONE);
 
+            if(selectMode && selectedItems.get(position))
+                holder.checkboxChooseItem.setVisibility(View.VISIBLE);
+            else holder.checkboxChooseItem.setVisibility(View.GONE);
+            holder.checkboxChooseItem.setChecked(selectedItems.get(position));
         }catch (Exception e){
             holder.textViewText.setText(e.toString());
             holder.textViewTitle.setText(context.getResources().getString(R.string.error));
@@ -103,7 +116,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
 
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         CardView itemCardView;
         ImageView imageViewPin;
         TextView textViewTitle;
@@ -111,6 +124,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
         TextView textViewDate;
         TextView textViewExpiredDate;
         TextView textViewCategory;
+        CheckBox checkboxChooseItem;
         ViewHolder(View itemView) {
             super(itemView);
             itemCardView = itemView.findViewById(R.id.itemCardView);
@@ -120,12 +134,23 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
             textViewDate = itemView.findViewById(R.id.textViewDate);
             textViewExpiredDate = itemView.findViewById(R.id.textViewExpiredDate);
             textViewCategory = itemView.findViewById(R.id.textViewCategory);
-            itemView.setOnClickListener(this);
-        }
+            checkboxChooseItem = itemView.findViewById(R.id.checkboxChooseItem);
 
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            itemView.setOnClickListener(view -> {
+                if (mClickListener == null)
+                    return;
+
+                mClickListener.onItemClick(view, getAdapterPosition());
+            });
+
+            itemView.setOnLongClickListener(view -> {
+
+                if (mLongClickListener == null)
+                    return false;
+
+                mLongClickListener.onItemLongClick(getAdapterPosition());
+                return true;
+            });
         }
     }
 
@@ -133,12 +158,30 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
         return mData.get(position);
     }
 
+    public int checkNumberSelectedItems(){
+        int number=0;
+        if(selectedItems==null) return number;
+        for(int i=0;i<selectedItems.size();i++){
+            if(selectedItems.get(i))
+                number++;
+        }
+        return number;
+    }
+
     public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
+    public void setLongClickListener(ItemLongClickListener itemLongClickListener) {
+        this.mLongClickListener = itemLongClickListener;
+    }
+
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+    }
+
+    public interface ItemLongClickListener {
+        void onItemLongClick(int position);
     }
 
     @Override

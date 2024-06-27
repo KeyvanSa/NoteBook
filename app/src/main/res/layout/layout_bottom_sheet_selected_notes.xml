@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="?attr/backgroundColor"
+    app:cardCornerRadius="10dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                style="@style/textViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textViewText"
+                style="@style/textViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewTitle"
+                android:layout_margin="10dp"
+                android:text="@string/text"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewText"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textLayoutFileName"
+                    style="@style/textinputlayout_large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    app:boxBackgroundMode="filled"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:endIconMode="clear_text"
+                    app:suffixText="@string/file_format">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edittextFileName"
+                        style="@style/textViewTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="true"
+                        android:hint="@string/file_name"
+                        android:maxLines="1"
+                        android:textAlignment="textStart" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkBoxSaveTitle"
+                    style="@style/firstButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:checked="true"
+                    android:text="@string/save_title"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkBoxSaveText"
+                    style="@style/firstButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:checked="true"
+                    android:text="@string/save_text"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkBoxSaveDate"
+                    style="@style/firstButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:text="@string/save_date"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="14sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroupSelectDateType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:checkedButton="@id/radioButtonGregorianDate"
+                    android:visibility="gone">
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/radioButtonGregorianDate"
+                        style="@style/firstButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#00000000"
+                        android:text="@string/use_gregorian_date"
+                        android:textColor="?attr/colorAccent"
+                        android:textSize="14sp" />
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/radioButtonJalaliDate"
+                        style="@style/firstButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#00000000"
+                        android:text="@string/use_jalali_date"
+                        android:textColor="?attr/colorAccent"
+                        android:textSize="14sp" />
+                </RadioGroup>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkBoxSelectSeparator"
+                    style="@style/firstButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:text="@string/select_separator"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="14sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroupSelectSeparator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checkedButton="@id/radioButtonLine">
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/radioButtonLine"
+                        style="@style/firstButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#00000000"
+                        android:text="@string/line"
+                        android:textColor="?attr/colorAccent"
+                        android:textSize="14sp" />
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/radioButtonDot"
+                        style="@style/firstButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#00000000"
+                        android:text="@string/dot"
+                        android:textColor="?attr/colorAccent"
+                        android:textSize="14sp" />
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/radioButtonDash"
+                        style="@style/firstButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#00000000"
+                        android:text="@string/dash"
+                        android:textColor="?attr/colorAccent"
+                        android:textSize="14sp" />
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/radioButtonUnderLine"
+                        style="@style/firstButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#00000000"
+                        android:text="@string/underline"
+                        android:textColor="?attr/colorAccent"
+                        android:textSize="14sp" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linearLayoutItems"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonOK"
+                    style="@style/firstButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:text="@string/ok"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonNo"
+                    style="@style/firstButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="#00000000"
+                    android:text="@string/no"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</androidx.cardview.widget.CardView>

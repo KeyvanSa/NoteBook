@@ -71,6 +71,6 @@ public class Constants
     public static final String COLOR_MAIL="comail";
     public static final String COLOR_PHONE="cophone";
 
-    public static final boolean bazzar_or_myket = false; // true is bazzar
+    public static final boolean bazzar_or_myket = true; // true is bazzar
 
 }

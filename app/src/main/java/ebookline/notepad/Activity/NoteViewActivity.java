@@ -130,8 +130,7 @@ public class NoteViewActivity extends AppCompatActivity
                 }
 
                 if(model.getSymbol().equals(SPCRecognizer.SYMBOL_PHONE)){
-                    Intent toCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + model.getText()));
-                    startActivity(toCall);
+                    helper.copyToClipboard(model.getText());
                     return;
                 }
             }catch (Exception e){
