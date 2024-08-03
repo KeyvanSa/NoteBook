@@ -381,6 +381,14 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
 
             BottomSheetSelectedNotes bottomSheet = new BottomSheetSelectedNotes(this);
             bottomSheet.setSelectedNotes(list);
+            bottomSheet.setClickListener(new BottomSheetSelectedNotes.ItemClickListener() {
+                @Override
+                public void onPositiveItemClick(View view) {
+                    onBackPressed();
+                }
+                @Override
+                public void onNegativeItemClick(View view) {}
+            });
             bottomSheet.show(this.getSupportFragmentManager(),bottomSheet.getTag());
         });
 
@@ -403,8 +411,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
                        if (aList.get(i))
                            db.addNoteToTrash(noteList.get(i));
                    }
-                   main.menuMultiSelectionItems.setVisibility(View.GONE);
-                   main.menuMultiSelectionItems.close(false);
+                   onBackPressed();
                    getNotesList(null,null);
                }
 
@@ -427,6 +434,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
                 if(noteAdapter.selectedItems.get(i))
                     db.addTask(task);
             }
+            onBackPressed();
             helper.showToast(getResources().getString(R.string.task_add_successfully),3);
         });
 
@@ -517,6 +525,12 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
                 noteAdapter.selectedItems.set(position,true);
             else noteAdapter.selectedItems.set(position,false);
             noteAdapter.notifyDataSetChanged();
+
+            int  i = 0;
+            for (boolean bool:noteAdapter.selectedItems)
+                if(bool) i++;
+            if(i==0)
+                onBackPressed();
         }
     }
 

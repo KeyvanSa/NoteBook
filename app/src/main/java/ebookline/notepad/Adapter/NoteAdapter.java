@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -76,9 +77,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
             holder.textViewText.setText(note.getText());
             holder.textViewDate.setText(helper.getDate(note.getaTime()));
             holder.textViewCategory.setText(category.getTitle());
-            holder.itemCardView.setCardBackgroundColor(Color.parseColor(note.getColor()));
 
-            //String[] sDate = holder.textViewDate.getText().toString().split("-")[1].split("/");
+            holder.itemCardView.setCardBackgroundColor(Color.parseColor(helper.getMaterialColorCode(note.getColor(),0)));
 
             if(context.getClass()==TrashActivity.class && shared.getBoolean(Constants.USE_EXPIRED_NOTE))
                 setExpiredDay(position,holder.textViewExpiredDate);
@@ -102,11 +102,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
         long day = (java.lang.System.currentTimeMillis() - Long.parseLong(getItem(position).getaTime()) )/1000;
         int lastDays = 29 - (int)(day/(24*60*60));
 
-        textViewExpiredDate.setText(
-                String.format(
-                        Locale.ROOT,
-                        context.getResources().getString(R.string.left_days)
-                        ,lastDays));
+        if(lastDays<0)
+            lastDays = 30 + (lastDays * -1);
+
+        textViewExpiredDate.setText(String.format(Locale.ROOT,
+                context.getResources().getString(
+                        lastDays>30 ?
+                                R.string.days_ago :
+                                R.string.left_days),lastDays));
 
         if(lastDays <= 10)
            textViewExpiredDate.setTextColor(context.getResources().getColor(R.color.message_error));

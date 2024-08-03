@@ -7,10 +7,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -145,11 +143,11 @@ public class SettingsActivity extends AppCompatActivity
         setOnCheckedChangeListener(settings.checkboxFindMails,settings.linearLayoutMail);
         setOnCheckedChangeListener(settings.checkboxFindPhones,settings.linearLayoutPhone);
 
-        setBackgroundColor(settings.linearLayoutColorHashtag,shared.getString(Constants.COLOR_HASHTAG),R.color.text_color_hashtag);
-        setBackgroundColor(settings.linearLayoutColorMention,shared.getString(Constants.COLOR_MENTION),R.color.text_color_mention);
-        setBackgroundColor(settings.linearLayoutColorUrls,shared.getString(Constants.COLOR_URL),R.color.text_color_url);
-        setBackgroundColor(settings.linearLayoutColorMail,shared.getString(Constants.COLOR_MAIL),R.color.text_color_mail);
-        setBackgroundColor(settings.linearLayoutColorPhone,shared.getString(Constants.COLOR_PHONE),R.color.text_color_phone);
+        setBackgroundColor(settings.linearLayoutColorHashtag,shared.getString(Constants.COLOR_HASHTAG),getResources().getColor(R.color.text_color_hashtag));
+        setBackgroundColor(settings.linearLayoutColorMention,shared.getString(Constants.COLOR_MENTION),getResources().getColor(R.color.text_color_mention));
+        setBackgroundColor(settings.linearLayoutColorUrls,shared.getString(Constants.COLOR_URL),getResources().getColor(R.color.text_color_url));
+        setBackgroundColor(settings.linearLayoutColorMail,shared.getString(Constants.COLOR_MAIL),getResources().getColor(R.color.text_color_mail));
+        setBackgroundColor(settings.linearLayoutColorPhone,shared.getString(Constants.COLOR_PHONE),getResources().getColor(R.color.text_color_phone));
 
         chooseColor(settings.linearLayoutColorHashtag,Constants.COLOR_HASHTAG);
         chooseColor(settings.linearLayoutColorMention,Constants.COLOR_MENTION);
@@ -180,12 +178,17 @@ public class SettingsActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
 
-        shared.saveString(Constants.TEXT_COLOR,textColor);
+        if(settings.radioButtonLightTheme.isChecked()) {
+            shared.saveInt(Constants.THEME, 1);
+            if(textColor.equals(Constants.TextColorsList.get(1)))
+                textColor = Constants.TextColorsList.get(0);
+        } else if(settings.radioButtonDarkTheme.isChecked()) {
+            shared.saveInt(Constants.THEME, 2);
+            if(textColor.equals(Constants.TextColorsList.get(0)))
+                textColor = Constants.TextColorsList.get(1);
+        }
 
-        if(settings.radioButtonLightTheme.isChecked())
-            shared.saveInt(Constants.THEME,1);
-        else if(settings.radioButtonDarkTheme.isChecked())
-            shared.saveInt(Constants.THEME,2);
+        shared.saveString(Constants.TEXT_COLOR,textColor);
 
         if(settings.checkboxUsePassword.isChecked()){
             if(Objects.requireNonNull(settings.edittextPassword.getText()).toString().length()>0&&

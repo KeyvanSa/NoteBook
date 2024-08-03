@@ -60,6 +60,8 @@ public class BottomSheetSelectedNotes extends BottomSheetDialogFragment
     private Button buttonOK;
     private Button buttonNo;
 
+    ItemClickListener mClickListener;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,6 +179,8 @@ public class BottomSheetSelectedNotes extends BottomSheetDialogFragment
 
                                         helper.saveTextToFile(file,string);
                                         helper.showToast(context.getResources().getString(R.string.save_selected_notes),3);
+
+                                        mClickListener.onPositiveItemClick(view);
                                     }
                                     @Override
                                     public boolean chooseBack() {
@@ -235,6 +239,15 @@ public class BottomSheetSelectedNotes extends BottomSheetDialogFragment
 
         buttonNo.setOnClickListener(view1 -> dismiss());
 
+    }
+
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+
+    public interface ItemClickListener {
+        void onPositiveItemClick(View view);
+        void onNegativeItemClick(View view);
     }
 
     public BottomSheetSelectedNotes(Context context){

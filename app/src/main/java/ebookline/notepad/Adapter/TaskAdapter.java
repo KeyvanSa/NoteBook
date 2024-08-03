@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,9 @@ import java.util.List;
 
 import ebookline.notepad.Model.Task;
 import ebookline.notepad.R;
+import ebookline.notepad.Shared.SharedHelper;
+import ebookline.notepad.Util.Constants;
+import ebookline.notepad.Util.HelperClass;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>
 {
@@ -27,9 +31,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>
     private ItemCheckListener mCheckListener;
 
     private final Context context;
+    private HelperClass helper;
+    private SharedHelper shared;
 
     public TaskAdapter(Context context, List<Task> data) {
         this.context = context;
+        this.helper = new HelperClass(context);
+        this.shared = new SharedHelper(context);
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -56,7 +64,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>
                 holder.checkBoxTitle.setChecked(false);
             }
 
-            holder.itemCardView.setCardBackgroundColor(Color.parseColor(task.getColor()));
+            holder.itemCardView.setCardBackgroundColor(Color.parseColor(helper.getMaterialColorCode(task.getColor(),0)));
+
         }catch (Exception e){
             holder.checkBoxTitle.setText(e.toString());
         }

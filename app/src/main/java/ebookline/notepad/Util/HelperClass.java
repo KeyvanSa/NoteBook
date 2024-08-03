@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Environment;
@@ -362,6 +363,20 @@ public class HelperClass
         dialog.setText(message);
         dialog.setType(type);
         dialog.showDialog();
+    }
+
+    public String getMaterialColorCode(String colorCode,double percent){
+        long f = Long.parseLong(colorCode.substring(1), 16);
+        double t = percent < 0 ? 0 : 255;
+        double p = percent < 0 ? percent * -1 : percent;
+        long R = f >> 16;
+        long G = f >> 8 & 0x00FF;
+        long B = f & 0x0000FF;
+        int red = (int) (Math.round((t - R) * p) + R);
+        int green = (int) (Math.round((t - G) * p) + G);
+        int blue = (int) (Math.round((t - B) * p) + B);
+
+        return String.format("#%06X", (0xFFFFFF & Color.rgb(red, green, blue)));
     }
 
     public HelperClass(Context context){

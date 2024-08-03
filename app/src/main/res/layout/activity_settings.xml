@@ -9,9 +9,9 @@
     tools:context=".Activity.SettingsActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -22,9 +22,9 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="1dp">
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textViewTitle1"
@@ -89,23 +89,23 @@
                     android:textSize="14sp" />
 
                 <LinearLayout
+                    android:id="@+id/linearColorButtons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_below="@id/textViewTextColor"
-                    android:id="@+id/linearColorButtons"
-                    android:layout_margin="5dp">
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/buttonTextColor"
                         style="@style/firstButton"
-                        android:background="#00000000"
-                        android:textColor="?attr/textColor"
-                        android:gravity="start|center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="@string/text_color" />
+                        android:background="#00000000"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/text_color"
+                        android:textColor="?attr/textColor" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -120,9 +120,9 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="1dp">
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <TextView
                     android:id="@+id/textViewTitle2"
                     style="@style/textViewTitle"
@@ -237,9 +237,9 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="1dp">
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <TextView
                     android:id="@+id/textViewTitle3"
                     style="@style/textViewTitle"
@@ -257,8 +257,9 @@
                     style="@style/textViewTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textViewTitle2"
-                    android:layout_margin="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:text="@string/delete_timer"
                     android:textSize="14sp" />
 
@@ -266,8 +267,9 @@
                     android:id="@+id/linearExpiredNotes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/checkboxUsePassword"
-                    android:layout_margin="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical"
                     android:visibility="gone">
 
@@ -276,7 +278,6 @@
                         style="@style/textViewTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:alpha="0.7"
                         android:text="@string/expire_notes_information"
                         android:textSize="12sp" />
@@ -295,9 +296,9 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="1dp">
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <TextView
                     android:id="@+id/textViewTitle4"
                     style="@style/textViewTitle"
@@ -311,9 +312,9 @@
                     android:textStyle="bold" />
 
                <RadioGroup
-                   android:orientation="vertical"
                    android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical">
 
                    <com.google.android.material.radiobutton.MaterialRadioButton
                        android:id="@+id/radioButtonEnglishLanguage"
@@ -349,9 +350,9 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="1dp">
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 
                 <TextView
                     android:id="@+id/textViewTitle5"
