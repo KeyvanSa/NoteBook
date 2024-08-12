@@ -230,12 +230,16 @@ public class DBHelper
     }
 
     ///////////// Task Start /////////////////
-    public List<Task> getTasks(){
+    public List<Task> getTasks(String selection,String sort){
         List<Task> list = new ArrayList<>();
 
+        if(sort==null)
+            sort = Constants.IS_CHECKED+" asc";
+        else sort += ","+Constants.IS_CHECKED+" asc";
+
         dbOpen();
-        Cursor cursor=db.query(Constants.TBL_TASK_NAME,null,null,null,null,null,
-                Constants.IS_CHECKED+" asc");
+        Cursor cursor=db.query(Constants.TBL_TASK_NAME,null,selection,null,null,null,
+                sort);
 
         while (cursor.moveToNext()){
             Task task = new Task();
@@ -243,6 +247,7 @@ public class DBHelper
             task.setTitle(cursor.getString(1));
             task.setColor(cursor.getString(2));
             task.setCheck(cursor.getInt(3));
+            task.setCategory(cursor.getInt(4));
 
             list.add(task);
         }
@@ -265,6 +270,7 @@ public class DBHelper
         task.setTitle(cursor.getString(1));
         task.setColor(cursor.getString(2));
         task.setCheck(cursor.getInt(3));
+        task.setCategory(cursor.getInt(4));
 
         dbClose();
         cursor.close();
@@ -276,6 +282,7 @@ public class DBHelper
         cv.put(Constants.TITLE,task.getTitle());
         cv.put(Constants.COLOR,task.getColor());
         cv.put(Constants.IS_CHECKED,task.getCheck());
+        cv.put(Constants.CATEGORY,task.getCategory());
 
         dbOpen();
         long result = db.insert(Constants.TBL_TASK_NAME,null,cv);
@@ -288,6 +295,7 @@ public class DBHelper
         cv.put(Constants.TITLE,task.getTitle());
         cv.put(Constants.COLOR,task.getColor());
         cv.put(Constants.IS_CHECKED,task.getCheck());
+        cv.put(Constants.CATEGORY,task.getCategory());
 
         dbOpen();
         long result = db.update(Constants.TBL_TASK_NAME,cv,Constants.ID+"=?",new String[]{String.valueOf(task.getId())});
@@ -304,6 +312,97 @@ public class DBHelper
         return result;
     }
     ///////////// Task End //////////////////
+
+    ///////////// Task Category Start //////////////////
+    public List<Category> getTaskCategories(){
+        List<Category> list = new ArrayList<>();
+        list.add(new Category(0,0,context.getResources().getString(R.string.no_category),Constants.taskCategoryColorsList.get(0)));
+
+        dbOpen();
+        Cursor cursor=db.query(Constants.TBL_TASK_CATEGORY_NAME,null,null,null,null,null,
+                null);
+
+        while (cursor.moveToNext()){
+            Category category = new Category();
+            category.setId(cursor.getInt(0));
+            category.setTitle(cursor.getString(1));
+            category.setColor(cursor.getString(2));
+            category.setParent(cursor.getInt(3));
+            list.add(category);
+        }
+
+        dbClose();
+        cursor.close();
+        return list;
+    }
+
+    public long addTaskCategory(Category category){
+        ContentValues cv = new ContentValues();
+        cv.put(Constants.TITLE,category.getTitle());
+        cv.put(Constants.COLOR,category.getColor());
+        cv.put(Constants.PARENT,category.getParent());
+
+        dbOpen();
+        long result = db.insert(Constants.TBL_TASK_CATEGORY_NAME,null,cv);
+        dbClose();
+        return result;
+    }
+
+    public Category getTaskCategory(int id){
+
+        Category category = new Category();
+
+        if(id==0) {
+            category=new Category(0, 0, context.getResources().getString(R.string.no_category), Constants.categoryColorsList.get(0));
+            return category;
+        }
+
+        dbOpen();
+        Cursor cursor=db.query(Constants.TBL_TASK_CATEGORY_NAME,null,Constants.ID+"=?",new String[]{String.valueOf(id)},null,null, null);
+
+        if(!cursor.moveToFirst())
+            return category;
+
+        category.setId(cursor.getInt(0));
+        category.setTitle(cursor.getString(1));
+        category.setColor(cursor.getString(2));
+        category.setParent(cursor.getInt(3));
+
+        dbClose();
+        cursor.close();
+        return category;
+    }
+
+    public long updateTaskCategory(Category category){
+        ContentValues cv = new ContentValues();
+        cv.put(Constants.TITLE,category.getTitle());
+        cv.put(Constants.COLOR,category.getColor());
+        cv.put(Constants.PARENT,category.getParent());
+
+        dbOpen();
+        long result = db.update(Constants.TBL_TASK_CATEGORY_NAME,cv,Constants.ID+"=?",new String[]{String.valueOf(category.getId())});
+        dbClose();
+        return result;
+    }
+
+    public int deleteTaskCategory(Category category){
+
+        dbOpen();
+        int result = db.delete(Constants.TBL_TASK_CATEGORY_NAME,Constants.ID+"=?",new String[]{String.valueOf(category.getId())});
+        dbClose();
+
+        if(result==1){
+            List<Task> list = getTasks(null,null);
+            for(Task task : list){
+                if(task.getCategory()==category.getId()){
+                    task.setCategory(0);
+                    result=(int)updateTask(task);
+                }
+            }
+        }
+        return result;
+    }
+    ///////////// Task Category End //////////////////
 
     ///////////// Category Start //////////////////
     public List<Category> getCategories(){

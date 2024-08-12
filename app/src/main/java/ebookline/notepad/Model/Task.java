@@ -4,6 +4,7 @@ public class Task
 {
     int id;
     int check;
+    int category;
     String title;
     String color;
 
@@ -31,6 +32,10 @@ public class Task
     public void setCheck(int check) {
         this.check = check;
     }
+
+    public int getCategory() {return category;}
+
+    public void setCategory(int category) {this.category = category;}
 
     public String getTitle() {
         return title;

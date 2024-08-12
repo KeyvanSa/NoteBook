@@ -3,12 +3,12 @@ package ebookline.notepad.Adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,11 +16,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import ebookline.notepad.Database.DBHelper;
+import ebookline.notepad.Model.Category;
 import ebookline.notepad.Model.Task;
 import ebookline.notepad.R;
 import ebookline.notepad.Shared.SharedHelper;
-import ebookline.notepad.Util.Constants;
 import ebookline.notepad.Util.HelperClass;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>
@@ -32,12 +35,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>
 
     private final Context context;
     private HelperClass helper;
+    private DBHelper db;
     private SharedHelper shared;
 
     public TaskAdapter(Context context, List<Task> data) {
         this.context = context;
         this.helper = new HelperClass(context);
         this.shared = new SharedHelper(context);
+        this.db = new DBHelper(context);
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -55,17 +60,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>
         Task task = mData.get(position);
 
         try{
+            Category category = db.getTaskCategory(task.getCategory());
 
             if(task.getCheck()==1){
                 holder.checkBoxTitle.setText(Html.fromHtml(String.format("<del>%s</del>",task.getTitle())));
                 holder.checkBoxTitle.setChecked(true);
             } else {
-                holder.checkBoxTitle.setText(task.getTitle());
+                holder.checkBoxTitle.setText(String.format("%s",task.getTitle()));
                 holder.checkBoxTitle.setChecked(false);
             }
 
             holder.itemCardView.setCardBackgroundColor(Color.parseColor(helper.getMaterialColorCode(task.getColor(),0)));
-
+            holder.textViewCategory.setText(category.getTitle());
         }catch (Exception e){
             holder.checkBoxTitle.setText(e.toString());
         }
@@ -74,10 +80,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener , View.OnLongClickListener {
         CardView itemCardView;
         CheckBox checkBoxTitle;
+        TextView textViewCategory;
         ViewHolder(View itemView) {
             super(itemView);
             itemCardView = itemView.findViewById(R.id.itemCardView);
             checkBoxTitle = itemView.findViewById(R.id.textViewTitle);
+            textViewCategory = itemView.findViewById(R.id.textViewCategory);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
             checkBoxTitle.setOnClickListener(this);

@@ -27,6 +27,18 @@
             android:layout_margin="5dp"
             android:maxLines="5" />
 
+        <TextView
+            android:id="@+id/textViewCategory"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textSize="12sp" />
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:background="?attr/backgroundColor"
     tools:context=".Activity.TaskActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/backgroundColor"
+        android:elevation="3dp"
+        android:minHeight="50dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <RelativeLayout
         android:id="@+id/relativeShowProgressTasks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/recyclerViewCategories"
         android:layout_margin="3dp"
         android:visibility="gone">
 
@@ -81,9 +92,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerTasks"
-        android:layout_below="@id/relativeShowProgressTasks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/relativeShowProgressTasks"
         android:layout_margin="5dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
@@ -92,15 +103,15 @@
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        fab:menu_fab_size="normal"
-        fab:menu_showShadow="true"
+        android:layout_alignParentBottom="true"
         fab:menu_colorNormal="?attr/colorAccent"
+        fab:menu_fab_label="@string/options"
+        fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
         fab:menu_labels_position="left"
         fab:menu_openDirection="up"
-        fab:menu_fab_label="@string/options">
+        fab:menu_showShadow="true">
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menuItemAddTask"
@@ -109,6 +120,15 @@
             android:src="@drawable/fab_add"
             app:fab_colorNormal="?attr/colorAccent"
             fab:fab_label="@string/task_add"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menuItemAddCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="?attr/colorAccent"
+            fab:fab_label="@string/category_add"
             fab:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>
