@@ -26,7 +26,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentRight="true"
-                android:padding="5dp"
+                android:padding="9dp"
                 android:src="@drawable/navicon"
                 app:tint="?attr/colorAccent" />
 
@@ -35,7 +35,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_toLeftOf="@id/imageViewMenu"
-                android:padding="5dp"
+                android:padding="9dp"
                 android:src="@drawable/unbookmark"
                 app:tint="?attr/colorAccent" />
 
@@ -44,7 +44,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_toLeftOf="@id/imageViewPin"
-                android:padding="5dp"
+                android:padding="9dp"
                 android:src="@drawable/search"
                 app:tint="?attr/colorAccent" />
 
@@ -53,7 +53,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_toLeftOf="@id/imageViewSearch"
-                android:padding="5dp"
+                android:padding="9dp"
                 android:src="@drawable/edit"
                 app:tint="?attr/colorAccent" />
 
@@ -62,7 +62,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_toLeftOf="@id/imageViewEdit"
-                android:padding="5dp"
+                android:padding="9dp"
                 android:src="@drawable/trash"
                 app:tint="?attr/colorAccent" />
 
@@ -111,10 +111,10 @@
 
             <LinearLayout
                 android:id="@+id/linearLayoutCounter"
-                android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textLayoutText"
+                android:layout_alignParentLeft="true"
                 android:gravity="center"
                 android:orientation="horizontal">
                 <ImageView
@@ -153,7 +153,8 @@
         android:layout_below="@id/relativeToolbar"
         android:layout_margin="10dp"
         android:ellipsize="end"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -169,17 +170,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:padding="3dp"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
             android:textSize="12sp" />
-
-        <LinearLayout
-            android:id="@+id/linearLayoutCategory"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_margin="5dp"
-            android:orientation="vertical" />
 
     </LinearLayout>
 

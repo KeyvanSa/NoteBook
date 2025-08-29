@@ -77,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
 
     private boolean isSearchMode = false;
 
+    private boolean enableSelected = false;
+    private int     selectedItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeManager.setTheme(this);
@@ -118,15 +121,17 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
         {
             List<Menu> menuList=new ArrayList<>();
 
-            menuList.add(new Menu(1,getResources().getString(R.string.sort_by_newest),R.drawable.sort));
-            menuList.add(new Menu(2,getResources().getString(R.string.sort_by_oldest),R.drawable.sort));
-            menuList.add(new Menu(3,getResources().getString(R.string.sort_by_title_asc),R.drawable.sort));
-            menuList.add(new Menu(4,getResources().getString(R.string.sort_by_title_desc),R.drawable.sort));
-            menuList.add(new Menu(5,getResources().getString(R.string.sort_by_text_acs),R.drawable.sort));
-            menuList.add(new Menu(6,getResources().getString(R.string.sort_by_text_desc),R.drawable.sort));
+            menuList.add(new Menu(1,getResources().getString(R.string.sort_by_newest),R.drawable.sortz_a));
+            menuList.add(new Menu(2,getResources().getString(R.string.sort_by_oldest),R.drawable.sorta_z));
+            menuList.add(new Menu(3,getResources().getString(R.string.sort_by_title_asc),R.drawable.sortz_a));
+            menuList.add(new Menu(4,getResources().getString(R.string.sort_by_title_desc),R.drawable.sorta_z));
+            menuList.add(new Menu(5,getResources().getString(R.string.sort_by_text_acs),R.drawable.sortz_a));
+            menuList.add(new Menu(6,getResources().getString(R.string.sort_by_text_desc),R.drawable.sorta_z));
 
             MenuDialog bottomSheet=new MenuDialog(this);
             bottomSheet.setList(menuList);
+            bottomSheet.setEnableSelected(enableSelected);
+            bottomSheet.setSelectedItem(selectedItem);
             bottomSheet.setOnClickButtonListener(menu ->
             {
                 isSearchMode = true;
@@ -146,6 +151,9 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
                     getNotesList(null,Constants.TEXT+" desc");
                 if(menu.getId()==6)
                     getNotesList(null,Constants.TEXT+" asc");
+
+                enableSelected = true;
+                selectedItem = menu.getId()-1;
             });
             bottomSheet.show(this.getSupportFragmentManager(),bottomSheet.getTag());
 
@@ -161,8 +169,8 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             menuList.add(new Menu(2,getResources().getString(R.string.settings),R.drawable.gear));
             menuList.add(new Menu(3,getResources().getString(R.string.about),R.drawable.exclamation));
             menuList.add(new Menu(4,getResources().getString(R.string.rate),R.drawable.star));
-            menuList.add(new Menu(5,getResources().getString(R.string.backup),R.drawable.floppy));
-            menuList.add(new Menu(6,getResources().getString(R.string.restore),R.drawable.refresh));
+            menuList.add(new Menu(5,getResources().getString(R.string.backup),R.drawable.backup));
+            menuList.add(new Menu(6,getResources().getString(R.string.restore),R.drawable.restore));
 
             MenuDialog dialog = new MenuDialog(this);
             dialog.setList(menuList);
@@ -295,11 +303,13 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
                                         dialog1.setOnClickButtonListener(new FilePickerDialog.OnClickButtonListener() {
                                             @Override
                                             public void chooseFolder(File folder) {
-                                                if (db.restoreDatabase(folder)) {
-                                                    helper.showToast(getResources().getString(R.string.notes_restore), 3);
-                                                    getNotesList(null, null);
-                                                    getCategoriesList();
-                                                } else helper.showToast(getResources().getString(R.string.notes_restore_error), 2);
+                                                try {
+                                                    if (db.restoreDatabase(folder)) {
+                                                        helper.showToast(getResources().getString(R.string.notes_restore), 3);
+                                                        getNotesList(null, null);
+                                                        getCategoriesList();
+                                                    } else helper.showToast(getResources().getString(R.string.notes_restore_error), 2);
+                                                }catch (Exception e){helper.showToast(getResources().getString(R.string.notes_restore_error), 2);}
                                             }
 
                                             @Override
@@ -671,6 +681,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             main.menu.close(true);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBackPressed() {
         if(isSearchMode){

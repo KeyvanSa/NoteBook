@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/recyclerViewCategories"
         android:layout_margin="3dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/textViewProgressTasks"
@@ -33,17 +33,19 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="15dp"
+            android:alpha="0.7"
             android:gravity="center"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textSize="12sp" />
 
         <ProgressBar
             android:id="@+id/progressBarProgressTasks"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewProgressTasks"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:layout_toRightOf="@id/textViewProgressTasks"
             android:max="100"
             android:progress="20" />
 
@@ -106,6 +108,10 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         fab:menu_colorNormal="?attr/colorAccent"
+        app:menu_labels_colorPressed="@color/color_accent"
+        app:menu_colorPressed="@color/color_accent"
+        app:menu_colorRipple="@color/color_accent"
+        app:menu_labels_colorRipple="@color/color_accent"
         fab:menu_fab_label="@string/options"
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"

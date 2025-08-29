@@ -177,8 +177,8 @@ public class NoteViewActivity extends AppCompatActivity
         noteViewBinding.imageViewDelete.setOnClickListener(view -> {
             CustomDialog dialog = new CustomDialog(this);
             dialog.setTitle(String.format(getResources().getString(R.string.note_delete),""));
-            dialog.setText(strTitle +"\n"+String.format(getResources().getString(R.string.note_delete),"?"));
-            dialog.setButtonOkText(String.format(getResources().getString(R.string.note_delete),""));
+            dialog.setText(String.format(getResources().getString(R.string.note_delete),strTitle));
+            dialog.setButtonOkText(getResources().getString(R.string.yes));
             dialog.setButtonNoText(getResources().getString(R.string.no));
             dialog.setClickListener(new CustomDialog.ItemClickListener() {
                 @Override
@@ -200,7 +200,7 @@ public class NoteViewActivity extends AppCompatActivity
             List<Menu> list = new ArrayList<>();
             list.add(new Menu(1,getResources().getString(R.string.share),R.drawable.share));
             list.add(new Menu(2,getResources().getString(R.string.save),R.drawable.floppy));
-            list.add(new Menu(3,getResources().getString(R.string.copy),R.drawable.widget));
+            list.add(new Menu(3,getResources().getString(R.string.copy),R.drawable.copy));
             list.add(new Menu(4,getResources().getString(R.string.information), R.drawable.exclamation));
 
             MenuDialog dialog = new MenuDialog(this);
@@ -379,31 +379,23 @@ public class NoteViewActivity extends AppCompatActivity
 
         noteViewBinding.textViewDate.setText(String.format("%s(%s)",helper.getDate(note.getaTime()),helper.getDisplayableTime(Long.parseLong(note.getaTime()))));
 
+        GradientDrawable shape;
+
         Category category = new Category();
-        if(note.getCategory()!=0)
-            category=db.getCategory(note.getCategory());
-        else category.setTitle(getResources().getString(R.string.no_category));
+        if(note.getCategory()!=0) {
+            category = db.getCategory(note.getCategory());
+            shape = helper.setBackgroundShape(category.getColor(),3,30,10);
+        } else {
+            category.setTitle(getResources().getString(R.string.no_category));
+            shape = helper.setBackgroundShape(Constants.categoryColorsList.get(0),3,30,10);
+        }
 
         noteViewBinding.textViewCategory.setText(category.getTitle());
 
         if(iPin==1)
             noteViewBinding.imageViewPin.setImageResource(R.drawable.bookmark);
 
-        GradientDrawable shape = new GradientDrawable();
-        shape.setShape(GradientDrawable.OVAL);
-        shape.setCornerRadii(new float[]{0, 0, 0, 0, 0, 0, 0, 0});
-        shape.setColor(Color.parseColor(strColor));
-
-        try{
-            TypedValue typedValue = new TypedValue();
-            Resources.Theme theme = getTheme();
-            theme.resolveAttribute(R.attr.textColor , typedValue, true);
-            @ColorInt
-            int color = typedValue.data;
-            shape.setStroke(5,color);
-        }catch (Exception ignored){}
-
-        noteViewBinding.linearLayoutCategory.setBackground(shape);
+        noteViewBinding.textViewCategory.setBackground(shape);
     }
 
     @Override

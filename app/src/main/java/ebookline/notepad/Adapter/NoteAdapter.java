@@ -115,6 +115,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
            textViewExpiredDate.setTextColor(context.getResources().getColor(R.color.message_error));
         else if (lastDays <= 20)
             textViewExpiredDate.setTextColor(context.getResources().getColor(R.color.color_accent));
+        else if(lastDays > 30)
+            textViewExpiredDate.setTextColor(context.getResources().getColor(R.color.message_error));
         else textViewExpiredDate.setTextColor(context.getResources().getColor(R.color.message_success_dark));
 
     }

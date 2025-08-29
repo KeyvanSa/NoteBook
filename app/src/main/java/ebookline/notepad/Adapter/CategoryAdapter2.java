@@ -58,18 +58,7 @@ public class CategoryAdapter2 extends RecyclerView.Adapter<CategoryAdapter2.View
 
         try{
             holder.textViewTitle.setText(category.getTitle());
-
-            GradientDrawable shape = new GradientDrawable();
-            shape.setShape(GradientDrawable.OVAL);
-            shape.setCornerRadii(new float[]{0, 0, 0, 0, 0, 0, 0, 0});
-            shape.setColor(Color.parseColor(category.getColor()));
-
-            float[]hsv=new float[3];
-            Color.colorToHSV(Color.parseColor(category.getColor()),hsv);
-            hsv[2] *= 0.8f;
-            shape.setStroke(5,Color.HSVToColor(hsv));
-
-            holder.linearLayoutColor.setBackground(shape);
+            holder.linearLayoutColor.setBackground(helper.setBackgroundShape(category.getColor(),5,50,30));
         }catch (Exception e){
             holder.textViewTitle.setText(e.toString());
         }

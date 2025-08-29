@@ -14,7 +14,7 @@
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:padding="5dp"
+        android:padding="9dp"
         app:tint="?attr/colorAccent" />
 
     <TextView

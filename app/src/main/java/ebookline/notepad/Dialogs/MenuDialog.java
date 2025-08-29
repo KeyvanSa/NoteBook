@@ -29,6 +29,9 @@ public class MenuDialog extends BottomSheetDialogFragment implements MenuAdapter
 
     OnClickItemListener onClickButtonListener;
 
+    private boolean enableSelected;
+    private int     selectedItem;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,8 @@ public class MenuDialog extends BottomSheetDialogFragment implements MenuAdapter
         RecyclerView recyclerView = view.findViewById(R.id.recyclerMenu);
 
         MenuAdapter adapter = new MenuAdapter(context, ((getList() == null) ? new ArrayList<>() : getList()));
+        adapter.setEnableSelected(isEnableSelected());
+        adapter.setSelectedItem(getSelectedItem());
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
     }
@@ -80,4 +85,19 @@ public class MenuDialog extends BottomSheetDialogFragment implements MenuAdapter
         this.list = list;
     }
 
+    public boolean isEnableSelected() {
+        return enableSelected;
+    }
+
+    public void setEnableSelected(boolean enableSelected) {
+        this.enableSelected = enableSelected;
+    }
+
+    public int getSelectedItem() {
+        return selectedItem;
+    }
+
+    public void setSelectedItem(int selectedItem) {
+        this.selectedItem = selectedItem;
+    }
 }

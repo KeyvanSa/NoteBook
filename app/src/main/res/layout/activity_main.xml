@@ -26,7 +26,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentRight="true"
-                android:padding="5dp"
+                android:padding="9dp"
                 android:src="@drawable/navicon"
                 app:tint="?attr/colorAccent" />
 
@@ -44,7 +44,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_toLeftOf="@id/imageViewSort"
-                android:padding="5dp"
+                android:padding="9dp"
                 android:src="@drawable/search"
                 app:tint="?attr/colorAccent" />
 
@@ -163,6 +163,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         fab:menu_colorNormal="?attr/colorAccent"
+        app:menu_colorPressed="@color/color_accent"
         fab:menu_fab_label="@string/options"
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
@@ -209,6 +210,7 @@
         android:layout_alignParentBottom="true"
         android:visibility="gone"
         fab:menu_colorNormal="?attr/colorAccent"
+        app:menu_labels_colorPressed="@color/color_accent"
         fab:menu_fab_label="@string/options"
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/ic_text_option"

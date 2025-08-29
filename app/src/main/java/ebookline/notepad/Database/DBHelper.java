@@ -174,8 +174,13 @@ public class DBHelper
 
                 addTask(task);
             }
+
+            if(!cursor.isClosed())
+                cursor.close();
         }
 
+        if(!cursor.isClosed())
+            cursor.close();
         return true;
     }
 

@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Environment;
@@ -28,6 +29,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import java.io.File;
@@ -282,7 +284,7 @@ public class HelperClass
         while(matcher.find())
             numberOfHashtags++;
 
-        int numberOfLines=0;
+        int numberOfLines=1;
         matcher=Pattern.compile("\n").matcher(txt);
         while(matcher.find())
             numberOfLines++;
@@ -377,6 +379,25 @@ public class HelperClass
         int blue = (int) (Math.round((t - B) * p) + B);
 
         return String.format("#%06X", (0xFFFFFF & Color.rgb(red, green, blue)));
+    }
+
+    public GradientDrawable setBackgroundShape(String hex,int strokeWidth,int percent,int corner)
+    {
+        int color = Color.parseColor(hex);
+
+        int alpha = (255*percent)/100;
+        int red = Color.red(color);
+        int blue = Color.blue(color);
+        int green = Color.green(color);
+
+        int background = Color.argb(alpha,red,green,blue);
+
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(background);
+        drawable.setCornerRadius(corner);
+        drawable.setStroke(strokeWidth,color);
+
+        return drawable;
     }
 
     public HelperClass(Context context){

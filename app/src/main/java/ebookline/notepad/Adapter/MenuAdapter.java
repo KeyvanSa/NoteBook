@@ -1,12 +1,15 @@
 package ebookline.notepad.Adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,11 +20,16 @@ import ebookline.notepad.R;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
 {
+    private Context context;
     private final List<Menu> mData;
     private final LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
+    private boolean enableSelected;
+    private int     selectedItem;
+
     public MenuAdapter(Context context, List<Menu> data) {
+        this.context=context;
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -42,6 +50,16 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
             holder.textViewMenuTitle.setText(menu.getTitle());
             if(menu.getIcon()!=0)
                 holder.imageViewMenuIcon.setImageResource(menu.getIcon());
+            if(isEnableSelected()&&getSelectedItem()==position){
+                try{
+                    TypedValue typedValue = new TypedValue();
+                    Resources.Theme theme = context.getTheme();
+                    theme.resolveAttribute(R.attr.colorAccent , typedValue, true);
+                    @ColorInt
+                    int color = typedValue.data;
+                    holder.textViewMenuTitle.setTextColor(color);
+                }catch (Exception ignored){}
+            }
         }catch (Exception e){
             holder.textViewMenuTitle.setText(e.toString());
         }
@@ -88,5 +106,21 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
     @Override
     public long getItemId(int position) {
         return super.getItemId(position);
+    }
+
+    public boolean isEnableSelected() {
+        return enableSelected;
+    }
+
+    public void setEnableSelected(boolean enableSelected) {
+        this.enableSelected = enableSelected;
+    }
+
+    public int getSelectedItem() {
+        return selectedItem;
+    }
+
+    public void setSelectedItem(int selectedItem) {
+        this.selectedItem = selectedItem;
     }
 }
