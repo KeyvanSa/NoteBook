@@ -376,6 +376,12 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
             startActivity(toTaskActivity);
         });
 
+        main.menuItemAddReceiver.setOnClickListener(view -> {
+            main.menu.close(true);
+            Intent toReceiverActivity = new Intent(this,ReceiverActivity.class);
+            startActivity(toReceiverActivity);
+        });
+
         main.menuItemSaveNotesText.setOnClickListener(view -> {
             main.menuMultiSelectionItems.close(true);
             if(!noteAdapter.selectMode)

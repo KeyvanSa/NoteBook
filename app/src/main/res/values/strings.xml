@@ -62,6 +62,7 @@
 
     <string name="empty_list_text">notes list is empty \n you can add note by use + button</string>
     <string name="empty_list_text_task">task list is empty \n you can add task by use + button</string>
+    <string name="empty_list_text_receiver">receiver list is empty \n you can add receiver by use + button</string>
     <string name="empty_trash_list_text">You do not have any deleted note</string>
     <string name="copy_database">Database Copied Successfully</string>
 
@@ -199,5 +200,39 @@
     <string name="count_email">%s Email(s): \n</string>
 
     <string name="date_information">This note was registered on %s Jalali and %s AD and the date of its last revision is %s Jalali and %s AD.</string>
+
+    <string name="auto_save">Automatically save notifications and messages</string>
+    <string name="beta_version">Beta Version(Trial)</string>
+    <string name="permissions_title">Needed Permissions</string>
+    <string name="permissions_text">To automatically save notifications and messages, please allow the following permissions</string>
+    <string name="permissions_sms_read">Access to messages</string>
+    <string name="permissions_battery_optimization">Reducing the battery limit</string>
+    <string name="permissions_show_notifications">Access to show notifications</string>
+    <string name="enable_auto_save_notifications">Enable Auto Save Notifications</string>
+    <string name="enable_auto_save_messages">Enable Auto Save Messages</string>
+    <string name="enable_receiver">Enable Receiver</string>
+    <string name="receiver_activity">Receivers Activity</string>
+    <string name="receiver_type">Receiver Type</string>
+    <string name="receiver_type_sms">SMS</string>
+    <string name="receiver_type_app">APP</string>
+    <string name="receiver_sender">Receiver Sender</string>
+    <string name="receiver_add">Add Receiver</string>
+    <string name="receiver_edit">Edit Receiver</string>
+    <string name="receiver_delete">Delete Receiver</string>
+    <string name="receiver_information">Receiver Information</string>
+    <string name="receiver_contain">Contain special words(separate words with ,)</string>
+    <string name="receiver_add_successfully">Receiver Added Successfully</string>
+    <string name="receiver_add_denied">Receiver Added Denied</string>
+    <string name="receiver_notification_text">Processing incoming messages</string>
+    <string name="enter_sender">Enter Sender</string>
+    <string name="enter_type">Enter Type</string>
+    <string name="receiver_added_successful">Receiver Added Successful</string>
+    <string name="receiver_added_denied">Receiver Added Denied</string>
+    <string name="receiver_edited_successful">Receiver Edited Successful</string>
+    <string name="receiver_edited_denied">Receiver Edited Denied</string>
+    <string name="receiver_deleted_successful">Receiver Deleted Successful</string>
+    <string name="receiver_deleted_denied">Receiver Deleted Denied</string>
+    <string name="reset_information">Reset Information</string>
+    <string name="app_search">Search App</string>
 
 </resources>

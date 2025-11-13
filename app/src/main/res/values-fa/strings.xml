@@ -61,6 +61,7 @@
 
     <string name="empty_list_text">لیست یادداشت ها خالی است. \n با استفاده از دکمه + میتوانید یادداشت جدید بنویسید</string>
     <string name="empty_list_text_task">لیست کارها خالی است. \n با استفاده از دکمه + میتوانید کار جدید بنویسید</string>
+    <string name="empty_list_text_receiver">لیست ذخیره خودکار خالی است. \n با استفاده از دکمه + میتوانید ذخیره خودکار جدید بنویسید</string>
     <string name="empty_trash_list_text">شما یادداشت حذف شده ای ندارید</string>
     <string name="copy_database">دیتابیس با موفقیت کپی شد</string>
 
@@ -200,5 +201,39 @@
     <string name="count_email">%s آدرس ایمیل\n</string>
 
     <string name="date_information">این یادداشت در تاریخ %s شمسی و %s میلادی ثبت شده است و تاریخ آخرین ویرایش آن %s شمسی و %s میلادی است.</string>
+
+    <string name="auto_save">ذخیره خودکار اعلانات و پیام ها</string>
+    <string name="beta_version">نسخه بتا(آزمایشی)</string>
+    <string name="permissions_title">دسترسی های مورد نیاز</string>
+    <string name="permissions_text">برای ذخیره خودکار پیام ها و اعلانات لطفا دسترسی زیر را تایید کنید</string>
+    <string name="permissions_sms_read">دسترسی به پیام ها</string>
+    <string name="permissions_battery_optimization">کاهش محدودیت باتری</string>
+    <string name="permissions_show_notifications">دسترسی به اعلانات</string>
+    <string name="enable_auto_save_notifications">فعال شدن ذخیره خودکار اعلانات</string>
+    <string name="enable_auto_save_messages">فعال شدن ذخیره خودکار پیام ها</string>
+    <string name="enable_receiver">فعال بودن ذخیره خودکار</string>
+    <string name="receiver_activity">صفحه اعلان ها</string>
+    <string name="receiver_type">نوع اعلان</string>
+    <string name="receiver_type_sms">پیامک</string>
+    <string name="receiver_type_app">برنامه</string>
+    <string name="receiver_sender">ارسال کننده اعلان</string>
+    <string name="receiver_add">افزودن ذخیره خودکار</string>
+    <string name="receiver_edit">ویرایش ذخیره خودکار</string>
+    <string name="receiver_delete">حذف ذخیره خودکار</string>
+    <string name="receiver_information">اطلاعات اعلان</string>
+    <string name="receiver_contain">شامل کلمات خاص(کلمات را با , کنید)</string>
+    <string name="receiver_add_successfully">افزودن ذخیره خودکار با موفقیت انجام شد</string>
+    <string name="receiver_add_denied">افزودن ذخیره خودکار با خطا مواجه شد</string>
+    <string name="receiver_notification_text">در حال پردازش پیام های دریافتی</string>
+    <string name="enter_sender">ارسال کننده را وارد کنید</string>
+    <string name="enter_type">نوع اعلان را وارد کنید</string>
+    <string name="receiver_added_successful">ذخیره خودکار با موفقیت ذخیره شد</string>
+    <string name="receiver_added_denied">ثبت ذخیره خودکار با خطا مواجه شد</string>
+    <string name="receiver_edited_successful">ذخیره خودکار با موفقیت ویرایش شد</string>
+    <string name="receiver_edited_denied">ویرایش ذخیره خودکار با خطا مواجه شد</string>
+    <string name="receiver_deleted_successful">حذف خودکار با موفقیت ویرایش شد</string>
+    <string name="receiver_deleted_denied">حذف ذخیره خودکار با خطا مواجه شد</string>
+    <string name="reset_information">پاک کردن اطلاعات</string>
+    <string name="app_search">جستجوی برنامه</string>
 
 </resources>

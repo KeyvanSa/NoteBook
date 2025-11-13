@@ -200,6 +200,16 @@
             fab:fab_label="@string/task_activity"
             fab:fab_size="mini" />
 
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menuItemAddReceiver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            app:fab_colorNormal="?attr/colorAccent"
+            app:menu_labels_textColor="?attr/backgroundColor"
+            fab:fab_label="@string/receiver_activity"
+            fab:fab_size="mini" />
+
     </com.github.clans.fab.FloatingActionMenu>
 
     <com.github.clans.fab.FloatingActionMenu

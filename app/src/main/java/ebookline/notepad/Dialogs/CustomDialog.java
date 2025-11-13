@@ -28,7 +28,8 @@ public class CustomDialog extends Dialog implements View.OnClickListener
 
     private ItemClickListener mClickListener;
 
-    private void init() {
+    private void init()
+    {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         setContentView(R.layout.layout_dialog);

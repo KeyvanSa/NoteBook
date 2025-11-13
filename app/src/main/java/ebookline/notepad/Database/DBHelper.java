@@ -15,6 +15,7 @@ import java.util.List;
 import ebookline.notepad.Dialogs.CustomDialog;
 import ebookline.notepad.Model.Category;
 import ebookline.notepad.Model.Note;
+import ebookline.notepad.Model.Receiver;
 import ebookline.notepad.Model.Task;
 import ebookline.notepad.R;
 import ebookline.notepad.Shared.SharedHelper;
@@ -233,6 +234,130 @@ public class DBHelper
         }
         return false;
     }
+
+    ///////////// Receiver Start /////////////////
+    public List<Receiver> getReceivers(String selection, String sort){
+        List<Receiver> list = new ArrayList<>();
+
+        if(sort==null)
+            sort = Constants.ID+" asc";
+        else sort += ","+Constants.ID+" asc";
+
+        dbOpen();
+        Cursor cursor=db.query(Constants.TBL_RECEIVER_NAME,null,selection,null,null,null,
+                sort);
+
+        while (cursor.moveToNext()){
+            Receiver receiver = new Receiver();
+            receiver.setId(cursor.getInt(0));
+            receiver.setTitle(cursor.getString(1));
+            receiver.setText(cursor.getString(2));
+            receiver.setInformation(cursor.getString(3));
+            receiver.setType(cursor.getString(4));
+            receiver.setSender(cursor.getString(5));
+            receiver.setTime(cursor.getString(6));
+            receiver.setContain(cursor.getString(7));
+            receiver.setEnable(cursor.getInt(8) == 1);
+
+            list.add(receiver);
+        }
+
+        dbClose();
+        cursor.close();
+        return list;
+    }
+
+    public Receiver getReceiver(String query){
+        dbOpen();
+        Cursor cursor=db.query(Constants.TBL_RECEIVER_NAME,null, query,null,null,null, null);
+
+        Receiver receiver = new Receiver();
+
+        if(!cursor.moveToFirst())
+            return receiver;
+
+        receiver.setId(cursor.getInt(0));
+        receiver.setTitle(cursor.getString(1));
+        receiver.setText(cursor.getString(2));
+        receiver.setInformation(cursor.getString(3));
+        receiver.setType(cursor.getString(4));
+        receiver.setSender(cursor.getString(5));
+        receiver.setTime(cursor.getString(6));
+        receiver.setContain(cursor.getString(7));
+        receiver.setEnable(cursor.getInt(8) == 1);
+
+        dbClose();
+        cursor.close();
+        return receiver;
+    }
+
+    public Receiver getReceiver(int id){
+        dbOpen();
+        Cursor cursor=db.query(Constants.TBL_RECEIVER_NAME,null,Constants.ID+"=?",new String[]{String.valueOf(id)},null,null, null);
+
+        Receiver receiver = new Receiver();
+
+        if(!cursor.moveToFirst())
+            return receiver;
+
+        receiver.setId(cursor.getInt(0));
+        receiver.setTitle(cursor.getString(1));
+        receiver.setText(cursor.getString(2));
+        receiver.setInformation(cursor.getString(3));
+        receiver.setType(cursor.getString(4));
+        receiver.setSender(cursor.getString(5));
+        receiver.setTime(cursor.getString(6));
+        receiver.setContain(cursor.getString(7));
+        receiver.setEnable(cursor.getInt(8) == 1);
+
+        dbClose();
+        cursor.close();
+        return receiver;
+    }
+
+    public long addReceiver(Receiver receiver){
+        ContentValues cv = new ContentValues();
+        cv.put(Constants.TITLE,receiver.getTitle());
+        cv.put(Constants.TEXT,receiver.getText());
+        cv.put(Constants.INFORMATION,receiver.getInformation());
+        cv.put(Constants.TYPE,receiver.getType());
+        cv.put(Constants.SENDER,receiver.getSender());
+        cv.put(Constants.ATIME,receiver.getTime());
+        cv.put(Constants.CONTAIN,receiver.getContain());
+        cv.put(Constants.ENABLE,receiver.isEnable());
+
+        dbOpen();
+        long result = db.insert(Constants.TBL_RECEIVER_NAME,null,cv);
+        dbClose();
+        return result;
+    }
+
+    public long updateReceiver(Receiver receiver){
+        ContentValues cv = new ContentValues();
+        cv.put(Constants.TITLE,receiver.getTitle());
+        cv.put(Constants.TEXT,receiver.getText());
+        cv.put(Constants.INFORMATION,receiver.getInformation());
+        cv.put(Constants.TYPE,receiver.getType());
+        cv.put(Constants.SENDER,receiver.getSender());
+        cv.put(Constants.ATIME,receiver.getTime());
+        cv.put(Constants.CONTAIN,receiver.getContain());
+        cv.put(Constants.ENABLE,receiver.isEnable());
+
+        dbOpen();
+        long result = db.update(Constants.TBL_RECEIVER_NAME,cv,Constants.ID+"=?",new String[]{String.valueOf(receiver.getId())});
+        dbClose();
+        return result;
+    }
+
+    public int deleteReceiver(Receiver receiver){
+
+        dbOpen();
+        int result = db.delete(Constants.TBL_RECEIVER_NAME,Constants.ID+"=?",new String[]{String.valueOf(receiver.getId())});
+        dbClose();
+
+        return result;
+    }
+    ///////////// Receiver End //////////////////
 
     ///////////// Task Start /////////////////
     public List<Task> getTasks(String selection,String sort){

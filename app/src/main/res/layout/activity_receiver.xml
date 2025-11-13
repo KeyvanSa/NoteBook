@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
+    tools:context=".Activity.ReceiverActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="?attr/searchBox">
+        <TextView
+            android:id="@+id/textViewTitle"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@string/auto_save"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/textViewVersion"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="15dp"
+            android:maxLines="1"
+            android:text="@string/beta_version"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linearLayoutToolbar"
+        android:padding="8dp"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchEnableNotifications"
+                style="@style/textViewTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/enable_auto_save_notifications"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchEnableMessages"
+                style="@style/textViewTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/switchEnableNotifications"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/enable_auto_save_messages"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerReceivers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/linearLayout"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            fab:menu_colorNormal="?attr/colorAccent"
+            app:menu_colorPressed="@color/color_accent"
+            fab:menu_fab_label="@string/options"
+            fab:menu_fab_size="normal"
+            fab:menu_icon="@drawable/fab_add"
+            fab:menu_labels_position="left"
+            fab:menu_openDirection="up"
+            fab:menu_showShadow="true">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/menuItemAddReceiver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fab_add"
+                app:fab_colorNormal="?attr/colorAccent"
+                app:menu_labels_textColor="?attr/backgroundColor"
+                fab:fab_label="@string/receiver_add"
+                fab:fab_size="mini" />
+
+        </com.github.clans.fab.FloatingActionMenu>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativePermissions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/textViewPermissionsTitle"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:maxLines="1"
+            android:text="@string/permissions_title"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewPermissionsText"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewPermissionsTitle"
+            android:layout_alignParentRight="true"
+            android:text="@string/permissions_text"
+            android:textSize="14sp"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonBatteryOptimization"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewPermissionsText"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="15dp"
+            android:text="@string/permissions_battery_optimization"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonSmsRead"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/radioButtonBatteryOptimization"
+            android:layout_alignParentRight="true"
+            android:text="@string/permissions_sms_read"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonShowNotifications"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/radioButtonSmsRead"
+            android:layout_alignParentRight="true"
+            android:text="@string/permissions_show_notifications"
+            android:textSize="12sp"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeEmptyList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageViewEmptyList"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/empty_notes" />
+
+        <TextView
+            android:id="@+id/textViewEmptyListTitle"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageViewEmptyList"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/empty_list_title"/>
+
+        <TextView
+            android:id="@+id/textViewText"
+            style="@style/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewEmptyListTitle"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="@string/empty_list_text_receiver"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

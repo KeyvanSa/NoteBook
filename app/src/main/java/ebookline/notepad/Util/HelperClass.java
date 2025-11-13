@@ -2,18 +2,23 @@ package ebookline.notepad.Util;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.hardware.fingerprint.FingerprintManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.PowerManager;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.text.Spannable;
@@ -38,18 +43,74 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ebookline.notepad.Dialogs.CustomDialog;
+import ebookline.notepad.Model.Apps;
 import ebookline.notepad.R;
+import ebookline.notepad.Service.NotificationListener;
 import ebookline.notepad.Shared.SharedHelper;
 import xyz.hasnat.sweettoast.SweetToast;
 
 public class HelperClass
 {
     private final Context context;
+
+    public boolean isServiceRunning(Class<?> serviceClass)
+    {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> runningService = manager.getRunningServices(Integer.MAX_VALUE);
+        for (ActivityManager.RunningServiceInfo service : runningService){
+            if(serviceClass.getName().equals(service.service.getClassName()))
+                return true;
+        }
+        return false;
+    }
+
+    @SuppressLint("BatteryLife")
+    public void goToBatterySettings()
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            intent.setData(Uri.parse("package:" + context.getPackageName()));
+            context.startActivity(intent);
+        }
+    }
+
+    public boolean isIgnoringBatteryOptimizations()
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PowerManager pm = context.getSystemService(PowerManager.class);
+            return pm.isIgnoringBatteryOptimizations(context.getPackageName());
+        }
+        return true;
+    }
+
+    public void goToNotificationsSettings()
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS);
+            context.startActivity(intent);
+        }
+    }
+
+    public boolean isNotificationServiceEnable()
+    {
+        ComponentName cn = new ComponentName(context, NotificationListener.class);
+        String flat = Settings.Secure.getString(context.getContentResolver(), "enabled_notification_listeners");
+        return flat != null && flat.contains(cn.flattenToString());
+    }
+
+    public boolean hasSmsReadPermission(){
+        return ContextCompat
+                .checkSelfPermission(context, Manifest.permission.READ_SMS)== PackageManager.PERMISSION_GRANTED;
+    }
 
     @SuppressLint("NewApi")
     public String getCurrentLanguage(){
